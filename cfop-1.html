@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CFOP-1 kaputelefon kiegészítő modul - Balog Attila</title>
+    <!-- Logó a lapfülen -->
+    <link rel="icon" type="image/png" href="images/BAlogo-blue.png">
+    <!-- Google Fonts: Indie Flower -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <style>
+        /* --- ALAPVETŐ TÉMA ÉS A HÁTTÉR --- */
+        body {
+            background-image: linear-gradient(rgba(5, 5, 5, 0.75), rgba(5, 5, 5, 0.75)), url('images/bg.webp');
+            background-color: #050505;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: #f5f5f7;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* --- FEJLÉC --- */
+        .site-header {
+            position: relative;
+            width: 100%;
+            height: 130px;
+            background-color: #000000;
+            margin-top: 0;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            box-sizing: border-box;
+            overflow: hidden;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .header-bg-polygons {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 55%;
+            height: 100%;
+            background: 
+                linear-gradient(105deg, transparent 20%, rgba(150, 0, 0, 0.6) 21%, rgba(200, 20, 20, 0.9) 50%, transparent 51%),
+                linear-gradient(45deg, transparent 40%, rgba(100, 0, 0, 0.7) 41%, rgba(180, 10, 10, 0.95) 70%, transparent 71%),
+                linear-gradient(160deg, transparent 60%, rgba(80, 0, 0, 0.8) 61%, #d00000 90%);
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .custom-logo {
+            height: 75px;
+            width: auto;
+            max-width: 100px;
+            object-fit: contain;
+        }
+
+        .header-titles {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .title-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .site-header h1 {
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+            margin: 0;
+            color: #ffffff;
+            font-style: italic;
+            font-weight: 700;
+        }
+
+        .title-line {
+            width: 60px;
+            height: 1px;
+            background-color: #666666;
+            margin-top: 5px;
+        }
+
+        .site-header h2 {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #dddddd;
+            letter-spacing: 0.5px;
+            margin: 5px 0 0 0;
+        }
+
+        /* --- CFOP TARTALMI DOBOZ ÉS STÍLUSOK --- */
+        .cfop-wrapper{
+            position:relative;
+            overflow:hidden;
+            padding:50px 25px;
+            max-width: 1200px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .cfop-container{
+            max-width:1200px;
+            margin:auto;
+            position:relative;
+            z-index:2;
+        }
+
+        .cfop-hero{
+            display:grid;
+            grid-template-columns:1.1fr 0.9fr;
+            gap:60px;
+            align-items:center;
+            margin-bottom:70px;
+        }
+
+        .cfop-title{
+            font-family: 'Indie Flower', cursive;
+            font-size: 52px;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .cfop-subtitle{
+            font-size:20px;
+            line-height:1.6;
+            color:#d1d5db;
+            margin-bottom:30px;
+        }
+
+        .cfop-lead{
+            font-size:18px;
+            line-height:1.8;
+            margin-bottom:22px;
+            color:#cccccc;
+        }
+
+        .cfop-buttons{
+            display:flex;
+            gap:16px;
+            flex-wrap:wrap;
+            margin-top:30px;
+        }
+
+        .cfop-button{
+            display:inline-block;
+            padding:18px 34px;
+            background:linear-gradient(135deg,#2563eb,#1d4ed8);
+            color:white !important;
+            text-decoration:none;
+            border-radius:16px;
+            font-size:18px;
+            font-weight:bold;
+            transition:0.25s ease;
+            box-shadow:0 12px 30px rgba(37,99,235,0.28);
+        }
+
+        .cfop-button:hover{
+            transform:translateY(-4px);
+            box-shadow:0 18px 36px rgba(37,99,235,0.38);
+        }
+
+        .cfop-button-secondary{
+            background:linear-gradient(135deg,#1e293b,#334155);
+            box-shadow:0 12px 30px rgba(15,23,42,0.25);
+        }
+
+        .cfop-dual-images{
+            display:grid;
+            grid-template-columns:1fr;
+            gap:25px;
+        }
+
+        .cfop-dual-images img{
+            width:100%;
+            border-radius:22px;
+            box-shadow:0 18px 45px rgba(0,0,0,0.4);
+            background:#111;
+        }
+
+        .cfop-section{
+            background: rgba(15, 15, 15, 0.85);
+            border: 1px solid #262626;
+            padding:50px;
+            border-radius:24px;
+            margin-top:35px;
+            box-shadow:0 10px 35px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            color: #f5f5f7;
+        }
+
+        .cfop-section h2{
+            font-family: 'Indie Flower', cursive;
+            font-size: 42px;
+            margin-bottom: 25px;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+
+        .cfop-section h3{
+            font-size:26px;
+            margin-top:35px;
+            margin-bottom:14px;
+            color:#ffffff;
+        }
+
+        .cfop-section p{
+            font-size:18px;
+            line-height:1.9;
+            margin-bottom:18px;
+            color:#cccccc;
+        }
+
+        .cfop-highlight{
+            background:linear-gradient(135deg, rgba(37,99,235,0.15), rgba(15,23,42,0.4));
+            border-left:6px solid #2563eb;
+            padding:28px;
+            border-radius:18px;
+            margin:30px 0;
+            font-size:19px;
+            line-height:1.8;
+            color:#e2e8f0;
+        }
+
+        .cfop-list{
+            margin-top:18px;
+            padding-left:22px;
+            text-align:left;
+        }
+
+        .cfop-list li{
+            margin-bottom:12px;
+            font-size:18px;
+            line-height:1.7;
+            text-align:left;
+            color:#cccccc;
+        }
+
+        .cfop-list strong {
+            color: #ffffff;
+        }
+
+        .cfop-note{
+            font-size:15px;
+            color:#9ca3af;
+            margin-top:20px;
+            font-style:italic;
+            text-align:left;
+        }
+
+        .cfop-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:25px;
+            margin-top:35px;
+        }
+
+        .cfop-card{
+            background: rgba(25, 25, 25, 0.6);
+            border:1px solid #333333;
+            border-radius:20px;
+            padding:28px;
+            transition:0.2s ease;
+        }
+
+        .cfop-card:hover{
+            transform:translateY(-4px);
+            box-shadow:0 12px 28px rgba(0,0,0,0.3);
+            border-color: #2563eb;
+        }
+
+        .cfop-card h4{
+            font-size:20px;
+            margin-bottom:14px;
+            color:#ffffff;
+        }
+
+        .cfop-card p{
+            font-size:16px;
+            margin:0;
+            color:#aaaaaa;
+        }
+
+        .cfop-footer{
+            margin-top:50px;
+            padding:70px 40px;
+            border-radius:28px;
+            background:linear-gradient(135deg,#0f172a,#1e293b);
+            text-align:center;
+            color:white;
+            border: 1px solid #334155;
+        }
+
+        .cfop-footer h2{
+            font-family: 'Indie Flower', cursive;
+            font-size: 44px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .cfop-footer p{
+            color:#d1d5db;
+            font-size:20px;
+            margin-bottom:35px;
+        }
+
+        .cfop-footer-buttons{
+            display:flex;
+            justify-content:center;
+            gap:16px;
+            flex-wrap:wrap;
+        }
+
+        .back-home {
+            display: inline-block;
+            margin: 30px 0 0 25px;
+            color: #aaaaaa;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95ln;
+        }
+
+        .back-home:hover {
+            color: #ffffff;
+        }
+
+        @media(max-width:950px){
+            .cfop-hero{
+                grid-template-columns:1fr;
+            }
+            .cfop-title{
+                font-size:38px;
+            }
+            .cfop-section{
+                padding:35px;
+            }
+            .cfop-section h2{
+                font-size:32px;
+            }
+            .cfop-footer h2{
+                font-size:30px;
+            }
+            .site-header {
+                height: auto;
+                padding: 20px;
+            }
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .title-row {
+                flex-direction: column;
+            }
+            .title-line {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- FEJLÉC -->
+    <header class="site-header">
+        <div class="header-bg-polygons"></div>
+        <div class="header-content">
+            <a href="index.html" class="header-logo">
+                <img src="images/BAlogo-blue.png" alt="Balog Attila Logo" class="custom-logo">
+            </a>
+            <div class="header-titles">
+                <div class="title-row">
+                    <h1>Balog Attila</h1>
+                    <div class="title-line"></div>
+                </div>
+                <h2>Custom PCB & Control Systems</h2>
+            </div>
+        </div>
+    </header>
+
+    <a href="index.html" class="back-home">← Vissza a főoldalra</a>
+
+    <div class="cfop-wrapper">
+    <div class="cfop-container">
+
+        <div class="cfop-hero">
+            <div>
+                <div class="cfop-title">
+                    CFOP-1 <br>kaputelefon kiegészítő modul
+                </div>
+
+                <div class="cfop-subtitle">
+                    A CFOP-1 egy saját fejlesztésű elektronikai interfész modul, amely digitális Codefon kaputelefon-rendszerekhez készült, és kiegészítő funkciókat biztosít a meglévő infrastruktúra módosítása nélkül.
+                </div>
+
+                <div class="cfop-lead">
+                    Nem kell külön modulokat összeválogatni, forrasztgatni, kábelezni vagy hosszasan hibát keresni. Egyszerűen csak beszerelni és működik.
+                </div>
+
+                <div class="cfop-lead">
+                    A modul egyedi tervezésű elektronikára épül, kis darabszámban készült, és folyamatosan fejlesztés alatt áll a felhasználói visszajelzéseket figyelembe véve.
+                </div>
+
+                <div class="cfop-buttons">
+                    <a class="cfop-button cfop-button-secondary" href="https://docs.google.com/document/d/1NSw38J_vEP_PtCITSJjcPn0LqcIJoF7J0rKkf16r0hk/edit?tab=t.0" target="_blank">
+                        Teljes dokumentáció
+                    </a>
+                </div>
+            </div>
+
+            <div class="cfop-dual-images">
+                <img src="https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000107-81cc481cc6/ChatGPT%20Image%202025.%20dec.%2018.%2000_00_58.webp?ph=0f123c8804" alt="CFOP-1 kaputelefon kiegészítő modul">
+                <img src="https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000049-2715b2715c/3D.webp?ph=0f123c8804" alt="CFOP-1 panel">
+            </div>
+        </div>
+
+        <div class="cfop-section">
+            <h2>Miért különleges a CFOP-1?</h2>
+
+            <div class="cfop-highlight">
+                <strong>
+                    A CFOP-1 nem barkács-elektronika.
+                </strong>
+                <br><br>
+                Egy komplett, professzionális egységet kap,
+                amely megbízható működésre készült —
+                nem pedig kompromisszumokra.
+            </div>
+
+            <p>
+                Dedikált ki és bemenetekkel rendelkezik, könnyen integrálható HA és okosotthon rendszerekbe. 
+            </p>
+
+            <p>
+                Ha fontos a stabil működés,
+                az igényes kivitel és a gyors telepítés,
+                akkor a CFOP-1 a megfelelő választás.
+            </p>
+        </div>
+
+        <div class="cfop-section">
+            <h2>Fő előnyök</h2>
+
+            <div class="cfop-grid">
+                <div class="cfop-card">
+                    <h4>✔ Komplett, autonóm módon működő rendszer</h4>
+                    <p>
+                        Nem igényel külső tápegységet! Gyárilag összeszerelt és tesztelt modul,
+                        beszerelést követően azonnal üzemkész.
+                    </p>
+                </div>
+
+                <div class="cfop-card">
+                    <h4>✔ Gyors és problémamentes beépítés</h4>
+                    <p>
+                        Kifejezetten egyszerű cserére lett tervezve. Nem kell kötözgetni, forrasztgatni: egyszerűen régi panel ki, új panel be, és már működik is!
+                    </p>
+                </div>
+
+                <div class="cfop-card">
+                    <h4>✔ Home Assistant kompatibilis</h4>
+                    <p>
+                        Könnyen integrálható modern
+                        okosotthon rendszerekbe.
+                    </p>
+                </div>
+
+                <div class="cfop-card">
+                    <h4>✔ Stabil működés</h4>
+                    <p>
+                        Hosszú távú megbízhatóságra
+                        és üzembiztos működésre tervezve.
+                    </p>
+                </div>
+
+                <div class="cfop-card">
+                    <h4>✔ Fogorvosi mód egyszerűen</h4>
+                    <p>
+                        Nincs szükség külső modulra, "mókolásra". A fogorvosi üzemmód egyetlen jumper vagy kapcsoló segítségével aktiválható.
+                    </p>
+                </div>
+
+                <div class="cfop-card">
+                    <h4>✔ Ne zavarjanak</h4>
+                    <p>
+                        HA-ból, vagy akár egy kapcsolóval aktiválható "ne zavarjanak" üzemmód, mialatt a beltéri egység nem ad csengetés jelzést. 
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cfop-section">
+            <h2>Amit nyújt:</h2>
+            
+            <p style="text-align: left; font-weight: bold;">
+                A panelt a meglévő lakáskészülékbe kell szerelni, a meglévő panel helyére, amit teljes mértékben helyettesít. Minden eredeti funkció megtartása mellett a következő plusz funkciókat nyújtja:
+            </p>
+
+            <ul class="cfop-list">
+                <li><strong>A csengetéskor ad egy kimenő jelet,</strong> amit célszerűen pl. egy Shelly uni bemenetére kötve értesítést küld arról, hogy valaki becsengetett.</li>
+                <li><strong>Relé kimenet:</strong> Használható pl. külső klasszikus csengő meghajtására, hang-fényjelző működtetésére (hallássérültek, gyengénlátók számára) vagy bármilyen egyéb vezérlés indítására.</li>
+                <li><strong>Ne zavarjanak üzemmód:</strong> A megfelelő bemenetet gnd-re téve a lakáskészülék nem ad hangot felcsengetéskor. (Pl. kisgyermekes családok esetében hasznos.)</li>
+                <li><strong>Zárnyitás bemenet:</strong> Adott bemenetet csengetés közben gnd-re téve, kinyitja a kültéri egység által vezérelt zárat. Célszerűen a Shelly egyik kimenetét ide kötve, távolról nyitás parancs adható. Vagy távirányító vevőt ide kötve, távirányítóval nyitható a zár.</li>
+                <li><strong>“Fogorvosi” funkció:</strong> Felcsengetésre automatikusan kinyitja a zárat. (Nem kell felemelni a kagylót és megnyomni a gombot.) Ezt egy nagyon rövid csengetés jelzi. Ezt jumperrel, vagy külső kapcsolóval is használható.</li>
+                <li><strong>128-as lakásszám fölé is címezhető</strong> 256-ig!</li>
+                <li><strong>Csökkenthető</strong> a csengetési hangerő.</li>
+                <li><strong>Némítható</strong> a csengetés, a többi funkció megtartása mellett is.</li>
+                <li><strong>Nem igényel</strong> külső áramforrást.</li>
+                <li><strong>Esztétikus, stabil</strong> és azonnal üzemkész.</li>
+            </ul>
+
+            <div class="cfop-note">
+                * A kapunyitás csak a felcsengetés ideje alatt lehetséges. Felcsengetés hiányában a zár nem nyitható!
+            </div>
+        </div>
+
+        <div class="cfop-section">
+            <h2>Professzionális kialakítás</h2>
+
+            <p style="text-align: left;">
+                A CFOP-1 fejlesztésénél fontos szempont volt:
+            </p>
+
+            <ul class="cfop-list">
+                <li>Kompakt méret</li>
+                <li>Egyszerű szerelhetőség</li>
+                <li>Saját tápellátás</li>
+                <li>Megbízható elektronikai kialakítás</li>
+                <li>Kulturált kábelezés</li>
+                <li>Üzembiztos működés</li>
+            </ul>
+
+            <div class="cfop-highlight">
+                A felhasználó nem egy prototípust kap,
+                hanem egy professzionális, kulturált és kész rendszert.
+            </div>
+        </div>
+
+        <div class="cfop-footer">
+            <h2>
+                CFOP-1 — Egyszerűen beszereli, és működik.
+            </h2>
+
+            <p>
+                Professzionális Codefon okosítás kompromisszumok nélkül.
+            </p>
+
+            <div class="cfop-footer-buttons">
+                <a class="cfop-button" href="https://script.google.com/macros/s/AKfycbwcuth4S1RLHCpbgboK8vl0EIZS_umX8s72f-4Iy9fK0NBonVG-LAby0ywrKXqlfxLZKQ/exec" target="_blank">
+                    Szeretnék egy ilyen modult!
+                </a>
+                <a class="cfop-button cfop-button-secondary" href="https://docs.google.com/document/d/1NSw38J_vEP_PtCITSJjcPn0LqcIJoF7J0rKkf16r0hk/edit?tab=t.0" target="_blank">
+                    Teljes dokumentáció
+                </a>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+</body>
+</html>
