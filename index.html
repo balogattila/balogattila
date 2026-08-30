@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Balog Attila - Custom PCB & Control Systems</title>
     <style>
-        /* --- ALAPVETŐ TÉMA ÉS ÚJ VÖRÖSES HÁTTÉR --- */
+        /* --- ALAPVETŐ TÉMA ÉS A TE EGYEDI HÁTTERED --- */
         body {
-            /* Sima fekete helyett mély vöröses ragyogás középről, ami a képen is látszik */
-            background-image: radial-gradient(circle at center top, #2a0505 0%, #111111 50%, #050505 100%);
+            /* Ide jön majd a te háttérképed a 'url()' közé betéve: */
+            background-image: url('images/hatterkep.jpg');
             background-color: #050505;
+            background-size: cover;
+            background-position: center;
             background-attachment: fixed;
             margin: 0;
             display: flex;
@@ -18,13 +20,13 @@
             min-height: 100vh;
         }
 
-        /* --- ÚJRAALKOTOTT FEJLÉC (HOZZÁADOTT STÍLUSOK) --- */
+        /* --- FEJLÉC ÉS LOGÓ BEÁLLÍTÁSOK --- */
         .site-header {
             position: relative;
             width: 100%;
             height: 130px;
             background-color: #000000;
-            margin-top: 0; /* Képernyő tetejére tapad */
+            margin-top: 0;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
@@ -35,14 +37,12 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
-        /* A jobb oldali piros, éles sokszöges háttér imitálása tiszta CSS-ből */
         .header-bg-polygons {
             position: absolute;
             top: 0;
             right: 0;
             width: 55%;
             height: 100%;
-            /* Rétegzett éles gradiensek a 3D-s sokszög hatás eléréséhez */
             background: 
                 linear-gradient(105deg, transparent 20%, rgba(150, 0, 0, 0.6) 21%, rgba(200, 20, 20, 0.9) 50%, transparent 51%),
                 linear-gradient(45deg, transparent 40%, rgba(100, 0, 0, 0.7) 41%, rgba(180, 10, 10, 0.95) 70%, transparent 71%),
@@ -50,7 +50,6 @@
             z-index: 1;
         }
 
-        /* A tartalom pozicionálása a háttér fölé */
         .header-content {
             position: relative;
             z-index: 2;
@@ -68,6 +67,14 @@
             justify-content: center;
         }
 
+        /* A te valódi logód képének méretezése */
+        .custom-logo {
+            height: 75px;
+            width: auto;
+            max-width: 100px;
+            object-fit: contain;
+        }
+
         .header-titles {
             display: flex;
             flex-direction: column;
@@ -80,7 +87,6 @@
             gap: 20px;
         }
 
-        /* A meglévő h1 formázása a kép alapján */
         .site-header h1 {
             font-size: 2.2rem;
             letter-spacing: 1px;
@@ -90,7 +96,6 @@
             font-weight: 700;
         }
 
-        /* A név melletti vízszintes vékony vonal */
         .title-line {
             width: 60px;
             height: 1px;
@@ -98,7 +103,6 @@
             margin-top: 5px;
         }
 
-        /* A meglévő h2 formázása a kép alapján */
         .site-header h2 {
             font-size: 1.1rem;
             font-weight: 400;
@@ -107,8 +111,7 @@
             margin: 5px 0 0 0;
         }
 
-
-        /* --- AZ EREDETI RÁCS KÓDOD INNEN FOLYTATÓDIK (VÁLTOZATLANUL) --- */
+        /* --- AZ EREDETI RÁCS KÓDOD (VÁLTOZATLANUL) --- */
         .honeycomb-wrapper {
             display: flex;
             justify-content: center;
@@ -212,7 +215,6 @@
 
         /* RESZPONZÍV MOBIL NÉZET ÉS CIKK-CAKK LOGIKA */
         @media (max-width: 700px) {
-            /* Fejléc átrendezése kisebb képernyőn */
             .site-header {
                 height: auto;
                 padding: 20px;
@@ -228,7 +230,7 @@
                 gap: 10px;
             }
             .title-line {
-                display: none; /* Mobilon elrejtjük a vonalat a letisztultságért */
+                display: none;
             }
             .site-header h1 {
                 font-size: 1.8rem;
@@ -297,11 +299,8 @@
         <div class="header-content">
             
             <div class="header-logo">
-                <svg viewBox="0 0 100 115" width="65" height="75">
-                    <polygon points="50,5 95,30 95,85 50,110 5,85 5,30" fill="none" stroke="#00a8ff" stroke-width="8" stroke-linejoin="round"/>
-                    <polygon points="50,15 85,35 85,80 50,100 15,80 15,35" fill="none" stroke="#00a8ff" stroke-width="2"/>
-                    <text x="50" y="74" font-family="'Segoe UI', Arial, sans-serif" font-size="44" font-weight="900" fill="#00a8ff" text-anchor="middle" letter-spacing="-2">BA</text>
-                </svg>
+                <!-- ITT VAN A LOGÓ HIVATKOZÁSA: -->
+                <img src="images/logo.png" alt="Balog Attila Logo" class="custom-logo">
             </div>
 
             <div class="header-titles">
@@ -318,6 +317,7 @@
     <div class="honeycomb-wrapper">
         <div class="honeycomb-grid">
             
+            <!-- 1. SOR (1 kocka) -->
             <a href="cfop-1.html" class="hex-button" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000107-81cc481cc6/ChatGPT%20Image%202025.%20dec.%2018.%2000_00_58.webp');">
                 <div class="hex-overlay">
                     <span class="hex-title">CFOP-1</span>
@@ -326,6 +326,7 @@
             
             <div class="hex-break"></div>
 
+            <!-- 2. SOR (2 kocka) -->
             <a href="elektronika.html" class="hex-button" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000021-8f9a78f9aa/wallpapertip_circuit-board-live-wallpaper_675774.webp?ph=0f123c8804');">
                 <div class="hex-overlay">
                     <span class="hex-title">Elektronika, PCB, tervezés</span>
@@ -340,6 +341,7 @@
 
             <div class="hex-break"></div>
 
+            <!-- 3. SOR (3 kocka) -->
             <a href="https://www.flickr.com/photos/balogattila/albums/" target="_blank" rel="noopener" class="hex-button" style="background-image: url('https://www.ephotozine.com/articles/nikon-d800-digital-slr-sample-photos-18856/images/highres-nikond800withlens_1332947881.jpg');">
                 <div class="hex-overlay">
                     <span class="hex-title">Fotóim a nagyvilágból</span>
@@ -360,6 +362,7 @@
 
             <div class="hex-break"></div>
 
+            <!-- 4. SOR (2 kocka) -->
             <a href="maszokalauz.html" class="hex-button" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000099-20cc120cc2/fels%C5%91t%C3%A1rk%C3%A1ny-sziklam%C3%A1szó-kalauz-topo-crag-szilamaszas-jobb%20oldal.webp?ph=0f123c8804');">
                 <div class="hex-overlay">
                     <span class="hex-title">Felsőtárkány mászókalauz</span>
@@ -374,6 +377,7 @@
             
             <div class="hex-break"></div>
 
+            <!-- 5. SOR (1 kocka) -->
             <a href="kapcsolat.html" class="hex-button" style="background-image: url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?q=80&w=400&auto=format&fit=crop');">
                 <div class="hex-overlay">
                     <span class="hex-title">Kapcsolat</span>
