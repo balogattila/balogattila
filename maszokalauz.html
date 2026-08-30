@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Felsőtárkány mászókalauz - Balog Attila</title>
+    <title>Felsőtárkány sziklamászó kalauz és topo - Balog Attila</title>
     <link rel="icon" type="image/png" href="images/BAlogo-blue.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -115,7 +115,7 @@
             margin: 5px 0 0 0;
         }
 
-        /* --- TARTALMI DOBOZ ÉS STÍLUSOK --- */
+        /* --- KALAUZ TARTALMI DOBOZ ÉS STÍLUSOK --- */
         .guide-wrapper{
             position:relative;
             overflow:hidden;
@@ -142,7 +142,7 @@
 
         .guide-title {
             font-family: 'Bungee Tint', cursive;
-            font-size: 64px;
+            font-size: 56px;
             line-height: 1.2;
             margin-bottom: 24px;
             color: #ffffff;
@@ -152,7 +152,7 @@
         .guide-section h2, 
         .guide-footer h2 {
             font-family: 'Bungee Tint', cursive;
-            font-size: 48px;
+            font-size: 42px;
             margin-bottom: 25px;
             color: #ffffff;
             font-weight: 400;
@@ -161,24 +161,46 @@
 
         /* Reszponzív méret igazítás mobilon */
         @media(max-width: 950px){
-            .guide-title {
-                font-size: 40px;
+            .guide-hero{
+                grid-template-columns:1fr;
             }
-            .guide-section h2, 
-            .guide-footer h2 {
-                font-size: 30px;
+            .guide-title{
+                font-size:36px;
+            }
+            .guide-section{
+                padding:35px;
+            }
+            .guide-section h2{
+                font-size:28px;
+            }
+            .guide-footer h2{
+                font-size:26px;
+            }
+            .site-header {
+                height: auto;
+                padding: 20px;
+            }
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .title-row {
+                flex-direction: column;
+            }
+            .title-line {
+                display: none;
             }
         }
 
         .guide-subtitle{
-            font-size:20px;
+            font-size:22px;
             line-height:1.6;
             color:#d1d5db;
             margin-bottom:30px;
         }
 
         .guide-lead{
-            font-size:18px;
+            font-size:19px;
             line-height:1.8;
             margin-bottom:22px;
             color:#cccccc;
@@ -246,7 +268,7 @@
         }
 
         .guide-section p{
-            font-size:18px;
+            font-size:19px;
             line-height:1.9;
             margin-bottom:18px;
             color:#cccccc;
@@ -258,7 +280,7 @@
             padding:28px;
             border-radius:18px;
             margin:30px 0;
-            font-size:19px;
+            font-size:20px;
             line-height:1.8;
             color:#e2e8f0;
         }
@@ -270,8 +292,8 @@
         }
 
         .guide-list li{
-            margin-bottom:12px;
-            font-size:18px;
+            margin-bottom:14px;
+            font-size:19px;
             line-height:1.7;
             text-align:left;
             color:#cccccc;
@@ -301,7 +323,7 @@
 
         .guide-footer p{
             color:#d1d5db;
-            font-size:20px;
+            font-size:22px;
             margin-bottom:35px;
         }
 
@@ -323,38 +345,6 @@
 
         .back-home:hover {
             color: #ffffff;
-        }
-
-        @media(max-width:950px){
-            .guide-hero{
-                grid-template-columns:1fr;
-            }
-            .guide-title{
-                font-size:38px;
-            }
-            .guide-section{
-                padding:35px;
-            }
-            .guide-section h2{
-                font-size:32px;
-            }
-            .guide-footer h2{
-                font-size:30px;
-            }
-            .site-header {
-                height: auto;
-                padding: 20px;
-            }
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            .title-row {
-                flex-direction: column;
-            }
-            .title-line {
-                display: none;
-            }
         }
     </style>
 </head>
@@ -385,75 +375,75 @@
         <div class="guide-hero">
             <div>
                 <div class="guide-title">
-                    Felsőtárkány <br>mászókalauz & topo
+                    Felsőtárkány sziklamászó kalauz és topo
                 </div>
 
                 <div class="guide-subtitle">
-                    Részletes sziklamászó kalauz és topo információk Felsőtárkány környékéről, helyi utakról, nehézségi fokozatokról és megközelítésről.
+                    A Felsőtárkányi sziklamászó kalauz és topo gyűjtemény segít eligazodni a helyi sziklákon, útvonalakon és a mászáshoz szükséges információkon.
                 </div>
 
                 <div class="guide-lead">
-                    A Bükk hegység lábánál elterülő sziklamászó helyek ideális célpontot jelentenek mind a kezdő, mind a tapasztalt mászók számára.
+                    A Bükk hegység lábánál található sziklák kiváló lehetőséget biztosítanak a sportmászás kedvelőinek.
                 </div>
 
                 <div class="guide-lead">
-                    Ez az útmutató segít eligazodni a sziklák között, bemutatva a fontosabb szektorokat és technikai tudnivalókat.
+                    Ez az oldal folyamatosan frissülő információkat, topo vázlatokat és hasznos tudnivalókat tartalmaz a biztonságos és élvezetes mászáshoz.
                 </div>
 
                 <div class="guide-buttons">
-                    <a class="guide-button cfop-button-secondary" href="kapcsolat.html">
-                        Kapcsolatfelvétel
+                    <a class="guide-button guide-button-secondary" href="https://docs.google.com/document/d/1NSw38J_vEP_PtCITSJjcPn0LqcIJoF7J0rKkf16r0hk/edit?tab=t.0" target="_blank">
+                        Teljes dokumentáció
                     </a>
                 </div>
             </div>
 
             <div class="guide-dual-images">
-                <img src="https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000099-20cc120cc2/fels%C5%91t%C3%A1rk%C3%A1ny-sziklam%C3%A1szó-kalauz-topo-crag-szilamaszas-jobb%20oldal.webp?ph=0f123c8804" alt="Felsőtárkány sziklamászó kalauz topo">
+                <img src="https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000099-20cc120cc2/fels%C5%91t%C3%A1rk%C3%A1ny-sziklam%C3%A1szó-kalauz-topo-crag-szilamaszas-jobb%20oldal.webp?ph=0f123c8804" alt="Felsőtárkány sziklamászó kalauz topo jobb oldal">
             </div>
         </div>
 
         <div class="guide-section">
-            <h2>A mászóhelyről</h2>
+            <h2>Felsőtárkány sziklamászó kalauz & topo</h2>
 
             <div class="guide-highlight">
                 <strong>
-                    Természetes környezet, technikás utak.
+                    Biztonságos és élvezetes mászás a Bükkben.
                 </strong>
                 <br><br>
-                Felsőtárkány és környéke kiváló minőségű mészkőfalakkal várja a mászókat, ahol a változatos technikai kihívások garantálják a tartalmas napot.
+                A helyi sziklák meghódításához fontos a megfelelő felkészültség, a szabályok betartása és a környezet tiszteletben tartása.
             </div>
 
             <p>
-                A szektorok könnyen megközelíthetők, a környezet pedig csöndes, rendezett erdei hangulatot biztosít.
+                A kalauz célja, hogy összefoglalja a legfontosabb tudnivalókat, megközelítési útvonalakat és a topo vázlatokat.
             </p>
 
             <p>
-                Minden mászónak ajánlott a helyi természetvédelmi előírások betartása és a kulturált viselkedés a szikláknál.
+                Kérjük, hogy minden esetben ellenőrizd a felszerelésedet, és tartsd be a természetvédelmi előírásokat!
             </p>
         </div>
 
         <div class="guide-section">
-            <h2>Fontos tudnivalók és felszerelés</h2>
+            <h2>Hasznos információk</h2>
 
             <ul class="guide-list">
-                <li><strong>Biztonság:</strong> Használj megfelelő minőségű dinamikus és félstatikus köteleket, valamint ellenőrzött biztosítóeszközöket.</li>
-                <li><strong>Topográfia:</strong> Az utak nehézségi fokozatai a könnyebb besorolástól a technikásabb, áthajlóbb vonalakig terjednek.</li>
-                <li><strong>Megközelítés:</strong> Kérjük, ügyelj arra, hogy a gépjárművek parkolásakor ne zárd el az erdészeti utakat.</li>
-                <li><strong>Környezetvédelem:</strong> Ne hagyj hátra szemetet, óvd a helyi flórát és faunát.</li>
+                <li><strong>Helyszín:</strong> Felsőtárkány és környéke, Bükk hegység.</li>
+                <li><strong>Felszerelés:</strong> Alapvető sziklamászó felszerelés (kötél, beülő, sisak, köztesek, expresszek).</li>
+                <li><strong>Környezet:</strong> Kérjük, óvd a termék- és természetvédelmi értékeket, ne hagyj hátra szemetet.</li>
+                <li><strong>Felelősség:</strong> A mászás extrém sport, mindenki saját felelősségére űzi.</li>
             </ul>
 
             <div class="guide-note">
-                * A mászás mindenki saját felelősségére történik. Mindig ellenőrizd a felszerelésedet indulás előtt!
+                * Az adatok és topo információk tájékoztató jellegűek.
             </div>
         </div>
 
         <div class="guide-footer">
             <h2>
-                Felsőtárkányi mászókalauz
+                Felsőtárkány sziklamászó kalauz & topo
             </h2>
 
             <p>
-                Biztonságos és élvezetes mászást kívánunk a Bükk szikláin!
+                Jó mászást és kellemes időtöltést kívánunk a szikláknál!
             </p>
 
             <div class="guide-footer-buttons">
