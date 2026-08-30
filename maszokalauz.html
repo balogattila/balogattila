@@ -161,18 +161,33 @@
             margin-bottom: 20px;
         }
 
+        /* --- KÉPEK ELRENDEZÉSE ASZTALON ÉS MOBILON --- */
         .guide-dual-images {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 0.75fr 1.25fr; /* A bal oldali kép keskenyebb, hogy magasságban passzoljon a jobb oldalihoz */
             gap: 25px;
             margin: 40px 0;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .guide-dual-images a {
+            display: block;
+            width: 100%;
+            cursor: zoom-in;
         }
 
         .guide-dual-images img {
             width: 100%;
+            height: auto;
             border-radius: 22px;
             box-shadow: 0 18px 45px rgba(0,0,0,0.4);
             background: #111;
+            transition: transform 0.3s ease;
+        }
+
+        .guide-dual-images img:hover {
+            transform: scale(1.02);
         }
 
         /* --- TÁBLÁZAT STÍLUSOK --- */
@@ -245,7 +260,7 @@
                 padding: 25px;
             }
             .guide-dual-images {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; /* Mobilon egymás alá kerülnek, teljes szélességben */
             }
             .site-header {
                 height: auto;
@@ -303,10 +318,14 @@
                 Figyelem! Az alábbi képeken nem a hivatalos, mászható utak szerepelnek, a valósággal való minden egyezés csak a véletlen műve! ;)
             </div>
 
-            <!-- Képek (Bal és Jobb oldal) -->
+            <!-- Képek kattintható teljes méretű linkkel -->
             <div class="guide-dual-images">
-                <img src="images/felsőtárkány-sziklamászó-kalauz-topo-bal-7.webp" alt="Felsőtárkány sziklamászó kalauz topo bal oldal">
-                <img src="https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000099-20cc120cc2/fels%C5%91t%C3%A1rk%C3%A1ny-sziklam%C3%A1szó-kalauz-topo-crag-szilamaszas-jobb%20oldal.webp?ph=0f123c8804" alt="Felsőtárkány sziklamászó kalauz topo jobb oldal">
+                <a href="images/felsőtárkány-sziklamászó-kalauz-topo-bal-7.webp" target="_blank">
+                    <img src="images/felsőtárkány-sziklamászó-kalauz-topo-bal-7.webp" alt="Felsőtárkány sziklamászó kalauz topo bal oldal">
+                </a>
+                <a href="https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000099-20cc120cc2/fels%C5%91t%C3%A1rk%C3%A1ny-sziklam%C3%A1szó-kalauz-topo-crag-szilamaszas-jobb%20oldal.webp?ph=0f123c8804" target="_blank">
+                    <img src="https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000099-20cc120cc2/fels%C5%91t%C3%A1rk%C3%A1ny-sziklam%C3%A1szó-kalauz-topo-crag-szilamaszas-jobb%20oldal.webp?ph=0f123c8804" alt="Felsőtárkány sziklamászó kalauz topo jobb oldal">
+                </a>
             </div>
 
             <!-- Táblázat -->
