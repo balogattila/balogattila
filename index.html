@@ -7,7 +7,6 @@
     <style>
         /* --- ALAPVETŐ TÉMA ÉS A TE EGYEDI HÁTTERED --- */
         body {
-            /* Sötétítő réteg (rgba) a kép tetején, hogy halványabb/mattabb legyen */
             background-image: linear-gradient(rgba(5, 5, 5, 0.75), rgba(5, 5, 5, 0.75)), url('images/bg.webp');
             background-color: #050505;
             background-size: cover;
@@ -67,7 +66,6 @@
             justify-content: center;
         }
 
-        /* A te valódi logód képének méretezése */
         .custom-logo {
             height: 75px;
             width: auto;
@@ -177,24 +175,24 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 35px;
+            padding: 30px;
             box-sizing: border-box;
             transition: background 0.5s ease;
         }
 
         .hex-title {
             color: #f5f5f7; 
-            font-size: 19px;
+            font-size: 20px;
             font-weight: 600;
             letter-spacing: 0.8px;
             text-transform: uppercase;
             text-align: center;
-            line-height: 1.25;
-            padding: 4px 4px;
+            line-height: 1.2;
+            padding: 4px 6px;
             width: 100%;
             box-sizing: border-box;
-            background: radial-gradient(circle, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 75%);
-            text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+            background: radial-gradient(circle, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 75%);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
             transition: all 0.5s ease;
             word-break: normal;
         }
@@ -210,11 +208,11 @@
 
         .hex-button:hover .hex-title {
             color: #ffffff;
-            background: radial-gradient(circle, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0) 85%);
+            background: radial-gradient(circle, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 85%);
             transform: scale(1.02);
         }
 
-        /* RESZPONZÍV MOBIL NÉZET ÉS CIKK-CAKK LOGIKA */
+        /* RESZPONZÍV MOBIL NÉZET ÉS CIKK-CAKK LOGIKA (VISSZAÁLLÍTVA) */
         @media (max-width: 700px) {
             .site-header {
                 height: auto;
@@ -242,8 +240,9 @@
             .honeycomb-grid {
                 max-width: 100%;
                 flex-direction: column;
-                align-items: center !important; /* Középre igazítva mobilon is */
-                padding: 0 10px;
+                align-items: flex-start !important;
+                padding-left: 20px;
+                padding-right: 20px;
                 width: 100%;
                 box-sizing: border-box;
             }
@@ -253,23 +252,41 @@
             }
             
             .hex-button {
-                width: 200px;
-                height: 230px;
-                margin: 0 0 -55px 0 !important;
-                transform: none !important; /* Kivesszük a féloldalas eltolást, hogy stabilan középen maradjon */
+                width: 160px;
+                height: 184px;
+                margin: 0 0 -46px 0 !important;
             }
-
-            .hex-overlay {
-                padding: 30px;
+            
+            .hex-button:nth-child(3),
+            .hex-button:nth-child(4),
+            .hex-button:nth-child(6),
+            .hex-button:nth-child(7),
+            .hex-button:nth-child(8),
+            .hex-button:nth-child(10),
+            .hex-button:nth-child(11),
+            .hex-button:nth-child(13) {
+                margin-top: 0;
             }
 
             .hex-title {
-                font-size: 16px;
-                padding: 4px;
+                font-size: 15px; /* Picit kisebb betű mobilon, hogy elférjen a hatszögben */
+                padding: 6px 2px;
             }
 
-            .hex-button:hover {
-                transform: scale(1.05) !important;
+            .hex-button:nth-of-type(odd) {
+                transform: translateX(0);
+            }
+
+            .hex-button:nth-of-type(even) {
+                transform: translateX(120px);
+            }
+            
+            .hex-button:nth-of-type(odd):hover {
+                transform: translateX(0) scale(1.05);
+            }
+            
+            .hex-button:nth-of-type(even):hover {
+                transform: translateX(120px) scale(1.05);
             }
         }
     </style>
