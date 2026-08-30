@@ -184,18 +184,19 @@
 
         .hex-title {
             color: #f5f5f7; 
-            font-size: 22px;
+            font-size: 20px;          /* Visszavéve 22px-ről, hogy elférjen */
             font-weight: 600;
-            letter-spacing: 1.5px;
+            letter-spacing: 0.8px;    /* Kicsit szűkebb betűköz */
             text-transform: uppercase;
             text-align: center;
-            line-height: 1.4;
-            padding: 8px 2px;
+            line-height: 1.2;         /* Sűrűbb sormagasság */
+            padding: 4px 6px;         /* Kevesebb padding fent/lent, több oldalt */
             width: 100%;
             box-sizing: border-box;
             background: radial-gradient(circle, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 75%);
             text-shadow: 0 2px 8px rgba(0,0,0,0.5);
             transition: all 0.5s ease;
+            word-break: normal;       /* Biztosítja, hogy ne tördelje ketté hülye helyen */
         }
 
         .hex-button:hover {
@@ -335,7 +336,7 @@
 
             <a href="termektamogatas.html" class="hex-button" style="background-image: url('https://img.magnific.com/free-photo/still-life-documents-stack_23-2151088805.jpg?semt=ais_hybrid&w=740&q=80');">
                 <div class="hex-overlay">
-                    <span class="hex-title">Terméktámogatás</span>
+                    <span class="hex-title">Termék- támogatás</span>
                 </div>
             </a>
 
@@ -350,7 +351,7 @@
 
             <a href="https://flickr.com/photos/balogattilaevents/albums" target="_blank" rel="noopener" class="hex-button" style="background-image: url('https://img.magnific.com/free-photo/hanged-lamps-outdoor-restaurant-with-multiple-visitors-background-bbq_1268-17681.jpg?semt=ais_hybrid&w=740&q=80');">
                 <div class="hex-overlay">
-                    <span class="hex-title">Rendezvényfotóim</span>
+                    <span class="hex-title">Rendezvény- fotóim</span>
                 </div>
             </a>
 
