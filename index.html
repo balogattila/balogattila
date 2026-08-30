@@ -183,6 +183,17 @@
             transition: background 0.5s ease;
         }
 
+        /* Csak az első hatszög egyedi mérete asztalon és mobilon */
+        .cfop-title {
+            font-size: 40px;
+        }
+
+        @media (max-width: 550px) {
+            .cfop-title {
+                font-size: 25px; /* Mobilon picit kisebbre veszi, hogy tuti elférjen */
+            }
+        }
+
         .hex-title {
             font-family: 'Indie Flower', cursive;
             font-size: 30px; /* A kézírásos betűk miatt picit nagyobb méret jól áll neki */
@@ -322,7 +333,7 @@
             <!-- 1. SOR (1 kocka) -->
             <a href="cfop-1.html" class="hex-button" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000107-81cc481cc6/ChatGPT%20Image%202025.%20dec.%2018.%2000_00_58.webp');">
                 <div class="hex-overlay">
-                    <span class="hex-title" style="font-size: 28px;">CFOP-1</span>
+                    <span class="cfop-title">CFOP-1</span>
                 </div>
             </a>
             
