@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balog Attila - Custom PCB & Control Systems</title>
+    <style>
+        /* --- ALAPVETŐ TÉMA ÉS ÚJ VÖRÖSES HÁTTÉR --- */
+        body {
+            /* Sima fekete helyett mély vöröses ragyogás középről, ami a képen is látszik */
+            background-image: radial-gradient(circle at center top, #2a0505 0%, #111111 50%, #050505 100%);
+            background-color: #050505;
+            background-attachment: fixed;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* --- ÚJRAALKOTOTT FEJLÉC (HOZZÁADOTT STÍLUSOK) --- */
+        .site-header {
+            position: relative;
+            width: 100%;
+            height: 130px;
+            background-color: #000000;
+            margin-top: 0; /* Képernyő tetejére tapad */
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            box-sizing: border-box;
+            overflow: hidden;
+            border-bottom: 1px solid #1a1a1a;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* A jobb oldali piros, éles sokszöges háttér imitálása tiszta CSS-ből */
+        .header-bg-polygons {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 55%;
+            height: 100%;
+            /* Rétegzett éles gradiensek a 3D-s sokszög hatás eléréséhez */
+            background: 
+                linear-gradient(105deg, transparent 20%, rgba(150, 0, 0, 0.6) 21%, rgba(200, 20, 20, 0.9) 50%, transparent 51%),
+                linear-gradient(45deg, transparent 40%, rgba(100, 0, 0, 0.7) 41%, rgba(180, 10, 10, 0.95) 70%, transparent 71%),
+                linear-gradient(160deg, transparent 60%, rgba(80, 0, 0, 0.8) 61%, #d00000 90%);
+            z-index: 1;
+        }
+
+        /* A tartalom pozicionálása a háttér fölé */
+        .header-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-titles {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .title-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* A meglévő h1 formázása a kép alapján */
+        .site-header h1 {
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+            margin: 0;
+            color: #ffffff;
+            font-style: italic;
+            font-weight: 700;
+        }
+
+        /* A név melletti vízszintes vékony vonal */
+        .title-line {
+            width: 60px;
+            height: 1px;
+            background-color: #666666;
+            margin-top: 5px;
+        }
+
+        /* A meglévő h2 formázása a kép alapján */
+        .site-header h2 {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #dddddd;
+            letter-spacing: 0.5px;
+            margin: 5px 0 0 0;
+        }
+
+
+        /* --- AZ EREDETI RÁCS KÓDOD INNEN FOLYTATÓDIK (VÁLTOZATLANUL) --- */
+        .honeycomb-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 20px 60px 20px;
+            background-color: transparent;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .honeycomb-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 850px;
+            user-select: none;
+        }
+
+        .hex-break {
+            flex-basis: 100%;
+            height: 0;
+        }
+
+        .hex-button {
+            position: relative;
+            width: 240px;
+            height: 277px;
+            margin: 0 12px;
+            background-position: center;
+            background-size: cover;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            cursor: pointer;
+            transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            text-decoration: none;
+        }
+
+        /* 1-2-3-2-1 GYÉMÁNT ELRENDEZÉS */
+        .hex-button:nth-child(3),
+        .hex-button:nth-child(4) {
+            margin-top: -69px;
+        }
+        
+        .hex-button:nth-child(6),
+        .hex-button:nth-child(7),
+        .hex-button:nth-child(8) {
+            margin-top: -69px;
+        }
+        
+        .hex-button:nth-child(10),
+        .hex-button:nth-child(11) {
+            margin-top: -69px;
+        }
+        
+        .hex-button:nth-child(13) {
+            margin-top: -69px;
+        }
+
+        .hex-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.35));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            box-sizing: border-box;
+            transition: background 0.5s ease;
+        }
+
+        .hex-title {
+            color: #f5f5f7; 
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 1.4;
+            padding: 8px 2px;
+            width: 100%;
+            box-sizing: border-box;
+            background: radial-gradient(circle, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 75%);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            transition: all 0.5s ease;
+        }
+
+        .hex-button:hover {
+            transform: scale(1.05);
+            z-index: 5;
+        }
+
+        .hex-button:hover .hex-overlay {
+            background: linear-gradient(rgba(240, 98, 146, 0.25), rgba(0, 0, 0, 0.3));
+        }
+
+        .hex-button:hover .hex-title {
+            color: #ffffff;
+            background: radial-gradient(circle, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 85%);
+            transform: scale(1.02);
+        }
+
+        /* RESZPONZÍV MOBIL NÉZET ÉS CIKK-CAKK LOGIKA */
+        @media (max-width: 700px) {
+            /* Fejléc átrendezése kisebb képernyőn */
+            .site-header {
+                height: auto;
+                padding: 20px;
+            }
+            .header-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 15px;
+            }
+            .title-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .title-line {
+                display: none; /* Mobilon elrejtjük a vonalat a letisztultságért */
+            }
+            .site-header h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .honeycomb-grid {
+                max-width: 100%;
+                flex-direction: column;
+                align-items: flex-start !important;
+                padding-left: 20px;
+                padding-right: 20px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            
+            .hex-break {
+                display: none;
+            }
+            
+            .hex-button {
+                width: 160px;
+                height: 184px;
+                margin: 0 0 -46px 0 !important;
+            }
+            
+            .hex-button:nth-child(3),
+            .hex-button:nth-child(4),
+            .hex-button:nth-child(6),
+            .hex-button:nth-child(7),
+            .hex-button:nth-child(8),
+            .hex-button:nth-child(10),
+            .hex-button:nth-child(11),
+            .hex-button:nth-child(13) {
+                margin-top: 0;
+            }
+
+            .hex-title {
+                font-size: 16px;
+                padding: 8px 5px;
+            }
+
+            .hex-button:nth-of-type(odd) {
+                transform: translateX(0);
+            }
+
+            .hex-button:nth-of-type(even) {
+                transform: translateX(120px);
+            }
+            
+            .hex-button:nth-of-type(odd):hover {
+                transform: translateX(0) scale(1.05);
+            }
+            
+            .hex-button:nth-of-type(even):hover {
+                transform: translateX(120px) scale(1.05);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-bg-polygons"></div>
+        <div class="header-content">
+            
+            <div class="header-logo">
+                <svg viewBox="0 0 100 115" width="65" height="75">
+                    <polygon points="50,5 95,30 95,85 50,110 5,85 5,30" fill="none" stroke="#00a8ff" stroke-width="8" stroke-linejoin="round"/>
+                    <polygon points="50,15 85,35 85,80 50,100 15,80 15,35" fill="none" stroke="#00a8ff" stroke-width="2"/>
+                    <text x="50" y="74" font-family="'Segoe UI', Arial, sans-serif" font-size="44" font-weight="900" fill="#00a8ff" text-anchor="middle" letter-spacing="-2">BA</text>
+                </svg>
+            </div>
+
+            <div class="header-titles">
+                <div class="title-row">
+                    <h1>Balog Attila</h1>
+                    <div class="title-line"></div>
+                </div>
+                <h2>Custom PCB & Control Systems</h2>
+            </div>
+            
+        </div>
+    </header>
+
+    <div class="honeycomb-wrapper">
+        <div class="honeycomb-grid">
+            
+            <a href="cfop-1.html" class="hex-button" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000107-81cc481cc6/ChatGPT%20Image%202025.%20dec.%2018.%2000_00_58.webp');">
+                <div class="hex-overlay">
+                    <span class="hex-title">CFOP-1</span>
+                </div>
+            </a>
+            
+            <div class="hex-break"></div>
+
+            <a href="elektronika.html" class="hex-button" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000021-8f9a78f9aa/wallpapertip_circuit-board-live-wallpaper_675774.webp?ph=0f123c8804');">
+                <div class="hex-overlay">
+                    <span class="hex-title">Elektronika, PCB, tervezés</span>
+                </div>
+            </a>
+
+            <a href="termektamogatas.html" class="hex-button" style="background-image: url('https://img.magnific.com/free-photo/still-life-documents-stack_23-2151088805.jpg?semt=ais_hybrid&w=740&q=80');">
+                <div class="hex-overlay">
+                    <span class="hex-title">Terméktámogatás</span>
+                </div>
+            </a>
+
+            <div class="hex-break"></div>
+
+            <a href="https://www.flickr.com/photos/balogattila/albums/" target="_blank" rel="noopener" class="hex-button" style="background-image: url('https://www.ephotozine.com/articles/nikon-d800-digital-slr-sample-photos-18856/images/highres-nikond800withlens_1332947881.jpg');">
+                <div class="hex-overlay">
+                    <span class="hex-title">Fotóim a nagyvilágból</span>
+                </div>
+            </a>
+
+            <a href="https://flickr.com/photos/balogattilaevents/albums" target="_blank" rel="noopener" class="hex-button" style="background-image: url('https://img.magnific.com/free-photo/hanged-lamps-outdoor-restaurant-with-multiple-visitors-background-bbq_1268-17681.jpg?semt=ais_hybrid&w=740&q=80');">
+                <div class="hex-overlay">
+                    <span class="hex-title">Rendezvényfotóim</span>
+                </div>
+            </a>
+
+            <a href="https://www.youtube.com/@balog_attila/videos" target="_blank" rel="noopener" class="hex-button" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000149-0c44c0c44e/700/youtube-icon-42018.webp');">
+                <div class="hex-overlay">
+                    <span class="hex-title">Videóim</span>
+                </div>
+            </a>
+
+            <div class="hex-break"></div>
+
+            <a href="maszokalauz.html" class="hex-button" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000099-20cc120cc2/fels%C5%91t%C3%A1rk%C3%A1ny-sziklam%C3%A1szó-kalauz-topo-crag-szilamaszas-jobb%20oldal.webp?ph=0f123c8804');">
+                <div class="hex-overlay">
+                    <span class="hex-title">Felsőtárkány mászókalauz</span>
+                </div>
+            </a>
+
+            <a href="https://everest2x.webnode.page/" target="_blank" rel="noopener" class="hex-button" style="background-image: url('https://34fec72398.cbaul-cdnwnd.com/f77a4a2a04a070b93fcfc22c8797b376/200000001-8a89d8a89f/ChatGPT%20Image%202026.%20jan.%205.%2008_18_14.webp?ph=34fec72398');">
+                <div class="hex-overlay">
+                    <span class="hex-title">Everest2X kihívás</span>
+                </div>
+            </a>
+            
+            <div class="hex-break"></div>
+
+            <a href="kapcsolat.html" class="hex-button" style="background-image: url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?q=80&w=400&auto=format&fit=crop');">
+                <div class="hex-overlay">
+                    <span class="hex-title">Kapcsolat</span>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</body>
+</html>
