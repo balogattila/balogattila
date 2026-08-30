@@ -163,7 +163,7 @@
 
         .guide-dual-images {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr 1fr;
             gap: 25px;
             margin: 40px 0;
         }
@@ -175,7 +175,7 @@
             background: #111;
         }
 
-        /* --- TÁBLÁZAT STÍLUSOK (Sötét témára hangolva) --- */
+        /* --- TÁBLÁZAT STÍLUSOK --- */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -219,6 +219,11 @@
             text-align: center;
         }
 
+        .likebtn-container {
+            margin-top: 40px;
+            text-align: center;
+        }
+
         .back-home {
             display: inline-block;
             margin: 30px 0 0 25px;
@@ -238,6 +243,9 @@
             }
             .guide-section{
                 padding: 25px;
+            }
+            .guide-dual-images {
+                grid-template-columns: 1fr;
             }
             .site-header {
                 height: auto;
@@ -295,9 +303,10 @@
                 Figyelem! Az alábbi képeken nem a hivatalos, mászható utak szerepelnek, a valósággal való minden egyezés csak a véletlen műve! ;)
             </div>
 
-            <!-- Képek -->
+            <!-- Képek (Bal és Jobb oldal) -->
             <div class="guide-dual-images">
-                <img src="https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000099-20cc120cc2/fels%C5%91t%C3%A1rk%C3%A1ny-sziklam%C3%A1szó-kalauz-topo-crag-szilamaszas-jobb%20oldal.webp?ph=0f123c8804" alt="Felsőtárkány sziklamászó kalauz topo">
+                <img src="images/felsőtárkány-sziklamászó-kalauz-topo-bal-7.webp" alt="Felsőtárkány sziklamászó kalauz topo bal oldal">
+                <img src="https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000099-20cc120cc2/fels%C5%91t%C3%A1rk%C3%A1ny-sziklam%C3%A1szó-kalauz-topo-crag-szilamaszas-jobb%20oldal.webp?ph=0f123c8804" alt="Felsőtárkány sziklamászó kalauz topo jobb oldal">
             </div>
 
             <!-- Táblázat -->
@@ -331,13 +340,16 @@
                     <tr><td>12</td><td>Téma</td><td class="center">VIII</td><td class="center">?</td><td class="center">?</td></tr>
                     <tr><td>13</td><td>XXX</td><td class="center">VIII+</td><td class="center">?</td><td class="center">?</td></tr>
                     <tr><td>14</td><td>Kovács István emlékút (Elhanyagolt, törős, körülményesen biztosítható!)</td><td class="center">V</td><td class="center">?</td><td class="center">15m</td></tr>
-                    <br>
-                    <!-- LikeBtn.com BEGIN -->
-<span class="likebtn-wrapper" data-theme="black" data-lang="hu" data-ef_voting="heartbeat" data-white_label="true" data-identifier="item_1" data-counter_count="true"></span>
-<script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
-<!-- LikeBtn.com END -->
                 </tbody>
             </table>
+
+            <!-- Like Gomb -->
+            <div class="likebtn-container">
+                <!-- LikeBtn.com BEGIN -->
+                <span class="likebtn-wrapper" data-theme="black" data-lang="hu" data-ef_voting="heartbeat" data-white_label="true" data-identifier="item_1" data-counter_count="true"></span>
+                <script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
+                <!-- LikeBtn.com END -->
+            </div>
 
         </div>
 
