@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Felsőtárkány sziklamászó kalauz és topo - Balog Attila</title>
+    <title>Felsőtárkány szurdok-szikla mászókalauz - Balog Attila</title>
     <link rel="icon" type="image/png" href="images/BAlogo-blue.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -132,49 +132,112 @@
             z-index:2;
         }
 
-        .guide-hero{
-            display:grid;
-            grid-template-columns:1.1fr 0.9fr;
-            gap:60px;
-            align-items:center;
-            margin-bottom:70px;
-        }
-
         .guide-title {
             font-family: 'Bungee Tint', cursive;
-            font-size: 56px;
+            font-size: 48px;
             line-height: 1.2;
-            margin-bottom: 24px;
+            margin-bottom: 30px;
             color: #ffffff;
             font-weight: 400;
+            text-align: center;
         }
 
-        .guide-section h2, 
-        .guide-footer h2 {
-            font-family: 'Bungee Tint', cursive;
-            font-size: 42px;
-            margin-bottom: 25px;
+        .guide-section {
+            background: rgba(15, 15, 15, 0.85);
+            border: 1px solid #262626;
+            padding: 40px;
+            border-radius: 24px;
+            margin-top: 35px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            color: #f5f5f7;
+        }
+
+        .guide-text-center {
+            text-align: center;
+            font-size: 18px;
+            line-height: 1.8;
+            color: #d1d5db;
+            margin-bottom: 20px;
+        }
+
+        .guide-dual-images {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .guide-dual-images img {
+            width: 100%;
+            border-radius: 22px;
+            box-shadow: 0 18px 45px rgba(0,0,0,0.4);
+            background: #111;
+        }
+
+        /* --- TÁBLÁZAT STÍLUSOK (Sötét témára hangolva) --- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #333333;
+            text-align: left;
+            padding: 12px 15px;
+            color: #dddddd;
+        }
+
+        th:first-child, td:first-child {
+            white-space: nowrap;
+            width: 1%;
+            padding-right: 15px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #1e293b;
             color: #ffffff;
-            font-weight: 400;
-            line-height: 1.25;
+            font-weight: bold;
         }
 
-        /* Reszponzív méret igazítás mobilon */
+        tr:nth-child(even) {
+            background-color: rgba(25, 25, 25, 0.6);
+        }
+
+        tr:nth-child(odd) {
+            background-color: rgba(15, 15, 15, 0.4);
+        }
+
+        tr:hover {
+            background-color: rgba(37, 99, 235, 0.15);
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .back-home {
+            display: inline-block;
+            margin: 30px 0 0 25px;
+            color: #aaaaaa;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .back-home:hover {
+            color: #ffffff;
+        }
+
         @media(max-width: 950px){
-            .guide-hero{
-                grid-template-columns:1fr;
-            }
             .guide-title{
-                font-size:36px;
+                font-size: 30px;
             }
             .guide-section{
-                padding:35px;
-            }
-            .guide-section h2{
-                font-size:28px;
-            }
-            .guide-footer h2{
-                font-size:26px;
+                padding: 25px;
             }
             .site-header {
                 height: auto;
@@ -190,161 +253,6 @@
             .title-line {
                 display: none;
             }
-        }
-
-        .guide-subtitle{
-            font-size:22px;
-            line-height:1.6;
-            color:#d1d5db;
-            margin-bottom:30px;
-        }
-
-        .guide-lead{
-            font-size:19px;
-            line-height:1.8;
-            margin-bottom:22px;
-            color:#cccccc;
-        }
-
-        .guide-buttons{
-            display:flex;
-            gap:16px;
-            flex-wrap:wrap;
-            margin-top:30px;
-        }
-
-        .guide-button{
-            display:inline-block;
-            padding:18px 34px;
-            background:linear-gradient(135deg,#2563eb,#1d4ed8);
-            color:white !important;
-            text-decoration:none;
-            border-radius:16px;
-            font-size:18px;
-            font-weight:bold;
-            transition:0.25s ease;
-            box-shadow:0 12px 30px rgba(37,99,235,0.28);
-        }
-
-        .guide-button:hover{
-            transform:translateY(-4px);
-            box-shadow:0 18px 36px rgba(37,99,235,0.38);
-        }
-
-        .guide-button-secondary{
-            background:linear-gradient(135deg,#1e293b,#334155);
-            box-shadow:0 12px 30px rgba(15,23,42,0.25);
-        }
-
-        .guide-dual-images{
-            display:grid;
-            grid-template-columns:1fr;
-            gap:25px;
-        }
-
-        .guide-dual-images img{
-            width:100%;
-            border-radius:22px;
-            box-shadow:0 18px 45px rgba(0,0,0,0.4);
-            background:#111;
-        }
-
-        .guide-section{
-            background: rgba(15, 15, 15, 0.85);
-            border: 1px solid #262626;
-            padding:50px;
-            border-radius:24px;
-            margin-top:35px;
-            box-shadow:0 10px 35px rgba(0,0,0,0.5);
-            backdrop-filter: blur(10px);
-            color: #f5f5f7;
-        }
-
-        .guide-section h3{
-            font-size:26px;
-            margin-top:35px;
-            margin-bottom:14px;
-            color:#ffffff;
-        }
-
-        .guide-section p{
-            font-size:19px;
-            line-height:1.9;
-            margin-bottom:18px;
-            color:#cccccc;
-        }
-
-        .guide-highlight{
-            background:linear-gradient(135deg, rgba(37,99,235,0.15), rgba(15,23,42,0.4));
-            border-left:6px solid #2563eb;
-            padding:28px;
-            border-radius:18px;
-            margin:30px 0;
-            font-size:20px;
-            line-height:1.8;
-            color:#e2e8f0;
-        }
-
-        .guide-list{
-            margin-top:18px;
-            padding-left:22px;
-            text-align:left;
-        }
-
-        .guide-list li{
-            margin-bottom:14px;
-            font-size:19px;
-            line-height:1.7;
-            text-align:left;
-            color:#cccccc;
-        }
-
-        .guide-list strong {
-            color: #ffffff;
-        }
-
-        .guide-note{
-            font-size:15px;
-            color:#9ca3af;
-            margin-top:20px;
-            font-style:italic;
-            text-align:left;
-        }
-
-        .guide-footer{
-            margin-top:50px;
-            padding:70px 40px;
-            border-radius:28px;
-            background:linear-gradient(135deg,#0f172a,#1e293b);
-            text-align:center;
-            color:white;
-            border: 1px solid #334155;
-        }
-
-        .guide-footer p{
-            color:#d1d5db;
-            font-size:22px;
-            margin-bottom:35px;
-        }
-
-        .guide-footer-buttons{
-            display:flex;
-            justify-content:center;
-            gap:16px;
-            flex-wrap:wrap;
-        }
-
-        .back-home {
-            display: inline-block;
-            margin: 30px 0 0 25px;
-            color: #aaaaaa;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-size: 0.95rem;
-        }
-
-        .back-home:hover {
-            color: #ffffff;
         }
     </style>
 </head>
@@ -372,85 +280,65 @@
     <div class="guide-wrapper">
     <div class="guide-container">
 
-        <div class="guide-hero">
-            <div>
-                <div class="guide-title">
-                    Felsőtárkány sziklamászó kalauz és topo
-                </div>
+        <div class="guide-section">
+            <h1 class="guide-title">Felsőtárkány szurdok-szikla mászókalauz</h1>
 
-                <div class="guide-subtitle">
-                    A Felsőtárkányi sziklamászó kalauz és topo gyűjtemény segít eligazodni a helyi sziklákon, útvonalakon és a mászáshoz szükséges információkon.
-                </div>
-
-                <div class="guide-lead">
-                    A Bükk hegység lábánál található sziklák kiváló lehetőséget biztosítanak a sportmászás kedvelőinek.
-                </div>
-
-                <div class="guide-lead">
-                    Ez az oldal folyamatosan frissülő információkat, topo vázlatokat és hasznos tudnivalókat tartalmaz a biztonságos és élvezetes mászáshoz.
-                </div>
-
-                <div class="guide-buttons">
-                    <a class="guide-button guide-button-secondary" href="https://docs.google.com/document/d/1NSw38J_vEP_PtCITSJjcPn0LqcIJoF7J0rKkf16r0hk/edit?tab=t.0" target="_blank">
-                        Teljes dokumentáció
-                    </a>
-                </div>
+            <div class="guide-text-center">
+                Védett, sziklamászásra kizárólag az arra engedélyt kapott szervezetek érvényes tagsággal rendelkező tagjai jogosultak. A sziklamászók kötelesek érvényes, fennálló tagsági viszonyukat igazoló igazolványukat maguknál tartani, és azt a BNPI Természetvédelmi Őrszolgálatának felszólítására bemutatni.
             </div>
 
+            <div class="guide-text-center">
+                Egész évben mászható (engedéllyel) a HMK határozata szerint.
+            </div>
+
+            <div class="guide-text-center" style="color: #f87171; font-weight: bold;">
+                Figyelem! Az alábbi képeken nem a hivatalos, mászható utak szerepelnek, a valósággal való minden egyezés csak a véletlen műve! ;)
+            </div>
+
+            <!-- Képek -->
             <div class="guide-dual-images">
-                <img src="https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000099-20cc120cc2/fels%C5%91t%C3%A1rk%C3%A1ny-sziklam%C3%A1szó-kalauz-topo-crag-szilamaszas-jobb%20oldal.webp?ph=0f123c8804" alt="Felsőtárkány sziklamászó kalauz topo jobb oldal">
-            </div>
-        </div>
-
-        <div class="guide-section">
-            <h2>Felsőtárkány sziklamászó kalauz & topo</h2>
-
-            <div class="guide-highlight">
-                <strong>
-                    Biztonságos és élvezetes mászás a Bükkben.
-                </strong>
-                <br><br>
-                A helyi sziklák meghódításához fontos a megfelelő felkészültség, a szabályok betartása és a környezet tiszteletben tartása.
+                <img src="https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000099-20cc120cc2/fels%C5%91t%C3%A1rk%C3%A1ny-sziklam%C3%A1szó-kalauz-topo-crag-szilamaszas-jobb%20oldal.webp?ph=0f123c8804" alt="Felsőtárkány sziklamászó kalauz topo">
             </div>
 
-            <p>
-                A kalauz célja, hogy összefoglalja a legfontosabb tudnivalókat, megközelítési útvonalakat és a topo vázlatokat.
-            </p>
+            <!-- Táblázat -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Út neve</th>
+                        <th class="center">💪</th>
+                        <th class="center">⛓️</th>
+                        <th class="center">🧶</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>0</td><td>Beszálló</td><td class="center">III</td><td class="center">0</td><td class="center">5m</td></tr>
+                    <tr><td>1</td><td>Kanyar (Balesetveszélyes, csak felbiztosítással!)Másik terület!</td><td class="center">VI-</td><td class="center">?</td><td class="center">?</td></tr>
+                    <tr><td>2</td><td>Kürtő</td><td class="center">?</td><td class="center">?</td><td class="center">13m</td></tr>
+                    <tr><td>3</td><td>Idegenek útja</td><td class="center">V</td><td class="center">?</td><td class="center">?</td></tr>
+                    <tr><td>4</td><td>Repedés (Nittelt trad)</td><td class="center">V-</td><td class="center">5b 2j</td><td class="center">25m</td></tr>
+                    <tr><td>5</td><td>Tű direkt jobbra</td><td class="center">VI</td><td class="center">7b +1F ~20mm</td><td class="center">22m</td></tr>
+                    <tr><td>5a</td><td>Tű direkt balra</td><td class="center">VI+</td><td class="center">5b +1F ~20mm</td><td class="center">22m</td></tr>
+                    <tr><td>6</td><td>Lányos út (Tradban is kimászható)</td><td class="center">IV</td><td class="center">6b 1j</td><td class="center">25m</td></tr>
+                    <tr><td>6a</td><td>Yani variál</td><td class="center">V</td><td class="center">?</td><td class="center">22m</td></tr>
+                    <tr><td>7</td><td>Odúsor</td><td class="center">VI</td><td class="center">4b 1j</td><td class="center">25m</td></tr>
+                    <tr><td>8</td><td>Lyuksor balra</td><td class="center">VI</td><td class="center">5b 1j</td><td class="center">15m</td></tr>
+                    <tr><td>8a</td><td>Lyuksor direkt (Kulcs az utolsó akasztásnál!)</td><td class="center">V / C2. Teteje: VII</td><td class="center">4b 3j</td><td class="center">15m</td></tr>
+                    <tr><td>8b</td><td>Lyuksor variáns jobbra</td><td class="center">VI</td><td class="center">4b 3j</td><td class="center">15m</td></tr>
+                    <tr><td>9</td><td>Variációk egy témára 1</td><td class="center">VI</td><td class="center">?</td><td class="center">?</td></tr>
+                    <tr><td>10</td><td>Variációk egy témára 2</td><td class="center">VI+</td><td class="center">?</td><td class="center">?</td></tr>
+                    <tr><td>11</td><td>Variációk egy témára 3</td><td class="center">VII+</td><td class="center">?</td><td class="center">?</td></tr>
+                    <tr><td>12</td><td>Téma</td><td class="center">VIII</td><td class="center">?</td><td class="center">?</td></tr>
+                    <tr><td>13</td><td>XXX</td><td class="center">VIII+</td><td class="center">?</td><td class="center">?</td></tr>
+                    <tr><td>14</td><td>Kovács István emlékút (Elhanyagolt, törős, körülményesen biztosítható!)</td><td class="center">V</td><td class="center">?</td><td class="center">15m</td></tr>
+                    <br>
+                    <!-- LikeBtn.com BEGIN -->
+<span class="likebtn-wrapper" data-theme="black" data-lang="hu" data-ef_voting="heartbeat" data-white_label="true" data-identifier="item_1" data-counter_count="true"></span>
+<script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
+<!-- LikeBtn.com END -->
+                </tbody>
+            </table>
 
-            <p>
-                Kérjük, hogy minden esetben ellenőrizd a felszerelésedet, és tartsd be a természetvédelmi előírásokat!
-            </p>
-        </div>
-
-        <div class="guide-section">
-            <h2>Hasznos információk</h2>
-
-            <ul class="guide-list">
-                <li><strong>Helyszín:</strong> Felsőtárkány és környéke, Bükk hegység.</li>
-                <li><strong>Felszerelés:</strong> Alapvető sziklamászó felszerelés (kötél, beülő, sisak, köztesek, expresszek).</li>
-                <li><strong>Környezet:</strong> Kérjük, óvd a termék- és természetvédelmi értékeket, ne hagyj hátra szemetet.</li>
-                <li><strong>Felelősség:</strong> A mászás extrém sport, mindenki saját felelősségére űzi.</li>
-            </ul>
-
-            <div class="guide-note">
-                * Az adatok és topo információk tájékoztató jellegűek.
-            </div>
-        </div>
-
-        <div class="guide-footer">
-            <h2>
-                Felsőtárkány sziklamászó kalauz & topo
-            </h2>
-
-            <p>
-                Jó mászást és kellemes időtöltést kívánunk a szikláknál!
-            </p>
-
-            <div class="guide-footer-buttons">
-                <a class="guide-button" href="index.html">
-                    Vissza a főoldalra
-                </a>
-            </div>
         </div>
 
     </div>
