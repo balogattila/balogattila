@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CFOP-1 kaputelefon kiegészítő modul - Balog Attila</title>
-    <!-- Logó a lapfülen -->
     <link rel="icon" type="image/png" href="images/BAlogo-blue.png">
-    <!-- Google Fonts: Indie Flower -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap" rel="stylesheet">
@@ -142,11 +140,34 @@
             margin-bottom:70px;
         }
 
-        .cfop-title, 
+        .cfop-title {
+            font-family: 'Bungee Tint', cursive;
+            font-size: 64px;       /* Asztalon jó nagyra vesszük */
+            line-height: 1.2;
+            margin-bottom: 24px;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
         .cfop-section h2, 
         .cfop-footer h2 {
             font-family: 'Bungee Tint', cursive;
-            font-weight: 400; /* A Bungee Tint alapból ebben a súlyban létezik */
+            font-size: 48px;       /* Asztalon a többi címsor is megkapja a méretet */
+            margin-bottom: 25px;
+            color: #ffffff;
+            font-weight: 400;
+            line-height: 1.25;
+        }
+
+        /* Reszponzív méret igazítás mobilon, hogy ne lógjon ki */
+        @media(max-width: 950px){
+            .cfop-title {
+                font-size: 40px;
+            }
+            .cfop-section h2, 
+            .cfop-footer h2 {
+                font-size: 30px;
+            }
         }
 
         .cfop-subtitle{
