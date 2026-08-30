@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Felsőtárkány mászókalauz - Balog Attila</title>
+    <link rel="icon" type="image/png" href="images/BAlogo-blue.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap" rel="stylesheet">
+    <style>
+        /* --- ALAPVETŐ TÉMA ÉS A HÁTTÉR --- */
+        body {
+            background-image: linear-gradient(rgba(5, 5, 5, 0.75), rgba(5, 5, 5, 0.75)), url('images/bg.webp');
+            background-color: #050505;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: #f5f5f7;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* --- FEJLÉC --- */
+        .site-header {
+            position: relative;
+            width: 100%;
+            height: 130px;
+            background-color: #000000;
+            margin-top: 0;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            box-sizing: border-box;
+            overflow: hidden;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .header-bg-polygons {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 55%;
+            height: 100%;
+            background: 
+                linear-gradient(105deg, transparent 20%, rgba(150, 0, 0, 0.6) 21%, rgba(200, 20, 20, 0.9) 50%, transparent 51%),
+                linear-gradient(45deg, transparent 40%, rgba(100, 0, 0, 0.7) 41%, rgba(180, 10, 10, 0.95) 70%, transparent 71%),
+                linear-gradient(160deg, transparent 60%, rgba(80, 0, 0, 0.8) 61%, #d00000 90%);
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .custom-logo {
+            height: 75px;
+            width: auto;
+            max-width: 100px;
+            object-fit: contain;
+        }
+
+        .header-titles {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .title-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .site-header h1 {
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+            margin: 0;
+            color: #ffffff;
+            font-style: italic;
+            font-weight: 700;
+        }
+
+        .title-line {
+            width: 60px;
+            height: 1px;
+            background-color: #666666;
+            margin-top: 5px;
+        }
+
+        .site-header h2 {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #dddddd;
+            letter-spacing: 0.5px;
+            margin: 5px 0 0 0;
+        }
+
+        /* --- TARTALMI DOBOZ ÉS STÍLUSOK --- */
+        .guide-wrapper{
+            position:relative;
+            overflow:hidden;
+            padding:50px 25px;
+            max-width: 1200px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .guide-container{
+            max-width:1200px;
+            margin:auto;
+            position:relative;
+            z-index:2;
+        }
+
+        .guide-hero{
+            display:grid;
+            grid-template-columns:1.1fr 0.9fr;
+            gap:60px;
+            align-items:center;
+            margin-bottom:70px;
+        }
+
+        .guide-title {
+            font-family: 'Bungee Tint', cursive;
+            font-size: 64px;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        .guide-section h2, 
+        .guide-footer h2 {
+            font-family: 'Bungee Tint', cursive;
+            font-size: 48px;
+            margin-bottom: 25px;
+            color: #ffffff;
+            font-weight: 400;
+            line-height: 1.25;
+        }
+
+        /* Reszponzív méret igazítás mobilon */
+        @media(max-width: 950px){
+            .guide-title {
+                font-size: 40px;
+            }
+            .guide-section h2, 
+            .guide-footer h2 {
+                font-size: 30px;
+            }
+        }
+
+        .guide-subtitle{
+            font-size:20px;
+            line-height:1.6;
+            color:#d1d5db;
+            margin-bottom:30px;
+        }
+
+        .guide-lead{
+            font-size:18px;
+            line-height:1.8;
+            margin-bottom:22px;
+            color:#cccccc;
+        }
+
+        .guide-buttons{
+            display:flex;
+            gap:16px;
+            flex-wrap:wrap;
+            margin-top:30px;
+        }
+
+        .guide-button{
+            display:inline-block;
+            padding:18px 34px;
+            background:linear-gradient(135deg,#2563eb,#1d4ed8);
+            color:white !important;
+            text-decoration:none;
+            border-radius:16px;
+            font-size:18px;
+            font-weight:bold;
+            transition:0.25s ease;
+            box-shadow:0 12px 30px rgba(37,99,235,0.28);
+        }
+
+        .guide-button:hover{
+            transform:translateY(-4px);
+            box-shadow:0 18px 36px rgba(37,99,235,0.38);
+        }
+
+        .guide-button-secondary{
+            background:linear-gradient(135deg,#1e293b,#334155);
+            box-shadow:0 12px 30px rgba(15,23,42,0.25);
+        }
+
+        .guide-dual-images{
+            display:grid;
+            grid-template-columns:1fr;
+            gap:25px;
+        }
+
+        .guide-dual-images img{
+            width:100%;
+            border-radius:22px;
+            box-shadow:0 18px 45px rgba(0,0,0,0.4);
+            background:#111;
+        }
+
+        .guide-section{
+            background: rgba(15, 15, 15, 0.85);
+            border: 1px solid #262626;
+            padding:50px;
+            border-radius:24px;
+            margin-top:35px;
+            box-shadow:0 10px 35px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            color: #f5f5f7;
+        }
+
+        .guide-section h3{
+            font-size:26px;
+            margin-top:35px;
+            margin-bottom:14px;
+            color:#ffffff;
+        }
+
+        .guide-section p{
+            font-size:18px;
+            line-height:1.9;
+            margin-bottom:18px;
+            color:#cccccc;
+        }
+
+        .guide-highlight{
+            background:linear-gradient(135deg, rgba(37,99,235,0.15), rgba(15,23,42,0.4));
+            border-left:6px solid #2563eb;
+            padding:28px;
+            border-radius:18px;
+            margin:30px 0;
+            font-size:19px;
+            line-height:1.8;
+            color:#e2e8f0;
+        }
+
+        .guide-list{
+            margin-top:18px;
+            padding-left:22px;
+            text-align:left;
+        }
+
+        .guide-list li{
+            margin-bottom:12px;
+            font-size:18px;
+            line-height:1.7;
+            text-align:left;
+            color:#cccccc;
+        }
+
+        .guide-list strong {
+            color: #ffffff;
+        }
+
+        .guide-note{
+            font-size:15px;
+            color:#9ca3af;
+            margin-top:20px;
+            font-style:italic;
+            text-align:left;
+        }
+
+        .guide-footer{
+            margin-top:50px;
+            padding:70px 40px;
+            border-radius:28px;
+            background:linear-gradient(135deg,#0f172a,#1e293b);
+            text-align:center;
+            color:white;
+            border: 1px solid #334155;
+        }
+
+        .guide-footer p{
+            color:#d1d5db;
+            font-size:20px;
+            margin-bottom:35px;
+        }
+
+        .guide-footer-buttons{
+            display:flex;
+            justify-content:center;
+            gap:16px;
+            flex-wrap:wrap;
+        }
+
+        .back-home {
+            display: inline-block;
+            margin: 30px 0 0 25px;
+            color: #aaaaaa;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .back-home:hover {
+            color: #ffffff;
+        }
+
+        @media(max-width:950px){
+            .guide-hero{
+                grid-template-columns:1fr;
+            }
+            .guide-title{
+                font-size:38px;
+            }
+            .guide-section{
+                padding:35px;
+            }
+            .guide-section h2{
+                font-size:32px;
+            }
+            .guide-footer h2{
+                font-size:30px;
+            }
+            .site-header {
+                height: auto;
+                padding: 20px;
+            }
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .title-row {
+                flex-direction: column;
+            }
+            .title-line {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- FEJLÉC -->
+    <header class="site-header">
+        <div class="header-bg-polygons"></div>
+        <div class="header-content">
+            <a href="index.html" class="header-logo">
+                <img src="images/BAlogo-blue.png" alt="Balog Attila Logo" class="custom-logo">
+            </a>
+            <div class="header-titles">
+                <div class="title-row">
+                    <h1>Balog Attila</h1>
+                    <div class="title-line"></div>
+                </div>
+                <h2>Custom PCB & Control Systems</h2>
+            </div>
+        </div>
+    </header>
+
+    <a href="index.html" class="back-home">← Vissza a főoldalra</a>
+
+    <div class="guide-wrapper">
+    <div class="guide-container">
+
+        <div class="guide-hero">
+            <div>
+                <div class="guide-title">
+                    Felsőtárkány <br>mászókalauz & topo
+                </div>
+
+                <div class="guide-subtitle">
+                    Részletes sziklamászó kalauz és topo információk Felsőtárkány környékéről, helyi utakról, nehézségi fokozatokról és megközelítésről.
+                </div>
+
+                <div class="guide-lead">
+                    A Bükk hegység lábánál elterülő sziklamászó helyek ideális célpontot jelentenek mind a kezdő, mind a tapasztalt mászók számára.
+                </div>
+
+                <div class="guide-lead">
+                    Ez az útmutató segít eligazodni a sziklák között, bemutatva a fontosabb szektorokat és technikai tudnivalókat.
+                </div>
+
+                <div class="guide-buttons">
+                    <a class="guide-button cfop-button-secondary" href="kapcsolat.html">
+                        Kapcsolatfelvétel
+                    </a>
+                </div>
+            </div>
+
+            <div class="guide-dual-images">
+                <img src="https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000099-20cc120cc2/fels%C5%91t%C3%A1rk%C3%A1ny-sziklam%C3%A1szó-kalauz-topo-crag-szilamaszas-jobb%20oldal.webp?ph=0f123c8804" alt="Felsőtárkány sziklamászó kalauz topo">
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h2>A mászóhelyről</h2>
+
+            <div class="guide-highlight">
+                <strong>
+                    Természetes környezet, technikás utak.
+                </strong>
+                <br><br>
+                Felsőtárkány és környéke kiváló minőségű mészkőfalakkal várja a mászókat, ahol a változatos technikai kihívások garantálják a tartalmas napot.
+            </div>
+
+            <p>
+                A szektorok könnyen megközelíthetők, a környezet pedig csöndes, rendezett erdei hangulatot biztosít.
+            </p>
+
+            <p>
+                Minden mászónak ajánlott a helyi természetvédelmi előírások betartása és a kulturált viselkedés a szikláknál.
+            </p>
+        </div>
+
+        <div class="guide-section">
+            <h2>Fontos tudnivalók és felszerelés</h2>
+
+            <ul class="guide-list">
+                <li><strong>Biztonság:</strong> Használj megfelelő minőségű dinamikus és félstatikus köteleket, valamint ellenőrzött biztosítóeszközöket.</li>
+                <li><strong>Topográfia:</strong> Az utak nehézségi fokozatai a könnyebb besorolástól a technikásabb, áthajlóbb vonalakig terjednek.</li>
+                <li><strong>Megközelítés:</strong> Kérjük, ügyelj arra, hogy a gépjárművek parkolásakor ne zárd el az erdészeti utakat.</li>
+                <li><strong>Környezetvédelem:</strong> Ne hagyj hátra szemetet, óvd a helyi flórát és faunát.</li>
+            </ul>
+
+            <div class="guide-note">
+                * A mászás mindenki saját felelősségére történik. Mindig ellenőrizd a felszerelésedet indulás előtt!
+            </div>
+        </div>
+
+        <div class="guide-footer">
+            <h2>
+                Felsőtárkányi mászókalauz
+            </h2>
+
+            <p>
+                Biztonságos és élvezetes mászást kívánunk a Bükk szikláin!
+            </p>
+
+            <div class="guide-footer-buttons">
+                <a class="guide-button" href="index.html">
+                    Vissza a főoldalra
+                </a>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+</body>
+</html>
