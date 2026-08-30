@@ -21,7 +21,7 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
-        /* --- FEJLÉC (Ugyanaz, mint a főoldalon) --- */
+        /* --- FEJLÉC --- */
         .site-header {
             position: relative;
             width: 100%;
@@ -111,10 +111,10 @@
             margin: 5px 0 0 0;
         }
 
-        /* --- TARTALMI DOBOZ ÉS KAPCSOLAT FORM --- */
+        /* --- TARTALMI DOBOZ --- */
         .content-container {
             width: 100%;
-            max-width: 800px;
+            max-width: 700px;
             background: rgba(15, 15, 15, 0.85);
             border: 1px solid #262626;
             border-radius: 12px;
@@ -135,16 +135,56 @@
             display: inline-block;
         }
 
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+        .contact-info p {
+            line-height: 1.6;
+            color: #cccccc;
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+        }
+
+        .contact-info ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 30px 0;
+        }
+
+        .contact-info li {
+            margin-bottom: 15px;
+            color: #dddddd;
+            font-size: 1.1rem;
+        }
+
+        .contact-info strong {
+            color: #ffffff;
+            display: inline-block;
+            width: 120px;
+        }
+
+        .contact-info a {
+            color: #d00000;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-info a:hover {
+            color: #ff1a1a;
+            text-decoration: underline;
+        }
+
+        /* Vissza gomb a főoldalra */
+        .back-home {
+            display: inline-block;
+            color: #aaaaaa;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .back-home:hover {
+            color: #ffffff;
         }
 
         @media (max-width: 700px) {
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
             .site-header {
                 height: auto;
                 padding: 20px;
@@ -159,86 +199,10 @@
             .title-line {
                 display: none;
             }
-        }
-
-        .contact-info p {
-            line-height: 1.6;
-            color: #cccccc;
-            margin-bottom: 20px;
-        }
-
-        .contact-info ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .contact-info li {
-            margin-bottom: 12px;
-            color: #dddddd;
-        }
-
-        .contact-info strong {
-            color: #ffffff;
-        }
-
-        /* Vissza gomb a főoldalra */
-        .back-home {
-            display: inline-block;
-            margin-top: 30px;
-            color: #aaaaaa;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-size: 0.95rem;
-        }
-
-        .back-home:hover {
-            color: #ffffff;
-        }
-
-        /* Egyszerű űrlap stílus */
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .contact-form label {
-            font-size: 0.9rem;
-            color: #bbbbbb;
-        }
-
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid #333333;
-            border-radius: 6px;
-            color: #ffffff;
-            box-sizing: border-box;
-            font-family: inherit;
-        }
-
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            outline: none;
-            border-color: #d00000;
-        }
-
-        .contact-form button {
-            background-color: #d00000;
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .contact-form button:hover {
-            background-color: #f00000;
+            .contact-info strong {
+                display: block;
+                margin-bottom: 5px;
+            }
         }
     </style>
 </head>
@@ -265,30 +229,12 @@
     <div class="content-container">
         <h2 class="page-title">Kapcsolat</h2>
         
-        <div class="contact-grid">
-            <div class="contact-info">
-                <p>Ha kérdésed van a projektekkel, egyedi PCB tervezéssel vagy a rendszerekkel kapcsolatban, keress bizalommal az alábbi elérhetőségeken vagy az űrlap kitöltésével.</p>
-                <ul>
-                    <li><strong>Helyszín:</strong> Eger, Magyarország</li>
-                    <li><strong>Email:</strong> info@balogattila.hu</li>
-                </ul>
-            </div>
-
-            <form class="contact-form" action="#" method="POST">
-                <div>
-                    <label for="name">Neved:</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div>
-                    <label for="email">Email címed:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div>
-                    <label for="message">Üzenet:</label>
-                    <textarea id="message" name="message" rows="4" required></textarea>
-                </div>
-                <button type="submit">Üzenet küldése</button>
-            </form>
+        <div class="contact-info">
+            <p>Ha kérdésed van a projektekkel, egyedi PCB tervezéssel vagy a rendszerekkel kapcsolatban, keress bizalommal az alábbi elérhetőségeken.</p>
+            <ul>
+                <li><strong>Helyszín:</strong> Eger, Magyarország</li>
+                <li><strong>Email:</strong> <a href="mailto:info@balogattila.hu">info@balogattila.hu</a></li>
+            </ul>
         </div>
 
         <a href="index.html" class="back-home">← Vissza a főoldalra</a>
