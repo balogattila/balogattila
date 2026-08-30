@@ -111,7 +111,7 @@
             margin: 5px 0 0 0;
         }
 
-        /* --- AZ EREDETI RÁCS KÓDOD (VÁLTOZATLANUL) --- */
+        /* --- RÁCS KÓD --- */
         .honeycomb-wrapper {
             display: flex;
             justify-content: center;
@@ -177,26 +177,26 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 30px;
+            padding: 35px;
             box-sizing: border-box;
             transition: background 0.5s ease;
         }
 
         .hex-title {
             color: #f5f5f7; 
-            font-size: 20px;          /* Visszavéve 22px-ről, hogy elférjen */
+            font-size: 19px;
             font-weight: 600;
-            letter-spacing: 0.8px;    /* Kicsit szűkebb betűköz */
+            letter-spacing: 0.8px;
             text-transform: uppercase;
             text-align: center;
-            line-height: 1.2;         /* Sűrűbb sormagasság */
-            padding: 4px 6px;         /* Kevesebb padding fent/lent, több oldalt */
+            line-height: 1.25;
+            padding: 4px 4px;
             width: 100%;
             box-sizing: border-box;
-            background: radial-gradient(circle, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 75%);
-            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            background: radial-gradient(circle, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 75%);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.6);
             transition: all 0.5s ease;
-            word-break: normal;       /* Biztosítja, hogy ne tördelje ketté hülye helyen */
+            word-break: normal;
         }
 
         .hex-button:hover {
@@ -210,7 +210,7 @@
 
         .hex-button:hover .hex-title {
             color: #ffffff;
-            background: radial-gradient(circle, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 85%);
+            background: radial-gradient(circle, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0) 85%);
             transform: scale(1.02);
         }
 
@@ -242,9 +242,8 @@
             .honeycomb-grid {
                 max-width: 100%;
                 flex-direction: column;
-                align-items: flex-start !important;
-                padding-left: 20px;
-                padding-right: 20px;
+                align-items: center !important; /* Középre igazítva mobilon is */
+                padding: 0 10px;
                 width: 100%;
                 box-sizing: border-box;
             }
@@ -254,41 +253,23 @@
             }
             
             .hex-button {
-                width: 160px;
-                height: 184px;
-                margin: 0 0 -46px 0 !important;
+                width: 200px;
+                height: 230px;
+                margin: 0 0 -55px 0 !important;
+                transform: none !important; /* Kivesszük a féloldalas eltolást, hogy stabilan középen maradjon */
             }
-            
-            .hex-button:nth-child(3),
-            .hex-button:nth-child(4),
-            .hex-button:nth-child(6),
-            .hex-button:nth-child(7),
-            .hex-button:nth-child(8),
-            .hex-button:nth-child(10),
-            .hex-button:nth-child(11),
-            .hex-button:nth-child(13) {
-                margin-top: 0;
+
+            .hex-overlay {
+                padding: 30px;
             }
 
             .hex-title {
                 font-size: 16px;
-                padding: 8px 5px;
+                padding: 4px;
             }
 
-            .hex-button:nth-of-type(odd) {
-                transform: translateX(0);
-            }
-
-            .hex-button:nth-of-type(even) {
-                transform: translateX(120px);
-            }
-            
-            .hex-button:nth-of-type(odd):hover {
-                transform: translateX(0) scale(1.05);
-            }
-            
-            .hex-button:nth-of-type(even):hover {
-                transform: translateX(120px) scale(1.05);
+            .hex-button:hover {
+                transform: scale(1.05) !important;
             }
         }
     </style>
@@ -300,7 +281,6 @@
         <div class="header-content">
             
             <div class="header-logo">
-                <!-- ITT VAN A LOGÓ HIVATKOZÁSA: -->
                 <img src="images/BAlogo-blue.png" alt="Balog Attila Logo" class="custom-logo">
             </div>
 
