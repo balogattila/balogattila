@@ -151,7 +151,7 @@
             margin-bottom: 40px;
         }
 
-        /* Termék Kép (Kattintható teljes méretre) */
+        /* Termék Kép doboz */
         .product-image-box {
             max-width: 550px;
             margin: 0 auto 40px auto;
@@ -160,6 +160,7 @@
             background: #111;
             border: 1px solid #333333;
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            cursor: zoom-in;
         }
 
         .product-image-box img {
@@ -167,11 +168,46 @@
             height: auto;
             display: block;
             transition: transform 0.3s ease;
-            cursor: zoom-in;
         }
 
-        .product-image-box img:hover {
+        .product-image-box:hover img {
             transform: scale(1.02);
+        }
+
+        /* --- LIGHTBOX (TELJES KÉPERNYŐS KATTINTÁS) --- */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            cursor: zoom-out;
+        }
+
+        .lightbox-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox-overlay img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox-overlay.active img {
+            transform: scale(1);
         }
 
         /* Szöveges leírás alsó rész */
@@ -263,11 +299,9 @@
             <h1 class="product-title">Codefon kaputelefon kiegészítő relépanel</h1>
             <div class="product-date">2024.07.17</div>
 
-            <!-- Termék Kép -->
-            <div class="product-image-box">
-                <a href="images/cfrp.webp" target="_blank">
-                    <img src="images/cfrp.webp" alt="Codefon kaputelefon kiegészítő relépanel">
-                </a>
+            <!-- Termék Kép (Kattintható, lightboxot nyit) -->
+            <div class="product-image-box" onclick="openLightbox(this)">
+                <img src="images/cfrpwebp" alt="Codefon kaputelefon kiegészítő relépanel">
             </div>
 
             <!-- Szöveges Leírás -->
@@ -276,12 +310,34 @@
                     Felcsengetéskor vagy a külső csengőgomb megnyomásakor meghúzza a relét, aktiválja a kimenetet. Felhasználható okosotthon vezérlésre, automatizálásra, külső csengő áramkör kialakítására, folyosói világítás időzítés indítására, stb...
                 </p>
                 <p>
-                    Teljes leírás és dokumentáció <a href="https://docs.google.com/document/d/11NVUB-o8YmPFN-yCyDyAm4ZSPpm_B2YWmdaLPZVPtTQ/edit?usp=sharing">ide kattintva</a>, videós segítség <a href="https://a095.webnode.hu/l/codefon-relepanel/#">ide kattintva</a> érhető el.
+                    Teljes leírás és dokumentáció <a href="https://docs.google.com/document/d/11NVUB-o8YmPFN-yCyDyAm4ZSPpm_B2YWmdaLPZVPtTQ/edit?usp=sharing">ide kattintva</a>, videós segítség <a href="https://youtu.be/4nKbsdZYky0?si=WqpLuiuhpnX63x1q">ide kattintva</a> érhető el.
                 </p>
             </div>
 
         </div>
     </div>
+
+    <!-- Lightbox Teljes Képernyős Réteg -->
+    <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="Nagyított kép">
+    </div>
+
+    <!-- JavaScript a Lightbox működéséhez -->
+    <script>
+        function openLightbox(element) {
+            const img = element.querySelector('img');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
+            lightboxImg.src = img.src;
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+        }
+    </script>
 
 </body>
 </html>
