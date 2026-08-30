@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elektronika és Projektek - Balog Attila</title>
+    <link rel="icon" type="image/png" href="images/BAlogo-blue.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap" rel="stylesheet">
+    <style>
+        /* --- ALAPVETŐ TÉMA ÉS A HÁTTÉR --- */
+        body {
+            background-image: linear-gradient(rgba(5, 5, 5, 0.75), rgba(5, 5, 5, 0.75)), url('images/bg.webp');
+            background-color: #050505;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: #f5f5f7;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* --- FEJLÉC --- */
+        .site-header {
+            position: relative;
+            width: 100%;
+            height: 130px;
+            background-color: #000000;
+            margin-top: 0;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            box-sizing: border-box;
+            overflow: hidden;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .header-bg-polygons {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 55%;
+            height: 100%;
+            background: 
+                linear-gradient(105deg, transparent 20%, rgba(150, 0, 0, 0.6) 21%, rgba(200, 20, 20, 0.9) 50%, transparent 51%),
+                linear-gradient(45deg, transparent 40%, rgba(100, 0, 0, 0.7) 41%, rgba(180, 10, 10, 0.95) 70%, transparent 71%),
+                linear-gradient(160deg, transparent 60%, rgba(80, 0, 0, 0.8) 61%, #d00000 90%);
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .custom-logo {
+            height: 75px;
+            width: auto;
+            max-width: 100px;
+            object-fit: contain;
+        }
+
+        .header-titles {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .title-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .site-header h1 {
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+            margin: 0;
+            color: #ffffff;
+            font-style: italic;
+            font-weight: 700;
+        }
+
+        .title-line {
+            width: 60px;
+            height: 1px;
+            background-color: #666666;
+            margin-top: 5px;
+        }
+
+        .site-header h2 {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #dddddd;
+            letter-spacing: 0.5px;
+            margin: 5px 0 0 0;
+        }
+
+        /* --- ELEKTRONIKA TARTALMI DOBOZ --- */
+        .elec-wrapper {
+            position: relative;
+            overflow: hidden;
+            padding: 50px 25px;
+            max-width: 1200px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .elec-container {
+            max-width: 1200px;
+            margin: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .elec-title {
+            font-family: 'Bungee Tint', cursive;
+            font-size: 48px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #ffffff;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        .elec-subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #d1d5db;
+            margin-bottom: 50px;
+        }
+
+        /* Projekt Kártyák Rács Elrendezés */
+        .elec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .elec-card {
+            background: rgba(15, 15, 15, 0.85);
+            border: 1px solid #262626;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, border-color 0.3s;
+        }
+
+        .elec-card:hover {
+            transform: translateY(-5px);
+            border-color: #2563eb;
+        }
+
+        .elec-card-img-wrapper {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            background: #111;
+            position: relative;
+        }
+
+        .elec-card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+            cursor: zoom-in;
+        }
+
+        .elec-card-img-wrapper img:hover {
+            transform: scale(1.05);
+        }
+
+        .elec-card-content {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .elec-card-title {
+            font-size: 22px;
+            color: #ffffff;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .elec-card-desc {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #aaaaaa;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .elec-card-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .elec-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white !important;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.25s ease;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .elec-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+        }
+
+        .elec-btn-secondary {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.3);
+        }
+
+        .back-home {
+            display: inline-block;
+            margin: 30px 0 0 25px;
+            color: #aaaaaa;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .back-home:hover {
+            color: #ffffff;
+        }
+
+        @media(max-width: 950px){
+            .elec-title {
+                font-size: 32px;
+            }
+            .site-header {
+                height: auto;
+                padding: 20px;
+            }
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .title-row {
+                flex-direction: column;
+            }
+            .title-line {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- FEJLÉC -->
+    <header class="site-header">
+        <div class="header-bg-polygons"></div>
+        <div class="header-content">
+            <a href="index.html" class="header-logo">
+                <img src="images/BAlogo-blue.png" alt="Balog Attila Logo" class="custom-logo">
+            </a>
+            <div class="header-titles">
+                <div class="title-row">
+                    <h1>Balog Attila</h1>
+                    <div class="title-line"></div>
+                </div>
+                <h2>Custom PCB & Control Systems</h2>
+            </div>
+        </div>
+    </header>
+
+    <a href="index.html" class="back-home">← Vissza a főoldalra</a>
+
+    <div class="elec-wrapper">
+    <div class="elec-container">
+
+        <div class="elec-title">Elektronika & Projektek</div>
+        <div class="elec-subtitle">
+            Saját tervezésű egyedi PCB-k, vezérlőrendszerek, automatizálási modulok és hobbi elektronikai projektek bemutatása.
+        </div>
+
+        <div class="elec-grid">
+
+            <!-- 1. Projekt Kártya (Pl. CFOP-1) -->
+            <div class="elec-card">
+                <div class="elec-card-img-wrapper">
+                    <a href="https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000107-81cc481cc6/ChatGPT%20Image%202025.%20dec.%2018.%2000_00_58.webp?ph=0f123c8804" target="_blank">
+                        <img src="https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000107-81cc481cc6/ChatGPT%20Image%202025.%20dec.%2018.%2000_00_58.webp?ph=0f123c8804" alt="CFOP-1 modul">
+                    </a>
+                </div>
+                <div class="elec-card-content">
+                    <h3 class="elec-card-title">CFOP-1 Kaputelefon Modul</h3>
+                    <p class="elec-card-desc">Saját fejlesztésű interfész panel digitális Codefon kaputelefon-rendszerekhez, Home Assistant integrációval.</p>
+                    <div class="elec-card-buttons">
+                        <a href="cfop-1.html" class="elec-btn">Részletek</a>
+                        <a href="support.html" class="elec-btn elec-btn-secondary">Dokumentáció</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Projekt Kártya (Cserélhető képpel és linkekkel) -->
+            <div class="elec-card">
+                <div class="elec-card-img-wrapper">
+                    <a href="images/bg.webp" target="_blank">
+                        <img src="images/bg.webp" alt="Projekt kép">
+                    </a>
+                </div>
+                <div class="elec-card-content">
+                    <h3 class="elec-card-title">CFRP-1 Relépanel</h3>
+                    <p class="elec-card-desc">Bővítő relépanel Codefon és DP3000 digitális kaputelefonokhoz a stabilabb külső vezérlésekhez.</p>
+                    <div class="elec-card-buttons">
+                        <a href="support.html" class="elec-btn">Dokumentáció</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Projekt Kártya -->
+            <div class="elec-card">
+                <div class="elec-card-img-wrapper">
+                    <a href="images/bg.webp" target="_blank">
+                        <img src="images/bg.webp" alt="Projekt kép">
+                    </a>
+                </div>
+                <div class="elec-card-content">
+                    <h3 class="elec-card-title">Vízszivárgás Érzékelő (WS1, WS2)</h3>
+                    <p class="elec-card-desc">Kompakt, megbízható ömlés- és szivárgásérzékelő elektronika intelligens otthonokhoz.</p>
+                    <div class="elec-card-buttons">
+                        <a href="support.html" class="elec-btn">Dokumentáció</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Projekt Kártya -->
+            <div class="elec-card">
+                <div class="elec-card-img-wrapper">
+                    <a href="images/bg.webp" target="_blank">
+                        <img src="images/bg.webp" alt="Projekt kép">
+                    </a>
+                </div>
+                <div class="elec-card-content">
+                    <h3 class="elec-card-title">Airsoft Időzített Bomba</h3>
+                    <p class="elec-card-desc">Egyedi mikrovezérlős játékvezérlő és időzítő egység dinamikus airsoft szituációkhoz.</p>
+                    <div class="elec-card-buttons">
+                        <a href="support.html" class="elec-btn">Dokumentáció</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+
+</body>
+</html>
