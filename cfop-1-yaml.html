@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CFOP-1 Home Assistant YAML Példa - Balog Attila</title>
+    <title>CFOP-1 Home Assistant Automatizáció (YAML) - Balog Attila</title>
+    <meta name="description" content="CFOP-1 kaputelefon okosító panel Home Assistant integrációs példa és YAML automatizációs kód.">
     <link rel="icon" type="image/png" href="images/BAlogo-blue.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -162,7 +163,7 @@
         }
 
         .content-body li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         /* --- SÖTÉT KÓDBLOKK STÍLUS --- */
@@ -173,7 +174,7 @@
             padding: 20px;
             overflow-x: auto;
             font-family: Consolas, Monaco, monospace;
-            font-size: 14px;
+            font-size: 13.5px;
             color: #c9d1d9;
             line-height: 1.5;
             margin: 30px 0;
@@ -246,41 +247,54 @@
             <div class="content-body">
                 <p><strong>Beállítás Home Assistantban:</strong></p>
                 <ol>
-                    <li>A Shelly integrációba bekerült a Shelly Uni a Home Assistant rendszerhez.</li>
-                    <li>A megjelenő bemenetek közül Binary Sensor (bináris) típusuak.</li>
-                    <li>A nyitás parancsot konfiguráló Button (gomb) vagy Switch (kapcsoló) entitás jelzi a küldött jelet, hogy aktiválás után 1-2 másodperccel automatikusan kikapcsoljon (Monostabil jel).</li>
+                    <li>A Shelly integráción keresztül add hozzá a Shelly Uni-t a Home Assistant rendszerhez.</li>
+                    <li>A csengetés bemenetet állítsd Binary Sensor (bináris szenzor) típusúra.</li>
+                    <li>A nyitás kimenetet konfiguráld Button (gomb) vagy Switch (kapcsoló) entitásként (úgy beállítva, hogy aktiválás után 1-2 másodperccel automatikusan kapcsoljon ki/engedjen el).</li>
                 </ol>
 
                 <p>
-                    Az alábbiakban egy olyan Home Assistant automatizálási YAML kód látható. Ez a kód átveszi azonosítóként a hívókapcsolótól a hívásbizonylatot, és küld egy mobilapp értesítést a telefonodra, ha valaki becsengetett, és megnyomja a gombot. Ehhez meg kell adni a telefonod azonosítóját a YAML kódban:
+                    Az alábbiakban egy kész Home Assistant automatizáció YAML kódot találsz. Ez a kód küld egy azonnali értesítést a mobiltelefonodra, ha valaki megnyomja a kaputelefont, és felkínál egy "Ajtó nyitása" gombot közvetlenül az értesítésben. Így anélkül engedhetsz be valakit, hogy meg kellene nyitnod a Home Assistant appot. Másold be ezt a kódot az automatizáció szerkesztőben a "Szerkesztés YAML-ként" (Edit in YAML) nézetben:
                 </p>
 
                 <!-- KÓDBLOKK -->
-                <pre class="code-block"><code>alias: "Kaputelefon Csengetés és Nyitás Értesítés"
-description: "Csengetés detektálásakor küld értesítést és ad gombot a nyitáshoz."
+                <pre class="code-block"><code>alias: "Kaputelefon: Csengetés és Nyitás Értesítés"
+description: "Mobil értesítést küld csengetéskor és gombot biztosít a nyitáshoz."
 trigger:
   - platform: state
-    entity_id: binary_sensor.shellyuni_csengeto  # Cseréld ki a saját entitás ID-dra
+    entity_id: binary_sensor.shelly_kaputelefon_csengetes # Cseréld ki a saját csengetés szenzorod ID-jára
     from: "off"
     to: "on"
 action:
-  - service: notify.mobile_app_telefonod_neve  # Cseréld ki a saját értesítési célnévre
+  - service: notify.notify # Az összes csatlakoztatott eszközre küldi, vagy írd át pl. notify.mobile_app_telefonod_neve
     data:
       title: "🔔 Kaputelefon"
-      message: "Valaki becsengetett a kapunál!"
+      message: "Valaki csenget a kapunál!"
       data:
+        tag: "kaputelefon-cseng" # Ez a tag csoportosítja az értesítéseket, így felülírja a régit
         actions:
-          - action: "OPEN_DOOR"
-            title: "🚪 Ajtó nyitása"
+          - action: "NYITAS_ACTION"
+            title: "🔑 Ajtó nyitása"
 mode: single
-# (A folytatásban ide jöhet a válaszkezelési ág...)</code></pre>
+
+# Ez a második rész figyeli, ha megnyomtad a gombot az értesítésben
+alias: "Kaputelefon: Nyitás gomb kezelése"
+description: "Aktiválja a nyitó relét, ha az értesítésben a gombra kattintottak."
+trigger:
+  - platform: event
+    event_type: mobile_app_notification_action
+    event_data:
+      action: "NYITAS_ACTION"
+action:
+  - service: switch.turn_on # Vagy button.press, ha gombként konfiguráltad a nyitó relét
+    target:
+      entity_id: switch.shelly_kaputelefon_nyitas # Cseréld ki a saját nyitó reléd ID-jára</code></pre>
 
                 <p><strong>Fontos lépések a beállításhoz:</strong></p>
-                <ol>
-                    <li>Mindenekelőtt az entitásokat a Shelly hardverrel (hangfrekvenciás csengetés) és a Home Assistantban konfigurált entitásokkal pontosan össze kell hangolni.</li>
-                    <li>Ügyelj arra, hogy a kimenet ne maradjon folyamatosan a hálózaton, mert a relé/áramkör leéghet, ezért a relé vezérlés mindig monostabil (impulzus) működésű legyen.</li>
-                    <li>Auto-off (automatikus kikapcsolás) kiegészítést úgy kell beállítani, hogy a Shelly Uni (vagy 2-es kimenet) 2 másodperc múlva egymás után leálljon, mert ha nem áll le, akkor úgy "gombnyomást" szimulál.</li>
-                </ol>
+                <ul>
+                    <li><strong>Entitás nevek:</strong> Írd át a <code>binary_sensor.shelly_kaputelefon_csengetes</code> és a <code>switch.shelly_kaputelefon_nyitas</code> neveket a te rendszeredben létrejött valós Shelly entitás azonosítókra.</li>
+                    <li><strong>Célzott értesítés:</strong> Ha nem szeretnéd, hogy a házban mindenkinek csipogjon a telefonja, a <code>notify.notify</code> sort cseréld le a saját telefonod egyedi szolgáltatására (pl. <code>notify.mobile_app_iphone</code>).</li>
+                    <li><strong>Auto-off (Automatikus kikapcsolás):</strong> Győződj meg róla, hogy a Shelly Uni felületén (vagy a Home Assistantban) a nyitó kapcsolóra be van állítva egy Auto Off (pl. 2 másodperc). A kaputelefonnak ugyanis nem állandó jelet kell adni, hanem csak egy rövid "gombnyomást".</li>
+                </ul>
             </div>
 
         </div>
