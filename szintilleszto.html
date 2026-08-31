@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Szintillesztő-invertáló áramkör - Balog Attila</title>
+    <meta name="description" content="Szintillesztő-invertáló áramkör - Nyitott kollektoros kimenetet illeszt pozitív impulzust váró áramköri bemenethez.">
+    <link rel="icon" type="image/png" href="images/BAlogo-blue.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap" rel="stylesheet">
+    <style>
+        /* --- ALAPVETŐ TÉMA ÉS A HÁTTÉR --- */
+        body {
+            background-image: linear-gradient(rgba(5, 5, 5, 0.75), rgba(5, 5, 5, 0.75)), url('images/bg.webp');
+            background-color: #050505;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: #f5f5f7;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* --- FEJLÉC --- */
+        .site-header {
+            position: relative;
+            width: 100%;
+            height: 130px;
+            background-color: #000000;
+            margin-top: 0;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            box-sizing: border-box;
+            overflow: hidden;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .header-bg-polygons {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 55%;
+            height: 100%;
+            background: 
+                linear-gradient(105deg, transparent 20%, rgba(150, 0, 0, 0.6) 21%, rgba(200, 20, 20, 0.9) 50%, transparent 51%),
+                linear-gradient(45deg, transparent 40%, rgba(100, 0, 0, 0.7) 41%, rgba(180, 10, 10, 0.95) 70%, transparent 71%),
+                linear-gradient(160deg, transparent 60%, rgba(80, 0, 0, 0.8) 61%, #d00000 90%);
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .custom-logo {
+            height: 75px;
+            width: auto;
+            max-width: 100px;
+            object-fit: contain;
+        }
+
+        .header-titles {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .title-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .site-header h1 {
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+            margin: 0;
+            color: #ffffff;
+            font-style: italic;
+            font-weight: 700;
+        }
+
+        .title-line {
+            width: 60px;
+            height: 1px;
+            background-color: #666666;
+            margin-top: 5px;
+        }
+
+        .site-header h2 {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #dddddd;
+            letter-spacing: 0.5px;
+            margin: 5px 0 0 0;
+        }
+
+        /* --- TARTALMI DOBOZ ÉS STÍLUSOK --- */
+        .circuit-wrapper {
+            position: relative;
+            overflow: hidden;
+            padding: 50px 25px;
+            max-width: 1200px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .circuit-container {
+            max-width: 1200px;
+            margin: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .circuit-hero {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 70px;
+        }
+
+        .circuit-title {
+            font-family: 'Bungee Tint', cursive;
+            font-size: 46px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        .circuit-date {
+            font-size: 15px;
+            color: #9ca3af;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .circuit-section h2, 
+        .circuit-footer h2 {
+            font-family: 'Bungee Tint', cursive;
+            font-size: 38px;
+            margin-bottom: 25px;
+            color: #ffffff;
+            font-weight: 400;
+            line-height: 1.25;
+        }
+
+        .circuit-subtitle {
+            font-size: 19px;
+            line-height: 1.6;
+            color: #d1d5db;
+            margin-bottom: 25px;
+        }
+
+        .circuit-lead {
+            font-size: 17px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #cccccc;
+        }
+
+        .circuit-images {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .circuit-images img {
+            width: 100%;
+            border-radius: 18px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            background: #111;
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
+            object-fit: contain;
+            max-height: 350px;
+        }
+
+        .circuit-images img:hover {
+            transform: scale(1.02);
+        }
+
+        .circuit-section {
+            background: rgba(15, 15, 15, 0.85);
+            border: 1px solid #262626;
+            padding: 50px;
+            border-radius: 24px;
+            margin-top: 35px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            color: #f5f5f7;
+        }
+
+        .circuit-section p {
+            font-size: 18px;
+            line-height: 1.9;
+            margin-bottom: 18px;
+            color: #cccccc;
+        }
+
+        .circuit-highlight {
+            background: linear-gradient(135deg, rgba(37,99,235,0.15), rgba(15,23,42,0.4));
+            border-left: 6px solid #2563eb;
+            padding: 28px;
+            border-radius: 18px;
+            margin: 30px 0;
+            font-size: 18px;
+            line-height: 1.8;
+            color: #e2e8f0;
+        }
+
+        .circuit-footer {
+            margin-top: 50px;
+            padding: 60px 40px;
+            border-radius: 28px;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            text-align: center;
+            color: white;
+            border: 1px solid #334155;
+        }
+
+        .circuit-footer p {
+            color: #d1d5db;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .circuit-btn {
+            display: inline-block;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white !important;
+            text-decoration: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.25s ease;
+            box-shadow: 0 10px 25px rgba(37,99,235,0.3);
+        }
+
+        .circuit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(37,99,235,0.45);
+        }
+
+        /* --- LIGHTBOX (TELJES KÉPERNYŐS NAGYÍTÁS) --- */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            cursor: zoom-out;
+        }
+
+        .lightbox-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox-overlay img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox-overlay.active img {
+            transform: scale(1);
+        }
+
+        .back-home {
+            display: inline-block;
+            margin: 30px 0 0 25px;
+            color: #aaaaaa;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .back-home:hover {
+            color: #ffffff;
+        }
+
+        @media(max-width: 950px){
+            .circuit-hero {
+                grid-template-columns: 1fr;
+            }
+            .circuit-title {
+                font-size: 32px;
+            }
+            .circuit-section h2, 
+            .circuit-footer h2 {
+                font-size: 26px;
+            }
+            .site-header {
+                height: auto;
+                padding: 20px;
+            }
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .title-row {
+                flex-direction: column;
+            }
+            .title-line {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- FEJLÉC -->
+    <header class="site-header">
+        <div class="header-bg-polygons"></div>
+        <div class="header-content">
+            <a href="index.html" class="header-logo">
+                <img src="images/BAlogo-blue.png" alt="Balog Attila Logo" class="custom-logo">
+            </a>
+            <div class="header-titles">
+                <div class="title-row">
+                    <h1>Balog Attila</h1>
+                    <div class="title-line"></div>
+                </div>
+                <h2>Custom PCB & Control Systems</h2>
+            </div>
+        </div>
+    </header>
+
+    <a href="index.html" class="back-home">← Vissza a főoldalra</a>
+
+    <div class="circuit-wrapper">
+    <div class="circuit-container">
+
+        <div class="circuit-hero">
+            <div>
+                <div class="circuit-title">Szintillesztő-invertáló áramkör</div>
+                <div class="circuit-date">2025.04.12</div>
+
+                <div class="circuit-subtitle">
+                    Kompakt elektronikai modul nyitott kollektoros kimenetek jelszintjének illesztéséhez és logikai invertálásához.
+                </div>
+
+                <div class="circuit-lead">
+                    Az áramkör elsődleges feladata, hogy a nyitott kollektoros kimeneteket biztonságosan illessze a pozitív impulzust váró áramköri bemenetekhez.
+                </div>
+
+                <div class="circuit-lead">
+                    A beépített 2N2222A tranzisztoros fokozat és a gondosan megválasztott ellenállás-értékek stabil, megbízható jeltovábbítást garantálnak.
+                </div>
+            </div>
+
+            <div class="circuit-images">
+                <!-- Ide töltheted majd be a saját képed fájlnevét, pl images/szintilleszto.webp -->
+                <img src="images/bg.webp" alt="Szintillesztő-invertáló modul" onclick="openLightbox(this)">
+                <img src="images/bg.webp" alt="Szintillesztő kapcsolási rajz" onclick="openLightbox(this)">
+            </div>
+        </div>
+
+        <div class="circuit-section">
+            <h2>Működési elv & Jellemzők</h2>
+
+            <div class="circuit-highlight">
+                <strong>Működési logika:</strong>
+                <br>
+                A bemenetet Gnd-re zárva a kimeneten Vcc jelenik meg. Nyitott bemenet mellett Gnd-n van a kimenet.
+            </div>
+
+            <p>
+                Az áramkör univerzális kialakításának köszönhetően könnyen integrálható különböző vezérlési és jelátviteli projektekbe, ahol a logikai szintek invertálása vagy illesztése elengedhetetlen.
+            </p>
+        </div>
+
+        <div class="circuit-footer">
+            <h2>Biztonságos jelátvitel egyedi elektronikákhoz.</h2>
+            <p>Fedezd fel a többi saját tervezésű modult és projektet is!</p>
+            <a class="circuit-btn" href="electronics.html">Vissza az Elektronikákhoz</a>
+        </div>
+
+    </div>
+    </div>
+
+    <!-- Lightbox Teljes Képernyős Nagyítás Réteg -->
+    <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="Nagyított kép">
+    </div>
+
+    <!-- JavaScript a Lightbox működéséhez -->
+    <script>
+        function openLightbox(element) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
+            lightboxImg.src = element.src;
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+        }
+    </script>
+
+</body>
+</html>
