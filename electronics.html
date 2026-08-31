@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Egyedi elktronikák tervezése és kivitelezése.">
+    <meta name="description" content="Egyedi elektronikák tervezése és kivitelezése - Balog Attila.">
     <title>Elektronika, Tervezés és Projektek - Balog Attila</title>
     <link rel="icon" type="image/png" href="images/BAlogo-blue.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -174,14 +174,14 @@
             border-color: #2563eb;
         }
 
-        /* A kép maga egy link a részletes oldalra */
+        /* A kép kattintható nagyításhoz */
         .elec-card-img-wrapper {
             width: 100%;
             height: 220px;
             overflow: hidden;
             background: #111;
             position: relative;
-            display: block;
+            cursor: zoom-in;
         }
 
         .elec-card-img-wrapper img {
@@ -202,29 +202,44 @@
             flex-grow: 1;
         }
 
-        .elec-card-title-link {
-            text-decoration: none;
-        }
-
         .elec-card-title {
             font-size: 22px;
             color: #ffffff;
             margin-top: 0;
             margin-bottom: 15px;
             font-weight: 700;
-            transition: color 0.2s;
         }
 
-        .elec-card-title-link:hover .elec-card-title {
-            color: #60a5fa;
-        }
-
+        /* Görgőzhető szövegdoboz a leíráshoz */
         .elec-card-desc {
-            font-size: 16px;
+            font-size: 15px;
             line-height: 1.6;
             color: #aaaaaa;
             margin-bottom: 25px;
+            height: 80px; /* Fix magasság, hogy minden kártya egyforma legyen */
+            overflow-y: auto; /* Ha túlnyúlik, megjelenik a görgetősáv */
+            padding-right: 5px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
             flex-grow: 1;
+        }
+
+        /* Görgetősáv szép sötét stílusa */
+        .elec-card-desc::-webkit-scrollbar {
+            width: 6px;
+        }
+        .elec-card-desc::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+            border-radius: 4px;
+        }
+        .elec-card-desc::-webkit-scrollbar-thumb {
+            background: #333333;
+            border-radius: 4px;
+        }
+        .elec-card-desc::-webkit-scrollbar-thumb:hover {
+            background: #555555;
         }
 
         .elec-card-buttons {
@@ -250,6 +265,42 @@
             transform: translateY(-2px);
             background: linear-gradient(135deg, #2563eb, #1d4ed8);
             box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+        }
+
+        /* --- LIGHTBOX (TELJES KÉPERNYŐS NAGYÍTÁS) --- */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            cursor: zoom-out;
+        }
+
+        .lightbox-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox-overlay img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox-overlay.active img {
+            transform: scale(1);
         }
 
         .back-home {
@@ -319,64 +370,154 @@
 
             <!-- 1. Projekt Kártya (CFOP-1) -->
             <div class="elec-card">
-                <a href="cfop-1.html" class="elec-card-img-wrapper">
+                <div class="elec-card-img-wrapper" onclick="openLightbox(this)">
                     <img src="https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000107-81cc481cc6/ChatGPT%20Image%202025.%20dec.%2018.%2000_00_58.webp?ph=0f123c8804" alt="CFOP-1 modul">
-                </a>
+                </div>
                 <div class="elec-card-content">
-                    <a href="cfop-1.html" class="elec-card-title-link">
-                        <h3 class="elec-card-title">CFOP-1 Kaputelefon Modul</h3>
-                    </a>
-                    <p class="elec-card-desc">Saját fejlesztésű interfész panel digitális Codefon kaputelefon-rendszerekhez, Home Assistant integrációval.</p>
+                    <h3 class="elec-card-title">CFOP-1 Kaputelefon Modul</h3>
+                    <div class="elec-card-desc">Saját fejlesztésű interfész panel digitális Codefon kaputelefon-rendszerekhez, Home Assistant integrációval és extra funkciókkal.</div>
                     <div class="elec-card-buttons">
-                        <a href="support.html" class="elec-btn">Dokumentáció</a>
+                        <a href="cfop-1.html" class="elec-btn">Bővebben</a>
                     </div>
                 </div>
             </div>
 
-            <!-- 2. Projekt Kártya (CFRP-1) -->
+            <!-- 2. Projekt Kártya (RC-328 intellgens redőnyvezérlő - Duplikálva) -->
             <div class="elec-card">
-                <a href="cfrp.html" class="elec-card-img-wrapper">
-                    <img src="images/cfrp.webp" alt="Projekt kép">
-                </a>
+                <div class="elec-card-img-wrapper" onclick="openLightbox(this)">
+                    <img src="https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000107-81cc481cc6/ChatGPT%20Image%202025.%20dec.%2018.%2000_00_58.webp?ph=0f123c8804" alt="RC-328 redőnyvezérlő">
+                </div>
                 <div class="elec-card-content">
-                    <a href="support.html" class="elec-card-title-link">
-                        <h3 class="elec-card-title">CFRP-1 Relépanel</h3>
-                    </a>
-                    <p class="elec-card-desc">Bővítő relépanel Codefon és DP3000 digitális kaputelefonokhoz a stabilabb külső vezérlésekhez.</p>
+                    <h3 class="elec-card-title">RC-328 intelligens redőnyvezérlő</h3>
+                    <div class="elec-card-desc">ATmega328P alapú intelligens redőnyvezérlő rendszer külső EEPROM naplózással, kettős kalibrációval és LCD menürendszerrel.</div>
                     <div class="elec-card-buttons">
-                        <a href="support.html" class="elec-btn">Dokumentáció</a>
+                        <a href="support.html" class="elec-btn">Bővebben</a>
                     </div>
                 </div>
             </div>
 
-            <!-- 3. Projekt Kártya (WS1, WS2) -->
+            <!-- 3. Projekt Kártya (CFRP-1) -->
             <div class="elec-card">
-                <a href="support.html" class="elec-card-img-wrapper">
-                    <img src="images/WS2-9S.webp" alt="Projekt kép">
-                </a>
+                <div class="elec-card-img-wrapper" onclick="openLightbox(this)">
+                    <img src="images/cfrp.webp" alt="CFRP-1 relépanel">
+                </div>
                 <div class="elec-card-content">
-                    <a href="support.html" class="elec-card-title-link">
-                        <h3 class="elec-card-title">Vízszivárgás Érzékelő (WS1, WS2)</h3>
-                    </a>
-                    <p class="elec-card-desc">Kompakt, megbízható ömlés- és szivárgásérzékelő elektronika intelligens otthonokhoz.</p>
+                    <h3 class="elec-card-title">CFRP-1 Relépanel</h3>
+                    <div class="elec-card-desc">Bővítő relépanel Codefon és DP3000 digitális kaputelefonokhoz a stabilabb külső vezérlésekhez.</div>
                     <div class="elec-card-buttons">
-                        <a href="https://docs.google.com/document/d/1bteZ2VbezkAIW1_o0iuWyw1XZ37ZnOYPX1pYgz8FvEg/edit?usp=sharing" class="elec-btn">Dokumentáció</a>
+                        <a href="support.html" class="elec-btn">Bővebben</a>
                     </div>
                 </div>
             </div>
 
-            <!-- 4. Projekt Kártya (Airsoft) -->
+            <!-- 4. Projekt Kártya (WS1, WS2) -->
             <div class="elec-card">
-                <a href="support.html" class="elec-card-img-wrapper">
-                    <img src="images/airsoft.jpg" alt="Projekt kép">
-                </a>
+                <div class="elec-card-img-wrapper" onclick="openLightbox(this)">
+                    <img src="images/WS2-9S.webp" alt="Vízszivárgás érzékelő">
+                </div>
                 <div class="elec-card-content">
-                    <a href="support.html" class="elec-card-title-link">
-                        <h3 class="elec-card-title">Airsoft Időzített Bomba</h3>
-                    </a>
-                    <p class="elec-card-desc">Egyedi mikrovezérlős játék és időzítő egység dinamikus airsoft szituációkhoz.</p>
+                    <h3 class="elec-card-title">Vízszivárgás Érzékelő (WS1, WS2)</h3>
+                    <div class="elec-card-desc">Kompakt, megbízható ömlés- és szivárgásérzékelő elektronika intelligens otthonokhoz.</div>
                     <div class="elec-card-buttons">
-                        <a href="https://docs.google.com/document/d/1f9KDcYXl5yV37U-zDU3wHt4X5np6T7yfWb3xWecSjNI/edit?usp=sharing" class="elec-btn">Dokumentáció</a>
+                        <a href="support.html" class="elec-btn">Bővebben</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Projekt Kártya (Airsoft) -->
+            <div class="elec-card">
+                <div class="elec-card-img-wrapper" onclick="openLightbox(this)">
+                    <img src="images/airsoft.jpg" alt="Airsoft időzített bomba">
+                </div>
+                <div class="elec-card-content">
+                    <h3 class="elec-card-title">Airsoft Időzített Bomba</h3>
+                    <div class="elec-card-desc">Egyedi mikrovezérlős játék és időzítő egység dinamikus airsoft szituációkhoz.</div>
+                    <div class="elec-card-buttons">
+                        <a href="support.html" class="elec-btn">Bővebben</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. Projekt Kártya -->
+            <div class="elec-card">
+                <div class="elec-card-img-wrapper" onclick="openLightbox(this)">
+                    <img src="images/bg.webp" alt="Projekt kép 6">
+                </div>
+                <div class="elec-card-content">
+                    <h3 class="elec-card-title">Projekt Cím 6</h3>
+                    <div class="elec-card-desc">Ide jön a hatodik projekt rövid leírása, ami szintén görgethető dobozban kap helyet, ha hosszabbra nyúlik.</div>
+                    <div class="elec-card-buttons">
+                        <a href="#" class="elec-btn">Bővebben</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. Projekt Kártya -->
+            <div class="elec-card">
+                <div class="elec-card-img-wrapper" onclick="openLightbox(this)">
+                    <img src="images/bg.webp" alt="Projekt kép 7">
+                </div>
+                <div class="elec-card-content">
+                    <h3 class="elec-card-title">Projekt Cím 7</h3>
+                    <div class="elec-card-desc">Ide jön a hetedik projekt rövid leírása.</div>
+                    <div class="elec-card-buttons">
+                        <a href="#" class="elec-btn">Bővebben</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. Projekt Kártya -->
+            <div class="elec-card">
+                <div class="elec-card-img-wrapper" onclick="openLightbox(this)">
+                    <img src="images/bg.webp" alt="Projekt kép 8">
+                </div>
+                <div class="elec-card-content">
+                    <h3 class="elec-card-title">Projekt Cím 8</h3>
+                    <div class="elec-card-desc">Ide jön a nyolcadik projekt rövid leírása.</div>
+                    <div class="elec-card-buttons">
+                        <a href="#" class="elec-btn">Bővebben</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. Projekt Kártya -->
+            <div class="elec-card">
+                <div class="elec-card-img-wrapper" onclick="openLightbox(this)">
+                    <img src="images/bg.webp" alt="Projekt kép 9">
+                </div>
+                <div class="elec-card-content">
+                    <h3 class="elec-card-title">Projekt Cím 9</h3>
+                    <div class="elec-card-desc">Ide jön a kilencedik projekt rövid leírása.</div>
+                    <div class="elec-card-buttons">
+                        <a href="#" class="elec-btn">Bővebben</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10. Projekt Kártya -->
+            <div class="elec-card">
+                <div class="elec-card-img-wrapper" onclick="openLightbox(this)">
+                    <img src="images/bg.webp" alt="Projekt kép 10">
+                </div>
+                <div class="elec-card-content">
+                    <h3 class="elec-card-title">Projekt Cím 10</h3>
+                    <div class="elec-card-desc">Ide jön a tizedik projekt rövid leírása.</div>
+                    <div class="elec-card-buttons">
+                        <a href="#" class="elec-btn">Bővebben</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11. Projekt Kártya -->
+            <div class="elec-card">
+                <div class="elec-card-img-wrapper" onclick="openLightbox(this)">
+                    <img src="images/bg.webp" alt="Projekt kép 11">
+                </div>
+                <div class="elec-card-content">
+                    <h3 class="elec-card-title">Projekt Cím 11</h3>
+                    <div class="elec-card-desc">Ide jön a tizenegyedik projekt rövid leírása.</div>
+                    <div class="elec-card-buttons">
+                        <a href="#" class="elec-btn">Bővebben</a>
                     </div>
                 </div>
             </div>
@@ -385,6 +526,28 @@
 
     </div>
     </div>
+
+    <!-- Lightbox Teljes Képernyős Nagyítás Réteg -->
+    <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="Nagyított kép">
+    </div>
+
+    <!-- JavaScript a Lightbox működéséhez -->
+    <script>
+        function openLightbox(element) {
+            const img = element.querySelector('img');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
+            lightboxImg.src = img.src;
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+        }
+    </script>
 
 </body>
 </html>
