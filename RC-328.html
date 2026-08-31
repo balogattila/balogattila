@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RC-328 Intelligens redőnyvezérlő - Balog Attila</title>
+    <meta name="description" content="RC-328 ATmega328P alapú intelligens redőnyvezérlő rendszer külső EEPROM naplózással, kettős kalibrációval és LCD menürendszerrel.">
+    <link rel="icon" type="image/png" href="images/BAlogo-blue.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap" rel="stylesheet">
+    <style>
+        /* --- ALAPVETŐ TÉMA ÉS A HÁTTÉR --- */
+        body {
+            background-image: linear-gradient(rgba(5, 5, 5, 0.75), rgba(5, 5, 5, 0.75)), url('images/bg.webp');
+            background-color: #050505;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: #f5f5f7;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* --- FEJLÉC --- */
+        .site-header {
+            position: relative;
+            width: 100%;
+            height: 130px;
+            background-color: #000000;
+            margin-top: 0;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            box-sizing: border-box;
+            overflow: hidden;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .header-bg-polygons {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 55%;
+            height: 100%;
+            background: 
+                linear-gradient(105deg, transparent 20%, rgba(150, 0, 0, 0.6) 21%, rgba(200, 20, 20, 0.9) 50%, transparent 51%),
+                linear-gradient(45deg, transparent 40%, rgba(100, 0, 0, 0.7) 41%, rgba(180, 10, 10, 0.95) 70%, transparent 71%),
+                linear-gradient(160deg, transparent 60%, rgba(80, 0, 0, 0.8) 61%, #d00000 90%);
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .custom-logo {
+            height: 75px;
+            width: auto;
+            max-width: 100px;
+            object-fit: contain;
+        }
+
+        .header-titles {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .title-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .site-header h1 {
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+            margin: 0;
+            color: #ffffff;
+            font-style: italic;
+            font-weight: 700;
+        }
+
+        .title-line {
+            width: 60px;
+            height: 1px;
+            background-color: #666666;
+            margin-top: 5px;
+        }
+
+        .site-header h2 {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #dddddd;
+            letter-spacing: 0.5px;
+            margin: 5px 0 0 0;
+        }
+
+        /* --- TARTALMI DOBOZ ÉS STÍLUSOK --- */
+        .rc-wrapper{
+            position:relative;
+            overflow:hidden;
+            padding:50px 25px;
+            max-width: 1200px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .rc-container{
+            max-width:1200px;
+            margin:auto;
+            position:relative;
+            z-index:2;
+        }
+
+        .rc-hero{
+            display:grid;
+            grid-template-columns:1.1fr 0.9fr;
+            gap:60px;
+            align-items:center;
+            margin-bottom:70px;
+        }
+
+        .rc-title {
+            font-family: 'Bungee Tint', cursive;
+            font-size: 52px;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        .rc-section h2, 
+        .rc-footer h2 {
+            font-family: 'Bungee Tint', cursive;
+            font-size: 42px;
+            margin-bottom: 25px;
+            color: #ffffff;
+            font-weight: 400;
+            line-height: 1.25;
+        }
+
+        /* Reszponzív méret igazítás mobilon */
+        @media(max-width: 950px){
+            .rc-title {
+                font-size: 36px;
+            }
+            .rc-section h2, 
+            .rc-footer h2 {
+                font-size: 28px;
+            }
+        }
+
+        .rc-subtitle{
+            font-size:20px;
+            line-height:1.6;
+            color:#d1d5db;
+            margin-bottom:30px;
+        }
+
+        .rc-lead{
+            font-size:18px;
+            line-height:1.8;
+            margin-bottom:22px;
+            color:#cccccc;
+        }
+
+        .rc-buttons{
+            display:flex;
+            gap:16px;
+            flex-wrap:wrap;
+            margin-top:30px;
+        }
+
+        .rc-button{
+            display:inline-block;
+            padding:18px 34px;
+            background:linear-gradient(135deg,#2563eb,#1d4ed8);
+            color:white !important;
+            text-decoration:none;
+            border-radius:16px;
+            font-size:18px;
+            font-weight:bold;
+            transition:0.25s ease;
+            box-shadow:0 12px 30px rgba(37,99,235,0.28);
+        }
+
+        .rc-button:hover{
+            transform:translateY(-4px);
+            box-shadow:0 18px 36px rgba(37,99,235,0.38);
+        }
+
+        .rc-button-secondary{
+            background:linear-gradient(135deg,#1e293b,#334155);
+            box-shadow:0 12px 30px rgba(15,23,42,0.25);
+        }
+
+        .rc-dual-images{
+            display:grid;
+            grid-template-columns:1fr;
+            gap:25px;
+        }
+
+        .rc-dual-images img{
+            width:100%;
+            border-radius:22px;
+            box-shadow:0 18px 45px rgba(0,0,0,0.4);
+            background:#111;
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
+        }
+
+        .rc-dual-images img:hover {
+            transform: scale(1.02);
+        }
+
+        .rc-section{
+            background: rgba(15, 15, 15, 0.85);
+            border: 1px solid #262626;
+            padding:50px;
+            border-radius:24px;
+            margin-top:35px;
+            box-shadow:0 10px 35px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            color: #f5f5f7;
+        }
+
+        .rc-section h3{
+            font-size:26px;
+            margin-top:35px;
+            margin-bottom:14px;
+            color:#ffffff;
+        }
+
+        .rc-section p{
+            font-size:18px;
+            line-height:1.9;
+            margin-bottom:18px;
+            color:#cccccc;
+        }
+
+        .rc-highlight{
+            background:linear-gradient(135deg, rgba(37,99,235,0.15), rgba(15,23,42,0.4));
+            border-left:6px solid #2563eb;
+            padding:28px;
+            border-radius:18px;
+            margin:30px 0;
+            font-size:19px;
+            line-height:1.8;
+            color:#e2e8f0;
+        }
+
+        .rc-list{
+            margin-top:18px;
+            padding-left:22px;
+            text-align:left;
+        }
+
+        .rc-list li{
+            margin-bottom:12px;
+            font-size:18px;
+            line-height:1.7;
+            text-align:left;
+            color:#cccccc;
+        }
+
+        .rc-list strong {
+            color: #ffffff;
+        }
+
+        .rc-note{
+            font-size:15px;
+            color:#9ca3af;
+            margin-top:20px;
+            font-style:italic;
+            text-align:left;
+        }
+
+        .rc-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:25px;
+            margin-top:35px;
+        }
+
+        .rc-card{
+            background: rgba(25, 25, 25, 0.6);
+            border:1px solid #333333;
+            border-radius:20px;
+            padding:28px;
+            transition:0.2s ease;
+        }
+
+        .rc-card:hover{
+            transform:translateY(-4px);
+            box-shadow:0 12px 28px rgba(0,0,0,0.3);
+            border-color: #2563eb;
+        }
+
+        .rc-card h4{
+            font-size:20px;
+            margin-bottom:14px;
+            color:#ffffff;
+        }
+
+        .rc-card p{
+            font-size:16px;
+            margin:0;
+            color:#aaaaaa;
+        }
+
+        .rc-footer{
+            margin-top:50px;
+            padding:70px 40px;
+            border-radius:28px;
+            background:linear-gradient(135deg,#0f172a,#1e293b);
+            text-align:center;
+            color:white;
+            border: 1px solid #334155;
+        }
+
+        .rc-footer p{
+            color:#d1d5db;
+            font-size:20px;
+            margin-bottom:35px;
+        }
+
+        .rc-footer-buttons{
+            display:flex;
+            justify-content:center;
+            gap:16px;
+            flex-wrap:wrap;
+        }
+
+        /* --- LIGHTBOX (TELJES KÉPERNYŐS NAGYÍTÁS) --- */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            cursor: zoom-out;
+        }
+
+        .lightbox-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox-overlay img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox-overlay.active img {
+            transform: scale(1);
+        }
+
+        .back-home {
+            display: inline-block;
+            margin: 30px 0 0 25px;
+            color: #aaaaaa;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .back-home:hover {
+            color: #ffffff;
+        }
+
+        @media(max-width:950px){
+            .rc-hero{
+                grid-template-columns:1fr;
+            }
+            .rc-title{
+                font-size:32px;
+            }
+            .rc-section{
+                padding:35px;
+            }
+            .rc-section h2{
+                font-size:26px;
+            }
+            .rc-footer h2{
+                font-size:26px;
+            }
+            .site-header {
+                height: auto;
+                padding: 20px;
+            }
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .title-row {
+                flex-direction: column;
+            }
+            .title-line {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- FEJLÉC -->
+    <header class="site-header">
+        <div class="header-bg-polygons"></div>
+        <div class="header-content">
+            <a href="index.html" class="header-logo">
+                <img src="images/BAlogo-blue.png" alt="Balog Attila Logo" class="custom-logo">
+            </a>
+            <div class="header-titles">
+                <div class="title-row">
+                    <h1>Balog Attila</h1>
+                    <div class="title-line"></div>
+                </div>
+                <h2>Custom PCB & Control Systems</h2>
+            </div>
+        </div>
+    </header>
+
+    <a href="index.html" class="back-home">← Vissza a főoldalra</a>
+
+    <div class="rc-wrapper">
+    <div class="rc-container">
+
+        <div class="rc-hero">
+            <div>
+                <div class="rc-title">
+                    RC-328 <br>intelligens redőnyvezérlő
+                </div>
+
+                <div class="rc-subtitle">
+                    Az RC-328 egy saját fejlesztésű, ATmega328P alapú beágyazott vezérlőrendszer, amelyet kifejezetten intelligens redőnyök precíz és megbízható automatizálására terveztek.
+                </div>
+
+                <div class="rc-lead">
+                    Külső EEPROM naplózással, kettős kalibrációs eljárással és integrált LCD menürendszerrel biztosítja a maximális kényelmet és üzembiztonságot.
+                </div>
+
+                <div class="rc-lead">
+                    A rendszer stabil hardveralapra és robusztus C++ firmware-re épül, folyamatosan igazodva a modern otthonok elvárásaihoz.
+                </div>
+
+                <div class="rc-buttons">
+                    <a class="rc-button rc-button-secondary" href="support.html">
+                        Teljes dokumentáció
+                    </a>
+                </div>
+            </div>
+
+            <div class="rc-dual-images">
+                <img src="https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000107-81cc481cc6/ChatGPT%20Image%202025.%20dec.%2018.%2000_00_58.webp?ph=0f123c8804" alt="RC-328 vezérlő panel" onclick="openLightbox(this)">
+            </div>
+        </div>
+
+        <div class="rc-section">
+            <h2>Miért különleges az RC-328?</h2>
+
+            <div class="rc-highlight">
+                <strong>
+                    Professzionális vezérlés kompromisszumok nélkül.
+                </strong>
+                <br><br>
+                Nem csupán egy egyszerű kapcsoló: egy teljes körű, beágyazott intelligence egység, amely logุมol, védi a mechanikát és rugalmasan konfigurálható.
+            </div>
+
+            <p>
+                A fedélzeti mikrokontroller és a külső memória kombinációja garantálja, hogy az adatok áramszünet esetén sem vesznek el, a kalibrációs adatok pedig stabilan megmaradnak.
+            </p>
+
+            <p>
+                Ha fontos a pontos végállás-vezérlés és a kulturált, áttekinthető kezelőfelület, az RC-328 a tökéletes választás.
+            </p>
+        </div>
+
+        <div class="rc-section">
+            <h2>Fő előnyök</h2>
+
+            <div class="rc-grid">
+                <div class="rc-card">
+                    <h4>✔ ATmega328P alapú hardver</h4>
+                    <p>
+                        Megbízható, ipari sztenderd AVR architektúra dedikált C++ firmware futtatására optimalizálva.
+                    </p>
+                </div>
+
+                <div class="rc-card">
+                    <h4>✔ Külső EEPROM naplózás</h4>
+                    <p>
+                        A fontos rendszeradatok, ciklusszámok és beállítások biztonságos tárolása külső I2C memóriában.
+                    </p>
+                </div>
+
+                <div class="rc-card">
+                    <h4>✔ Kettős kalibráció</h4>
+                    <p>
+                        Precíz idő- és útalapú kalibrációs eljárás a redőnyök tökéletes pozicionálásához.
+                    </p>
+                </div>
+
+                <div class="rc-card">
+                    <h4>✔ LCD menürendszer</h4>
+                    <p>
+                        Áttekinthető, helyi kijelző és kezelőfelület a paraméterek könnyű beállításához.
+                    </p>
+                </div>
+
+                <div class="rc-card">
+                    <h4>✔ Biztonsági védelem</h4>
+                    <p>
+                        Beépített határérték-kezelés és akadályfelismerési logika a motorok és a szerkezet védelméért.
+                    </p>
+                </div>
+
+                <div class="rc-card">
+                    <h4>✔ Stabil működés</h4>
+                    <p>
+                        Hosszú távú, zavarvédett üzemre tervezett egyedi PCB kialakítás.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="rc-section">
+            <h2>Amit nyújt a rendszer:</h2>
+            
+            <p style="text-align: left; font-weight: bold;">
+                Az RC-328 vezérlő mindent tud, amire egy modern, intelligens árnyékolástechnikai rendszernél szükség lehet:
+            </p>
+
+            <ul class="rc-list">
+                <li><strong>Precíz pozicionálás:</strong> A kettős kalibrációnak köszönhetően a redőny pontosan abban a pozícióban áll meg, ahová küldték.</li>
+                <li><strong>Helyi LCD menü:</strong> Számítógép vagy külső eszköz nélkül is finomhangolhatók a paraméterek.</li>
+                <li><strong>Eseménynaplózás:</strong> A külső EEPROM-nak köszönhetően követhetővé válnak a működési ciklusok.</li>
+                <li><strong>Kompakt méret:</strong> Kulturált elhelyezhetőség a szerelődobozokban vagy központi vezérlőszekrényben.</li>
+            </ul>
+
+            <div class="rc-note">
+                * A beszerelést és a hálózati bekötést minden esetben szakképzett villanyszerelő kell, hogy végezze!
+            </div>
+        </div>
+
+        <div class="rc-footer">
+            <h2>
+                RC-328 — Intelligens árnyékolás precízen.
+            </h2>
+
+            <p>
+                Megbízható beágyazott vezérlés otthonod számára.
+            </p>
+
+            <div class="rc-footer-buttons">
+                <a class="rc-button" href="support.html">
+                    Terméktámogatás & Dokumentáció
+                </a>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+    <!-- Lightbox Teljes Képernyős Nagyítás Réteg -->
+    <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="Nagyított kép">
+    </div>
+
+    <!-- JavaScript a Lightbox működéséhez -->
+    <script>
+        function openLightbox(element) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
+            lightboxImg.src = element.src;
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+        }
+    </script>
+
+</body>
+</html>
