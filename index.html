@@ -113,7 +113,7 @@
             margin: 5px 0 0 0;
         }
 
-        /* --- RÁCS KÓD --- */
+        /* --- RÁCS KÓD (HATTEST ELRENDEZÉS) --- */
         .honeycomb-wrapper {
             display: flex;
             justify-content: center;
@@ -130,20 +130,16 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            max-width: 850px;
+            /* Pontosan annyi szélesség, hogy 3 db 240px-es elem + margók férjenek ki egy sorba */
+            max-width: 792px; 
             user-select: none;
-        }
-
-        .hex-break {
-            flex-basis: 100%;
-            height: 0;
         }
 
         .hex-button {
             position: relative;
             width: 240px;
             height: 277px;
-            margin: 0 12px;
+            margin: -69px 6px 0 6px; /* Negatív margó a hatszögek összezárásához */
             background-position: center;
             background-size: cover;
             clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
@@ -152,29 +148,10 @@
             text-decoration: none;
         }
 
-        /* ÚJ 2-3-3-2 ELRENDEZÉS ASZTALI NÉZETBEN (-69px átfedéssel) */
-        /* 1. sor (2 db): CFOP-1, Elektronika */
+        /* Az első sor elemeinél nincs szükség fenti negatív margóra */
+        .hex-button:nth-child(1),
         .hex-button:nth-child(2) {
-            margin-top: -69px;
-        }
-
-        /* 2. sor (3 db): Terméktámogatás, Fotók, Rendezvényfotók */
-        .hex-button:nth-child(4),
-        .hex-button:nth-child(5),
-        .hex-button:nth-child(6) {
-            margin-top: -69px;
-        }
-        
-        /* 3. sor (3 db): Videók, Felsőtárkány, Everest2X */
-        .hex-button:nth-child(8),
-        .hex-button:nth-child(9),
-        .hex-button:nth-child(10) {
-            margin-top: -69px;
-        }
-        
-        /* 4. sor (1 db): Kapcsolat */
-        .hex-button:nth-child(12) {
-            margin-top: -69px;
+            margin-top: 0;
         }
 
         .hex-overlay {
@@ -209,21 +186,7 @@
 
         @media (max-width: 550px) {
             .cfop-title {
-                font-family: 'Indie Flower', cursive;
                 font-size: 35px;
-                font-weight: 700;
-                color: #f5f5f7; 
-                letter-spacing: 0.8px;
-                text-transform: uppercase;
-                text-align: center;
-                line-height: 1.2;
-                padding: 4px 6px;
-                width: 100%;
-                box-sizing: border-box;
-                background: radial-gradient(circle, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 75%);
-                text-shadow: 0 2px 8px rgba(0,0,0,0.5);
-                transition: all 0.5s ease;
-                word-break: normal;
             }
         }
 
@@ -313,26 +276,10 @@
                 box-sizing: border-box;
             }
             
-            .hex-break {
-                display: none;
-            }
-            
             .hex-button {
                 width: 160px;
                 height: 184px;
                 margin: 0 0 -46px 0 !important;
-            }
-            
-            /* Mobilon töröljük az asztali sor-eltolásokat, hogy a sima sorrend szerint fusson a cikk-cakk */
-            .hex-button:nth-child(2),
-            .hex-button:nth-child(4),
-            .hex-button:nth-child(5),
-            .hex-button:nth-child(6),
-            .hex-button:nth-child(8),
-            .hex-button:nth-child(9),
-            .hex-button:nth-child(10),
-            .hex-button:nth-child(12) {
-                margin-top: 0;
             }
 
             .hex-title {
@@ -382,7 +329,7 @@
     <div class="honeycomb-wrapper">
         <div class="honeycomb-grid">
             
-            <!-- 1. SOR (2 kocka): CFOP-1 és Elektronika -->
+            <!-- 1. SOR (2 db): CFOP-1, Elektronika -->
             <a href="cfop-1.html" class="hex-button" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000107-81cc481cc6/ChatGPT%20Image%202025.%20dec.%2018.%2000_00_58.webp');">
                 <div class="hex-overlay">
                     <span class="cfop-title">CFOP-1</span>
@@ -394,10 +341,8 @@
                     <span class="hex-title">Elektronika, PCB, tervezés</span>
                 </div>
             </a>
-            
-            <div class="hex-break"></div>
 
-            <!-- 2. SOR (3 kocka): Terméktámogatás, Fotók, Rendezvényfotók -->
+            <!-- 2. SOR (3 db): Terméktámogatás, Fotók, Rendezvényfotók -->
             <a href="termektamogatas.html" class="hex-button" style="background-image: url('https://img.magnific.com/free-photo/still-life-documents-stack_23-2151088805.jpg?semt=ais_hybrid&w=740&q=80');">
                 <div class="hex-overlay">
                     <span class="hex-title">Termék- támogatás</span>
@@ -416,9 +361,7 @@
                 </div>
             </a>
 
-            <div class="hex-break"></div>
-
-            <!-- 3. SOR (3 kocka): Videók, Felsőtárkány, Everest2X -->
+            <!-- 3. SOR (3 db): Videók, Felsőtárkány, Everest2X -->
             <a href="https://www.youtube.com/@balog_attila/videos" target="_blank" rel="noopener" class="hex-button" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000149-0c44c0c44e/700/youtube-icon-42018.webp');">
                 <div class="hex-overlay">
                     <span class="hex-title">Videóim</span>
@@ -436,10 +379,8 @@
                     <span class="hex-title">Everest2X kihívás</span>
                 </div>
             </a>
-            
-            <div class="hex-break"></div>
 
-            <!-- 4. SOR (1 kocka): Kapcsolat -->
+            <!-- 4. SOR (1 db): Kapcsolat -->
             <a href="kapcsolat.html" class="hex-button" style="background-image: url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?q=80&w=400&auto=format&fit=crop');">
                 <div class="hex-overlay">
                     <span class="hex-title">Kapcsolat</span>
