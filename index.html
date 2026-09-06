@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
     <style>
-        /* --- ALAPVETŐ TÉMA és EGYEDI HÁTTÉR --- */
+        /* --- ALAPVETŐ TÉMA ÉS A TE EGYEDI HÁTTERED --- */
         body {
             background-image: linear-gradient(rgba(5, 5, 5, 0.75), rgba(5, 5, 5, 0.75)), url('images/bg.webp');
             background-color: #050505;
@@ -152,24 +152,28 @@
             text-decoration: none;
         }
 
-        /* 1-2-3-2-1 GYÉMÁNT ELRENDEZÉS */
-        .hex-button:nth-child(3),
-        .hex-button:nth-child(4) {
+        /* ÚJ 2-3-3-2 ELRENDEZÉS ASZTALI NÉZETBEN (-69px átfedéssel) */
+        /* 1. sor (2 db): CFOP-1, Elektronika */
+        .hex-button:nth-child(2) {
+            margin-top: -69px;
+        }
+
+        /* 2. sor (3 db): Terméktámogatás, Fotók, Rendezvényfotók */
+        .hex-button:nth-child(4),
+        .hex-button:nth-child(5),
+        .hex-button:nth-child(6) {
             margin-top: -69px;
         }
         
-        .hex-button:nth-child(6),
-        .hex-button:nth-child(7),
-        .hex-button:nth-child(8) {
+        /* 3. sor (3 db): Videók, Felsőtárkány, Everest2X */
+        .hex-button:nth-child(8),
+        .hex-button:nth-child(9),
+        .hex-button:nth-child(10) {
             margin-top: -69px;
         }
         
-        .hex-button:nth-child(10),
-        .hex-button:nth-child(11) {
-            margin-top: -69px;
-        }
-        
-        .hex-button:nth-child(13) {
+        /* 4. sor (1 db): Kapcsolat */
+        .hex-button:nth-child(12) {
             margin-top: -69px;
         }
 
@@ -319,14 +323,15 @@
                 margin: 0 0 -46px 0 !important;
             }
             
-            .hex-button:nth-child(3),
+            /* Mobilon töröljük az asztali sor-eltolásokat, hogy a sima sorrend szerint fusson a cikk-cakk */
+            .hex-button:nth-child(2),
             .hex-button:nth-child(4),
+            .hex-button:nth-child(5),
             .hex-button:nth-child(6),
-            .hex-button:nth-child(7),
             .hex-button:nth-child(8),
+            .hex-button:nth-child(9),
             .hex-button:nth-child(10),
-            .hex-button:nth-child(11),
-            .hex-button:nth-child(13) {
+            .hex-button:nth-child(12) {
                 margin-top: 0;
             }
 
@@ -377,31 +382,28 @@
     <div class="honeycomb-wrapper">
         <div class="honeycomb-grid">
             
-            <!-- 1. SOR (1 kocka) -->
+            <!-- 1. SOR (2 kocka): CFOP-1 és Elektronika -->
             <a href="cfop-1.html" class="hex-button" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000107-81cc481cc6/ChatGPT%20Image%202025.%20dec.%2018.%2000_00_58.webp');">
                 <div class="hex-overlay">
                     <span class="cfop-title">CFOP-1</span>
                 </div>
             </a>
-            
-            <div class="hex-break"></div>
 
-            <!-- 2. SOR (2 kocka) -->
             <a href="electronics.html" class="hex-button" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000021-8f9a78f9aa/wallpapertip_circuit-board-live-wallpaper_675774.webp?ph=0f123c8804');">
                 <div class="hex-overlay">
                     <span class="hex-title">Elektronika, PCB, tervezés</span>
                 </div>
             </a>
+            
+            <div class="hex-break"></div>
 
+            <!-- 2. SOR (3 kocka): Terméktámogatás, Fotók, Rendezvényfotók -->
             <a href="termektamogatas.html" class="hex-button" style="background-image: url('https://img.magnific.com/free-photo/still-life-documents-stack_23-2151088805.jpg?semt=ais_hybrid&w=740&q=80');">
                 <div class="hex-overlay">
                     <span class="hex-title">Termék- támogatás</span>
                 </div>
             </a>
 
-            <div class="hex-break"></div>
-
-            <!-- 3. SOR (3 kocka) -->
             <a href="https://www.flickr.com/photos/balogattila/albums/" target="_blank" rel="noopener" class="hex-button" style="background-image: url('https://www.ephotozine.com/articles/nikon-d800-digital-slr-sample-photos-18856/images/highres-nikond800withlens_1332947881.jpg');">
                 <div class="hex-overlay">
                     <span class="hex-title">Fotóim a nagyvilágból</span>
@@ -414,15 +416,15 @@
                 </div>
             </a>
 
+            <div class="hex-break"></div>
+
+            <!-- 3. SOR (3 kocka): Videók, Felsőtárkány, Everest2X -->
             <a href="https://www.youtube.com/@balog_attila/videos" target="_blank" rel="noopener" class="hex-button" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000149-0c44c0c44e/700/youtube-icon-42018.webp');">
                 <div class="hex-overlay">
                     <span class="hex-title">Videóim</span>
                 </div>
             </a>
 
-            <div class="hex-break"></div>
-
-            <!-- 4. SOR (2 kocka) -->
             <a href="maszokalauz.html" class="hex-button" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000099-20cc120cc2/fels%C5%91t%C3%A1rk%C3%A1ny-sziklam%C3%A1szó-kalauz-topo-crag-szilamaszas-jobb%20oldal.webp?ph=0f123c8804');">
                 <div class="hex-overlay">
                     <span class="hex-title">Felsőtárkány mászókalauz</span>
@@ -437,7 +439,7 @@
             
             <div class="hex-break"></div>
 
-            <!-- 5. SOR (1 kocka) -->
+            <!-- 4. SOR (1 kocka): Kapcsolat -->
             <a href="kapcsolat.html" class="hex-button" style="background-image: url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?q=80&w=400&auto=format&fit=crop');">
                 <div class="hex-overlay">
                     <span class="hex-title">Kapcsolat</span>
@@ -447,7 +449,7 @@
         </div>
     </div>
 
-    <!-- adatvédelmi említés -->
+    <!-- Diszkrét, sötét, minimalista lábléc az adatvédelmi említéssel -->
     <footer class="site-footer">
         <p>A weboldal nem használ sütiket. A látogatottságot a Cloudflare Web Analytics méri teljesen anonim, személyes adatok gyűjtése nélkül.</p>
     </footer>
