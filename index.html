@@ -113,7 +113,7 @@
             margin: 5px 0 0 0;
         }
 
-        /* --- VALÓDI MÉHSEJTRÁCS (SOR ALAPÚ) --- */
+        /* --- ASZTALI MÉHSEJTRÁCS --- */
         .honeycomb-wrapper {
             display: flex;
             justify-content: center;
@@ -136,15 +136,13 @@
         .hex-row {
             display: flex;
             justify-content: center;
-            /* Negatív margó, hogy a sorok egymásba lógjanak (méhsejt hatás) */
             margin-top: -69px; 
         }
 
         .hex-row:first-child {
-            margin-top: 0; /* Az első sor alatt nincs fenti eltolás */
+            margin-top: 0;
         }
 
-        /* A középső sor (2. sor) picit jobbra csúsztatva */
         .hex-row.offset-row {
             transform: translateX(126px);
         }
@@ -153,7 +151,7 @@
             position: relative;
             width: 240px;
             height: 277px;
-            margin: 0 6px; /* Vízszintes rés a hatszögek között */
+            margin: 0 6px;
             background-position: center;
             background-size: cover;
             clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
@@ -190,12 +188,6 @@
             text-shadow: 0 2px 8px rgba(0,0,0,0.5);
             transition: all 0.5s ease;
             word-break: normal;
-        }
-
-        @media (max-width: 550px) {
-            .cfop-title {
-                font-size: 35px;
-            }
         }
 
         .hex-title {
@@ -249,7 +241,7 @@
             letter-spacing: 0.3px;
         }
 
-        /* RESZPONZÍV MOBIL NÉZET ÉS CIKK-CAKK LOGIKA */
+        /* RESZPONZÍV MOBIL NÉZET */
         @media (max-width: 700px) {
             .site-header {
                 height: auto;
@@ -275,25 +267,30 @@
 
         @media (max-width: 550px) {
             .honeycomb-grid {
-                width: 100%;
-                align-items: flex-start !important;
-                padding-left: 20px;
-                padding-right: 20px;
-                box-sizing: border-box;
-            }
-
-            .hex-row {
                 display: flex;
                 flex-direction: column;
-                margin-top: 0 !important;
-                transform: none !important;
+                align-items: flex-start;
                 width: 100%;
+                max-width: 320px;
+                padding: 0 10px;
+                box-sizing: border-box;
+                margin: 0 auto;
+            }
+
+            /* Mobilon megszüntetjük az asztali sorok hatását, és egységes flex oszloppá alakítjuk */
+            .hex-row {
+                display: contents; 
             }
             
             .hex-button {
                 width: 160px;
                 height: 184px;
                 margin: 0 0 -46px 0 !important;
+                transform: none !important;
+            }
+
+            .cfop-title {
+                font-size: 32px;
             }
 
             .hex-title {
@@ -301,20 +298,21 @@
                 padding: 6px 2px;
             }
 
-            .hex-button:nth-of-type(odd) {
-                transform: translateX(0);
+            /* Automatikus cikk-cakk eltolás mobilon a sorrend alapján */
+            .honeycomb-grid .hex-button:nth-of-type(odd) {
+                transform: translateX(0) !important;
             }
 
-            .hex-button:nth-of-type(even) {
-                transform: translateX(120px);
+            .honeycomb-grid .hex-button:nth-of-type(even) {
+                transform: translateX(110px) !important;
             }
             
-            .hex-button:nth-of-type(odd):hover {
-                transform: translateX(0) scale(1.05);
+            .honeycomb-grid .hex-button:nth-of-type(odd):hover {
+                transform: translateX(0) scale(1.05) !important;
             }
             
-            .hex-button:nth-of-type(even):hover {
-                transform: translateX(120px) scale(1.05);
+            .honeycomb-grid .hex-button:nth-of-type(even):hover {
+                transform: translateX(110px) scale(1.05) !important;
             }
         }
     </style>
