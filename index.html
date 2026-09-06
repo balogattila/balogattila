@@ -129,8 +129,9 @@
         .honeycomb-grid {
             display: flex;
             flex-wrap: wrap;
-            /* Pontosan olyan széles, hogy 3 db 240px-es elem férjen ki egy sorba (+ margók) */
-            max-width: 768px; 
+            justify-content: center;
+            /* Elegendő szélesség a 3 db 240px-es elemnek + eltolásnak */
+            max-width: 830px; 
             user-select: none;
         }
 
@@ -138,7 +139,7 @@
             position: relative;
             width: 240px;
             height: 277px;
-            margin: -69px 4px 0 4px; /* Függöleges összezárás és kis vízszintes rés */
+            margin: -69px 6px 0 6px; /* Függőleges összezárás és apró margó */
             background-position: center;
             background-size: cover;
             clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
@@ -154,14 +155,14 @@
             margin-top: 0;
         }
 
-        /* 2. sor első eleme (Fotók): Elhúzva jobbra a méhsejt rácshoz */
+        /* 2. sor első eleme (Fotók): Eltolva jobbra */
         .hex-button:nth-child(4) {
-            margin-left: 128px; 
+            margin-left: 134px; 
         }
 
         /* 3. sor első eleme (Felsőtárkány): Visszaigazítva balra */
         .hex-button:nth-child(7) {
-            margin-left: 4px; 
+            margin-left: 6px; 
         }
 
         .hex-overlay {
