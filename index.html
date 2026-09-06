@@ -277,7 +277,7 @@
                 align-items: flex-start;
             }
 
-            /* Mobilon teljesen eltüntetjük a sor-konténerek kereteit, hogy a gombok egyetlen folyamatos listát alkossanak */
+            /* Mobilon teljesen eltüntetjük a sor-konténereket, így a gombok egyetlen globális listát alkotnak */
             .hex-row {
                 display: contents !important;
             }
@@ -301,20 +301,20 @@
                 padding: 6px 2px;
             }
 
-            /* Folytonos cikk-cakk közvetlenül a gombokon (1-től 9-ig sorszámozva) */
-            .honeycomb-grid .hex-button:nth-of-type(odd) {
+            /* Globális, megszakítás nélküli váltakozás mind a 9 elemen */
+            .honeycomb-grid a.hex-button:nth-of-type(odd) {
                 transform: translateX(0) !important;
             }
 
-            .honeycomb-grid .hex-button:nth-of-type(even) {
+            .honeycomb-grid a.hex-button:nth-of-type(even) {
                 transform: translateX(110px) !important;
             }
             
-            .honeycomb-grid .hex-button:nth-of-type(odd):hover {
+            .honeycomb-grid a.hex-button:nth-of-type(odd):hover {
                 transform: translateX(0) scale(1.05) !important;
             }
             
-            .honeycomb-grid .hex-button:nth-of-type(even):hover {
+            .honeycomb-grid a.hex-button:nth-of-type(even):hover {
                 transform: translateX(110px) scale(1.05) !important;
             }
         }
@@ -344,7 +344,7 @@
     <div class="honeycomb-wrapper">
         <div class="honeycomb-grid">
             
-            <!-- 1. SOR (3 db) -->
+            <!-- ASZTALON SOROKBAN MŰKÖDŐ, MOBILON GLOBÁLISAN SÁVOZÓ GOMBOK -->
             <div class="hex-row">
                 <a href="cfop-1.html" class="hex-button" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000107-81cc481cc6/ChatGPT%20Image%202025.%20dec.%2018.%2000_00_58.webp');">
                     <div class="hex-overlay">
@@ -365,7 +365,6 @@
                 </a>
             </div>
 
-            <!-- 2. SOR (3 db - jobbra eltolva) -->
             <div class="hex-row offset-row">
                 <a href="https://www.flickr.com/photos/balogattila/albums/" target="_blank" rel="noopener" class="hex-button" style="background-image: url('https://www.ephotozine.com/articles/nikon-d800-digital-slr-sample-photos-18856/images/highres-nikond800withlens_1332947881.jpg');">
                     <div class="hex-overlay">
@@ -386,7 +385,6 @@
                 </a>
             </div>
 
-            <!-- 3. SOR (3 db) -->
             <div class="hex-row">
                 <a href="maszokalauz.html" class="hex-button" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000099-20cc120cc2/fels%C5%91t%C3%A1rk%C3%A1ny-sziklam%C3%A1szó-kalauz-topo-crag-szilamaszas-jobb%20oldal.webp?ph=0f123c8804');">
                     <div class="hex-overlay">
