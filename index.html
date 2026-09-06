@@ -129,22 +129,16 @@
         .honeycomb-grid {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
-            /* Pontosan 3 hatszög szélessége + margók, hogy 3-asával törjön sorba */
-            max-width: 792px; 
+            /* Pontosan olyan széles, hogy 3 db 240px-es elem férjen ki egy sorba (+ margók) */
+            max-width: 768px; 
             user-select: none;
-        }
-
-        .hex-break {
-            flex-basis: 100%;
-            height: 0;
         }
 
         .hex-button {
             position: relative;
             width: 240px;
             height: 277px;
-            margin: -69px 6px 0 6px; /* Vertikális átfedés a méhsejt mintához */
+            margin: -69px 4px 0 4px; /* Függöleges összezárás és kis vízszintes rés */
             background-position: center;
             background-size: cover;
             clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
@@ -153,16 +147,21 @@
             text-decoration: none;
         }
 
-        /* 1. sor elemeinél nincsen fenti negatív margó */
+        /* 1. sor: Nincs fenti negatív margó */
         .hex-button:nth-child(1),
         .hex-button:nth-child(2),
         .hex-button:nth-child(3) {
             margin-top: 0;
         }
 
-        /* Méhsejtszerű eltolás (jobbra csúsztatott 2. sor) */
+        /* 2. sor első eleme (Fotók): Elhúzva jobbra a méhsejt rácshoz */
         .hex-button:nth-child(4) {
-            margin-left: 132px; /* Fél hatszögnyi eltolás jobbra */
+            margin-left: 128px; 
+        }
+
+        /* 3. sor első eleme (Felsőtárkány): Visszaigazítva balra */
+        .hex-button:nth-child(7) {
+            margin-left: 4px; 
         }
 
         .hex-overlay {
@@ -287,17 +286,14 @@
                 box-sizing: border-box;
             }
             
-            .hex-break {
-                display: none;
-            }
-            
             .hex-button {
                 width: 160px;
                 height: 184px;
                 margin: 0 0 -46px 0 !important;
             }
 
-            .hex-button:nth-child(4) {
+            .hex-button:nth-child(4),
+            .hex-button:nth-child(7) {
                 margin-left: 0 !important;
             }
 
@@ -366,10 +362,8 @@
                     <span class="hex-title">Termék- támogatás</span>
                 </div>
             </a>
-            
-            <div class="hex-break"></div>
 
-            <!-- 2. SOR (3 db - jobbra csúsztatva): Fotók, Rendezvényfotók, Videók -->
+            <!-- 2. SOR (3 db - jobbra eltolva): Fotók, Rendezvényfotók, Videók -->
             <a href="https://www.flickr.com/photos/balogattila/albums/" target="_blank" rel="noopener" class="hex-button" style="background-image: url('https://www.ephotozine.com/articles/nikon-d800-digital-slr-sample-photos-18856/images/highres-nikond800withlens_1332947881.jpg');">
                 <div class="hex-overlay">
                     <span class="hex-title">Fotóim a nagyvilágból</span>
@@ -387,10 +381,8 @@
                     <span class="hex-title">Videóim</span>
                 </div>
             </a>
-            
-            <div class="hex-break"></div>
 
-            <!-- 3. SOR (3 db - vissza balra): Felsőtárkány, Everest2X, Kapcsolat -->
+            <!-- 3. SOR (3 db - visszacsúsztatva balra): Felsőtárkány, Everest2X, Kapcsolat -->
             <a href="maszokalauz.html" class="hex-button" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000099-20cc120cc2/fels%C5%91t%C3%A1rk%C3%A1ny-sziklam%C3%A1szó-kalauz-topo-crag-szilamaszas-jobb%20oldal.webp?ph=0f123c8804');">
                 <div class="hex-overlay">
                     <span class="hex-title">Felsőtárkány mászókalauz</span>
