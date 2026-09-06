@@ -271,13 +271,13 @@
                 flex-direction: column;
                 align-items: flex-start;
                 width: 100%;
-                max-width: 320px;
+                max-width: 310px;
                 padding: 0 10px;
                 box-sizing: border-box;
                 margin: 0 auto;
             }
 
-            /* Mobilon megszüntetjük az asztali sorok hatását, és egységes flex oszloppá alakítjuk */
+            /* Mobilon megszüntetjük a sorok határait, így a gombok egyetlen folyamatos listát alkotnak */
             .hex-row {
                 display: contents; 
             }
@@ -298,20 +298,20 @@
                 padding: 6px 2px;
             }
 
-            /* Automatikus cikk-cakk eltolás mobilon a sorrend alapján */
-            .honeycomb-grid .hex-button:nth-of-type(odd) {
+            /* Folyamatos cikk-cakk eltolás mobilon a teljes listán végigfutva */
+            .hex-button:nth-of-type(odd) {
                 transform: translateX(0) !important;
             }
 
-            .honeycomb-grid .hex-button:nth-of-type(even) {
+            .hex-button:nth-of-type(even) {
                 transform: translateX(110px) !important;
             }
             
-            .honeycomb-grid .hex-button:nth-of-type(odd):hover {
+            .hex-button:nth-of-type(odd):hover {
                 transform: translateX(0) scale(1.05) !important;
             }
             
-            .honeycomb-grid .hex-button:nth-of-type(even):hover {
+            .hex-button:nth-of-type(even):hover {
                 transform: translateX(110px) scale(1.05) !important;
             }
         }
