@@ -277,7 +277,7 @@
                 align-items: flex-start;
             }
 
-            /* Mobilon teljesen eltüntetjük a sor-konténereket, így a gombok egyetlen globális listát alkotnak */
+            /* Mobilon feloldjuk az asztali sorokat, hogy egymás alatt folyjanak az elemek */
             .hex-row {
                 display: contents !important;
             }
@@ -301,20 +301,19 @@
                 padding: 6px 2px;
             }
 
-            /* Globális, megszakítás nélküli váltakozás mind a 9 elemen */
-            .honeycomb-grid a.hex-button:nth-of-type(odd) {
+            /* Mobilon az inline style (vagy a fix osztályok) alapján léptetjük a cikk-cakkot, 
+               így garantáltan nem indul újra semmi 3 elem után! */
+            .hex-button.m-left {
                 transform: translateX(0) !important;
             }
-
-            .honeycomb-grid a.hex-button:nth-of-type(even) {
+            .hex-button.m-right {
                 transform: translateX(110px) !important;
             }
             
-            .honeycomb-grid a.hex-button:nth-of-type(odd):hover {
+            .hex-button.m-left:hover {
                 transform: translateX(0) scale(1.05) !important;
             }
-            
-            .honeycomb-grid a.hex-button:nth-of-type(even):hover {
+            .hex-button.m-right:hover {
                 transform: translateX(110px) scale(1.05) !important;
             }
         }
@@ -344,61 +343,72 @@
     <div class="honeycomb-wrapper">
         <div class="honeycomb-grid">
             
-            <!-- ASZTALON SOROKBAN MŰKÖDŐ, MOBILON GLOBÁLISAN SÁVOZÓ GOMBOK -->
+            <!-- 1. SOR (Asztalon 3 db sorban, mobilon folyamatos cikk-cakk) -->
             <div class="hex-row">
-                <a href="cfop-1.html" class="hex-button" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000107-81cc481cc6/ChatGPT%20Image%202025.%20dec.%2018.%2000_00_58.webp');">
+                <!-- 1. elem: Balra -->
+                <a href="cfop-1.html" class="hex-button m-left" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000107-81cc481cc6/ChatGPT%20Image%202025.%20dec.%2018.%2000_00_58.webp');">
                     <div class="hex-overlay">
                         <span class="cfop-title">CFOP-1</span>
                     </div>
                 </a>
 
-                <a href="electronics.html" class="hex-button" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000021-8f9a78f9aa/wallpapertip_circuit-board-live-wallpaper_675774.webp?ph=0f123c8804');">
+                <!-- 2. elem: Jobbra -->
+                <a href="electronics.html" class="hex-button m-right" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000021-8f9a78f9aa/wallpapertip_circuit-board-live-wallpaper_675774.webp?ph=0f123c8804');">
                     <div class="hex-overlay">
                         <span class="hex-title">Elektronika, PCB, tervezés</span>
                     </div>
                 </a>
 
-                <a href="termektamogatas.html" class="hex-button" style="background-image: url('https://img.magnific.com/free-photo/still-life-documents-stack_23-2151088805.jpg?semt=ais_hybrid&w=740&q=80');">
+                <!-- 3. elem: Balra -->
+                <a href="termektamogatas.html" class="hex-button m-left" style="background-image: url('https://img.magnific.com/free-photo/still-life-documents-stack_23-2151088805.jpg?semt=ais_hybrid&w=740&q=80');">
                     <div class="hex-overlay">
                         <span class="hex-title">Termék- támogatás</span>
                     </div>
                 </a>
             </div>
 
+            <!-- 2. SOR -->
             <div class="hex-row offset-row">
-                <a href="https://www.flickr.com/photos/balogattila/albums/" target="_blank" rel="noopener" class="hex-button" style="background-image: url('https://www.ephotozine.com/articles/nikon-d800-digital-slr-sample-photos-18856/images/highres-nikond800withlens_1332947881.jpg');">
+                <!-- 4. elem: Jobbra -->
+                <a href="https://www.flickr.com/photos/balogattila/albums/" target="_blank" rel="noopener" class="hex-button m-right" style="background-image: url('https://www.ephotozine.com/articles/nikon-d800-digital-slr-sample-photos-18856/images/highres-nikond800withlens_1332947881.jpg');">
                     <div class="hex-overlay">
                         <span class="hex-title">Fotóim a nagyvilágból</span>
                     </div>
                 </a>
 
-                <a href="https://flickr.com/photos/balogattilaevents/albums" target="_blank" rel="noopener" class="hex-button" style="background-image: url('https://img.magnific.com/free-photo/hanged-lamps-outdoor-restaurant-with-multiple-visitors-background-bbq_1268-17681.jpg?semt=ais_hybrid&w=740&q=80');">
+                <!-- 5. elem: Balra -->
+                <a href="https://flickr.com/photos/balogattilaevents/albums" target="_blank" rel="noopener" class="hex-button m-left" style="background-image: url('https://img.magnific.com/free-photo/hanged-lamps-outdoor-restaurant-with-multiple-visitors-background-bbq_1268-17681.jpg?semt=ais_hybrid&w=740&q=80');">
                     <div class="hex-overlay">
                         <span class="hex-title">Rendezvény- fotóim</span>
                     </div>
                 </a>
 
-                <a href="https://www.youtube.com/@balog_attila/videos" target="_blank" rel="noopener" class="hex-button" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000149-0c44c0c44e/700/youtube-icon-42018.webp');">
+                <!-- 6. elem: Jobbra -->
+                <a href="https://www.youtube.com/@balog_attila/videos" target="_blank" rel="noopener" class="hex-button m-right" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000149-0c44c0c44e/700/youtube-icon-42018.webp');">
                     <div class="hex-overlay">
                         <span class="hex-title">Videóim</span>
                     </div>
                 </a>
             </div>
 
+            <!-- 3. SOR -->
             <div class="hex-row">
-                <a href="maszokalauz.html" class="hex-button" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000099-20cc120cc2/fels%C5%91t%C3%A1rk%C3%A1ny-sziklam%C3%A1szó-kalauz-topo-crag-szilamaszas-jobb%20oldal.webp?ph=0f123c8804');">
+                <!-- 7. elem: Balra -->
+                <a href="maszokalauz.html" class="hex-button m-left" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000099-20cc120cc2/fels%C5%91t%C3%A1rk%C3%A1ny-sziklam%C3%A1szó-kalauz-topo-crag-szilamaszas-jobb%20oldal.webp?ph=0f123c8804');">
                     <div class="hex-overlay">
                         <span class="hex-title">Felsőtárkány mászókalauz</span>
                     </div>
                 </a>
 
-                <a href="https://everest2x.webnode.page/" target="_blank" rel="noopener" class="hex-button" style="background-image: url('https://34fec72398.cbaul-cdnwnd.com/f77a4a2a04a070b93fcfc22c8797b376/200000001-8a89d8a89f/ChatGPT%20Image%202026.%20jan.%205.%2008_18_14.webp?ph=34fec72398');">
+                <!-- 8. elem: Jobbra -->
+                <a href="https://everest2x.webnode.page/" target="_blank" rel="noopener" class="hex-button m-right" style="background-image: url('https://34fec72398.cbaul-cdnwnd.com/f77a4a2a04a070b93fcfc22c8797b376/200000001-8a89d8a89f/ChatGPT%20Image%202026.%20jan.%205.%2008_18_14.webp?ph=34fec72398');">
                     <div class="hex-overlay">
                         <span class="hex-title">Everest2X kihívás</span>
                     </div>
                 </a>
 
-                <a href="kapcsolat.html" class="hex-button" style="background-image: url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?q=80&w=400&auto=format&fit=crop');">
+                <!-- 9. elem: Balra -->
+                <a href="kapcsolat.html" class="hex-button m-left" style="background-image: url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?q=80&w=400&auto=format&fit=crop');">
                     <div class="hex-overlay">
                         <span class="hex-title">Kapcsolat</span>
                     </div>
