@@ -272,9 +272,12 @@
                 padding: 0 10px;
                 box-sizing: border-box;
                 margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
             }
 
-            /* Mobilon felbontjuk a sorokat, hogy a gombok egymás utáni listát alkossanak */
+            /* Mobilon teljesen eltüntetjük a sor-konténerek kereteit, hogy a gombok egyetlen folyamatos listát alkossanak */
             .hex-row {
                 display: contents !important;
             }
@@ -298,20 +301,20 @@
                 padding: 6px 2px;
             }
 
-            /* Folyamatos cikk-cakk mobilon az összes elemre index alapján */
-            .honeycomb-grid a.hex-button:nth-of-type(odd) {
+            /* Folytonos cikk-cakk közvetlenül a gombokon (1-től 9-ig sorszámozva) */
+            .honeycomb-grid .hex-button:nth-of-type(odd) {
                 transform: translateX(0) !important;
             }
 
-            .honeycomb-grid a.hex-button:nth-of-type(even) {
+            .honeycomb-grid .hex-button:nth-of-type(even) {
                 transform: translateX(110px) !important;
             }
             
-            .honeycomb-grid a.hex-button:nth-of-type(odd):hover {
+            .honeycomb-grid .hex-button:nth-of-type(odd):hover {
                 transform: translateX(0) scale(1.05) !important;
             }
             
-            .honeycomb-grid a.hex-button:nth-of-type(even):hover {
+            .honeycomb-grid .hex-button:nth-of-type(even):hover {
                 transform: translateX(110px) scale(1.05) !important;
             }
         }
