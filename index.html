@@ -113,7 +113,7 @@
             margin: 5px 0 0 0;
         }
 
-        /* --- RÁCS KÓD (HATTEST ELRENDEZÉS) --- */
+        /* --- RÁCS KÓD --- */
         .honeycomb-wrapper {
             display: flex;
             justify-content: center;
@@ -130,16 +130,20 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            /* Pontosan annyi szélesség, hogy 3 db 240px-es elem + margók férjenek ki egy sorba */
-            max-width: 792px; 
+            max-width: 850px;
             user-select: none;
+        }
+
+        .hex-break {
+            flex-basis: 100%;
+            height: 0;
         }
 
         .hex-button {
             position: relative;
             width: 240px;
             height: 277px;
-            margin: -69px 6px 0 6px; /* Negatív margó a hatszögek összezárásához */
+            margin: 0 12px;
             background-position: center;
             background-size: cover;
             clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
@@ -148,10 +152,15 @@
             text-decoration: none;
         }
 
-        /* Az első sor elemeinél nincs szükség fenti negatív margóra */
-        .hex-button:nth-child(1),
-        .hex-button:nth-child(2) {
-            margin-top: 0;
+        /* Asztali nézetben a 2., 3. és 4. sor elemeinek fenti negatív margója az összezáráshoz */
+        .hex-button:nth-child(4),
+        .hex-button:nth-child(5),
+        .hex-button:nth-child(6),
+        .hex-button:nth-child(8),
+        .hex-button:nth-child(9),
+        .hex-button:nth-child(10),
+        .hex-button:nth-child(12) {
+            margin-top: -69px;
         }
 
         .hex-overlay {
@@ -276,10 +285,24 @@
                 box-sizing: border-box;
             }
             
+            .hex-break {
+                display: none;
+            }
+            
             .hex-button {
                 width: 160px;
                 height: 184px;
                 margin: 0 0 -46px 0 !important;
+            }
+            
+            .hex-button:nth-child(4),
+            .hex-button:nth-child(5),
+            .hex-button:nth-child(6),
+            .hex-button:nth-child(8),
+            .hex-button:nth-child(9),
+            .hex-button:nth-child(10),
+            .hex-button:nth-child(12) {
+                margin-top: 0 !important;
             }
 
             .hex-title {
@@ -341,6 +364,8 @@
                     <span class="hex-title">Elektronika, PCB, tervezés</span>
                 </div>
             </a>
+            
+            <div class="hex-break"></div>
 
             <!-- 2. SOR (3 db): Terméktámogatás, Fotók, Rendezvényfotók -->
             <a href="termektamogatas.html" class="hex-button" style="background-image: url('https://img.magnific.com/free-photo/still-life-documents-stack_23-2151088805.jpg?semt=ais_hybrid&w=740&q=80');">
@@ -361,6 +386,8 @@
                 </div>
             </a>
 
+            <div class="hex-break"></div>
+
             <!-- 3. SOR (3 db): Videók, Felsőtárkány, Everest2X -->
             <a href="https://www.youtube.com/@balog_attila/videos" target="_blank" rel="noopener" class="hex-button" style="background-image: url('https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000149-0c44c0c44e/700/youtube-icon-42018.webp');">
                 <div class="hex-overlay">
@@ -379,6 +406,8 @@
                     <span class="hex-title">Everest2X kihívás</span>
                 </div>
             </a>
+            
+            <div class="hex-break"></div>
 
             <!-- 4. SOR (1 db): Kapcsolat -->
             <a href="kapcsolat.html" class="hex-button" style="background-image: url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?q=80&w=400&auto=format&fit=crop');">
