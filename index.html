@@ -167,7 +167,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 30px;
+            padding: 25px;
             box-sizing: border-box;
             transition: background 0.5s ease;
         }
@@ -268,16 +268,15 @@
         @media (max-width: 550px) {
             .honeycomb-grid {
                 width: 100%;
-                max-width: 310px;
-                padding: 0 10px;
+                max-width: 270px; /* Pontosan igazodik a cikk-cakk szélességéhez */
+                padding: 0;
                 box-sizing: border-box;
                 margin: 0 auto;
                 display: flex;
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: center; /* Középre igazítás */
             }
 
-            /* Mobilon feloldjuk az asztali sorokat, hogy egymás alatt folyjanak az elemek */
             .hex-row {
                 display: contents !important;
             }
@@ -292,29 +291,32 @@
                 margin: 0 0 -46px 0 !important;
             }
 
-            /* A CFOP-1 méretét mobilon is megőrizzük, a többit pedig finoman kisebbre vesszük, hogy ne lógjon ki */
+            .hex-overlay {
+                padding: 20px 15px; /* Kisebb belső margó mobilon, hogy maradjon hely a szövegnek */
+            }
+
+            /* CFOP-1 marad méretes, a többi címet pedig visszavesszük 16px-re, hogy tökéletesen elférjen */
             .cfop-title {
-                font-size: 42px;
+                font-size: 38px;
             }
 
             .hex-title {
-                font-size: 20px;
-                padding: 6px 2px;
+                font-size: 16px;
+                padding: 2px;
             }
 
-            /* Mobilon az inline style alapján léptetjük a cikk-cakkot */
             .hex-button.m-left {
-                transform: translateX(0) !important;
+                transform: translateX(-55px) !important;
             }
             .hex-button.m-right {
-                transform: translateX(110px) !important;
+                transform: translateX(55px) !important;
             }
             
             .hex-button.m-left:hover {
-                transform: translateX(0) scale(1.05) !important;
+                transform: translateX(-55px) scale(1.05) !important;
             }
             .hex-button.m-right:hover {
-                transform: translateX(110px) scale(1.05) !important;
+                transform: translateX(55px) scale(1.05) !important;
             }
         }
     </style>
