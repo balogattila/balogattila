@@ -169,9 +169,10 @@
             width: 100%;
             height: auto;
             margin-bottom: 25px;
-            border-radius: 12px;
+            /* border-radius: 12px; */ /* Átlátszó PNG miatt kikommentelve */
             display: inline-block;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            /* box-shadow: 0 5px 15px rgba(0,0,0,0.5); */ /* Átlátszó PNG miatt kikommentelve */
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5)); /* Hozzáadva a dobozárnyék helyett, hogy kövesse a png formáját */
         }
 
         .page-title {
@@ -271,9 +272,9 @@
     <div class="maintenance-wrapper">
         <div class="maintenance-container">
             
-            <!-- <div class="warning-icon">⚠️</div> -->
+            <div class="warning-icon">⚠️</div>
 
-            <!-- Hozzáadott kép -->
+            <!-- Hozzáadott kép (kiterjesztés módosítva .png-re) -->
             <img src="images/under-construction.png" alt="Under construction kép" class="under-construction-img">
 
             <h1 class="page-title">Under construction</h1>
