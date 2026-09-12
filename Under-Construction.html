@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oldal átköltöztetés alatt - Balog Attila</title>
-    <meta name="description" content="Az oldal jelenleg átköltöztetés és fejlesztés alatt áll. Kérjük, légy türelemmel!">
+    <meta name="description" content="Under construction">
     <link rel="icon" type="image/png" href="images/BAlogo-blue.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -163,6 +163,17 @@
             box-shadow: 0 0 25px rgba(234, 179, 8, 0.15);
         }
 
+        /* Hozzáadott kép stílusa */
+        .under-construction-img {
+            max-width: 250px;
+            width: 100%;
+            height: auto;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
         .page-title {
             font-family: 'Bungee Tint', cursive;
             font-size: 36px;
@@ -262,10 +273,13 @@
             
             <div class="warning-icon">⚠️</div>
 
-            <h1 class="page-title">Átköltöztetés alatt</h1>
+            <!-- Hozzáadott kép -->
+            <img src="images/underconstruction.jpg" alt="Under construction kép" class="under-construction-img">
+
+            <h1 class="page-title">Under construction</h1>
 
             <p class="maintenance-desc">
-                Az oldal, amit keresel, jelenleg átköltöztetés alatt áll. Kérjük, légy türelemmel, hamarosan elérhető lesz!
+                Az oldal, amit keresel, jelenleg fejlesztés alatt áll. Kérjük, légy türelemmel, hamarosan elérhető lesz!
             </p>
 
             <a href="#" onclick="history.back(); return false;" class="maintenance-btn">← Vissza az előző oldalra</a>
