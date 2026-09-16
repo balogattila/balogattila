@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <link rel="icon" type="image/png" href="images/BAlogo-blue.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CFOP-1 Videópályázat - Balog Attila</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <style>
+        /* --- ALAPVETŐ TÉMA ÉS A TE EGYEDI HÁTTERED --- */
+        body {
+            background-image: linear-gradient(rgba(5, 5, 5, 0.75), rgba(5, 5, 5, 0.75)), url('images/bg.webp');
+            background-color: #050505;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* --- FEJLÉC ÉS LOGÓ BEÁLLÍTÁSOK --- */
+        .site-header {
+            position: relative;
+            width: 100%;
+            height: 130px;
+            background-color: #000000;
+            margin-top: 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            box-sizing: border-box;
+            overflow: hidden;
+            border-bottom: 1px solid #1a1a1a;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .header-bg-polygons {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 55%;
+            height: 100%;
+            background: 
+                linear-gradient(105deg, transparent 20%, rgba(150, 0, 0, 0.6) 21%, rgba(200, 20, 20, 0.9) 50%, transparent 51%),
+                linear-gradient(45deg, transparent 40%, rgba(100, 0, 0, 0.7) 41%, rgba(180, 10, 10, 0.95) 70%, transparent 71%),
+                linear-gradient(160deg, transparent 60%, rgba(80, 0, 0, 0.8) 61%, #d00000 90%);
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .custom-logo {
+            height: 75px;
+            width: auto;
+            max-width: 100px;
+            object-fit: contain;
+        }
+
+        .header-titles {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .title-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .site-header h1 {
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+            margin: 0;
+            color: #ffffff;
+            font-style: italic;
+            font-weight: 700;
+        }
+
+        .title-line {
+            width: 60px;
+            height: 1px;
+            background-color: #666666;
+            margin-top: 5px;
+        }
+
+        .site-header h2 {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #dddddd;
+            letter-spacing: 0.5px;
+            margin: 5px 0 0 0;
+        }
+
+        /* --- ASZTALI MÉHSEJTRÁCS --- */
+        .honeycomb-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 20px 40px 20px;
+            background-color: transparent;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow: hidden;
+            width: 100%;
+            flex: 1;
+        }
+
+        .honeycomb-grid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            user-select: none;
+        }
+
+        .hex-row {
+            display: flex;
+            justify-content: center;
+            margin-top: -69px; 
+        }
+
+        .hex-row:first-child {
+            margin-top: 0;
+        }
+
+        .hex-row.offset-row {
+            transform: translateX(126px);
+        }
+
+        .hex-button {
+            position: relative;
+            width: 240px;
+            height: 277px;
+            margin: 0 6px;
+            background-position: center;
+            background-size: cover;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            cursor: pointer;
+            transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            text-decoration: none;
+        }
+
+        .hex-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.35));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            box-sizing: border-box;
+            transition: background 0.5s ease;
+        }
+
+        .cfop-title {
+            font-family: 'Indie Flower', cursive;
+            font-size: 50px;
+            font-weight: 700;
+            color: #f5f5f7; 
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 1.2;
+            padding: 4px 6px;
+            width: 100%;
+            box-sizing: border-box;
+            background: radial-gradient(circle, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 75%);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            transition: all 0.5s ease;
+            word-break: normal;
+        }
+
+        .hex-title {
+            font-family: 'Indie Flower', cursive;
+            font-size: 30px;
+            font-weight: 700;
+            color: #f5f5f7; 
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 1.2;
+            padding: 4px 6px;
+            width: 100%;
+            box-sizing: border-box;
+            background: radial-gradient(circle, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 75%);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            transition: all 0.5s ease;
+            word-break: normal;
+        }
+
+        .hex-button:hover {
+            transform: scale(1.05);
+            z-index: 5;
+        }
+
+        .hex-button:hover .hex-overlay {
+            background: linear-gradient(rgba(240, 98, 146, 0.25), rgba(0, 0, 0, 0.3));
+        }
+
+        .hex-button:hover .hex-title {
+            color: #ffffff;
+            background: radial-gradient(circle, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 85%);
+            transform: scale(1.02);
+        }
+
+        /* --- DISKRÉT LÁBLÉC --- */
+        .site-footer {
+            width: 100%;
+            padding: 15px 20px;
+            background-color: rgba(0, 0, 0, 0.85);
+            border-top: 1px solid #1a1a1a;
+            text-align: center;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .site-footer p {
+            margin: 0;
+            font-size: 0.75rem;
+            color: #666666;
+            letter-spacing: 0.3px;
+        }
+
+        /* RESZPONZÍV MOBIL NÉZET */
+        @media (max-width: 700px) {
+            .site-header {
+                height: auto;
+                padding: 20px;
+            }
+            .header-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 15px;
+            }
+            .title-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .title-line {
+                display: none;
+            }
+            .site-header h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .honeycomb-grid {
+                width: 100%;
+                max-width: 270px;
+                padding: 0;
+                box-sizing: border-box;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hex-row {
+                display: contents !important;
+            }
+            
+            .hex-row.offset-row {
+                transform: none !important;
+            }
+
+            .hex-button {
+                width: 160px;
+                height: 184px;
+                margin: 0 0 -46px 0 !important;
+            }
+
+            .hex-overlay {
+                padding: 20px 15px;
+            }
+
+            .cfop-title {
+                font-size: 38px;
+            }
+
+            .hex-title {
+                font-size: 16px;
+                padding: 2px;
+            }
+
+            .hex-button.m-left {
+                transform: translateX(-55px) !important;
+            }
+            .hex-button.m-right {
+                transform: translateX(55px) !important;
+            }
+            
+            .hex-button.m-left:hover {
+                transform: translateX(-55px) scale(1.05) !important;
+            }
+            .hex-button.m-right:hover {
+                transform: translateX(55px) scale(1.05) !important;
+            }
+        }
+
+        /* --- ÚJ STÍLUSOK A VIDEÓPÁLYÁZAT TARTALMÁHOZ --- */
+        .content-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px 20px 60px 20px;
+            width: 100%;
+            flex: 1;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .content-box {
+            background-color: rgba(15, 15, 15, 0.85); /* Áttetsző sötét háttér */
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            color: #dcdcdc; /* Világosszürke szöveg a jobb olvashatóságért */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            line-height: 1.7;
+        }
+
+        .content-box h1 {
+            color: #ffffff;
+            font-size: 2rem;
+            margin-top: 0;
+            margin-bottom: 25px;
+            text-align: center;
+            border-bottom: 2px solid #333;
+            padding-bottom: 15px;
+        }
+
+        .content-box h2 {
+            color: #ffffff;
+            font-size: 1.4rem;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+
+        .content-box ul, .content-box ol {
+            margin-left: 20px;
+            padding-left: 0;
+        }
+
+        .content-box li {
+            margin-bottom: 12px;
+        }
+
+        .content-box p {
+            margin-bottom: 15px;
+        }
+
+        .content-box strong {
+            color: #ffffff;
+        }
+
+        .highlight {
+            color: #d00000; /* Piros kiemelés, amely megegyezik a fejléc poligonjainak színével */
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 25px;
+            color: #aaaaaa;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #ffffff;
+        }
+
+        @media (max-width: 700px) {
+            .content-box {
+                padding: 25px 20px;
+            }
+            .content-box h1 {
+                font-size: 1.5rem;
+            }
+            .content-box h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-bg-polygons"></div>
+        <div class="header-content">
+            
+            <div class="header-logo">
+                <img src="images/BAlogo-blue.png" alt="Balog Attila Logo" class="custom-logo">
+            </div>
+
+            <div class="header-titles">
+                <div class="title-row">
+                    <h1>Balog Attila</h1>
+                    <div class="title-line"></div>
+                </div>
+                <h2>Custom PCB & Control Systems</h2>
+            </div>
+            
+        </div>
+    </header>
+
+    <div class="content-wrapper">
+        <div class="content-box">
+            
+            <a href="index.html" class="back-link">← Vissza a főoldalra</a>
+
+            <h1>🎥 Készíts bemutató videót és nyerd vissza a CFOP-1 árát!</h1>
+            
+            <p>Megvásároltad a CFOP-1 rendszert és elégedett vagy vele? Mutasd meg másoknak is, hogyan működik a gyakorlatban, és <span class="highlight">mi visszafizetjük a termék teljes vételárát!</span></p>
+            
+            <p>Egy olyan átfogó, minőségi bemutató videót keresünk, amelyet felhasználhatunk a honlapunkon és a közösségi oldalainkon, hogy segítsünk az érdeklődőknek megismerni a rendszert.</p>
+
+            <h2>Mit kell tartalmaznia a videónak?</h2>
+            <p>A nyertes videónak az alábbi lépéseket kell világosan és érthetően bemutatnia:</p>
+            <ul>
+                <li><strong>A termék bemutatása:</strong> Mit tartalmaz a csomag, hogyan néz ki a készülék.</li>
+                <li><strong>A beszerelés folyamata:</strong> Röviden, lépésről lépésre bemutatva a fizikai és elektromos csatlakoztatást.</li>
+                <li><strong>Beszerelt állapot:</strong> Hogyan mutat a rendszer a helyszínen (esztétikus, tiszta telepítés).</li>
+                <li><strong>Működés a gyakorlatban:</strong> A rendszer éles tesztje.</li>
+                <li><strong>Telefonos funkciók:</strong> Egyértelműen látszódjon (és hallatszódjon) egy telefonos becsengetés, valamint a kapu/ajtó telefonos nyitása.</li>
+            </ul>
+
+            <h2>Technikai és minőségi elvárások</h2>
+            <ul>
+                <li>Minimális felbontás: 1080p (Full HD).</li>
+                <li>Fekvő (16:9) formátum.</li>
+                <li>Érthető, tiszta hang (narráció) és jó fényviszonyok (ne legyen sötét vagy túl zajos a felvétel).</li>
+                <li>A videó legyen dinamikus, a felesleges üresjáratok legyenek megvágva.</li>
+            </ul>
+
+            <h2>A nyeremény és a kiválasztás menete</h2>
+            <ol>
+                <li><strong>Díjazás:</strong> A kiválasztott videó készítője <span class="highlight">visszakapja a CFOP-1 termék teljes vételárát</span> (a szállítási és egyéb felmerülő költségeket nem tartalmazza).</li>
+                <li><strong>Kiválasztás:</strong> Fenntartjuk a jogot, hogy a beküldött videók közül mi válasszuk ki a legjobbat. <strong>Csak abban az esetben hirdetünk nyertest, ha érkezik olyan pályamű, amely minőségében és tartalmában megfelel a fenti elvárásoknak.</strong> (Ha egyik videó sem éri el a kívánt szintet, a pályázatot nyertes nélkül is lezárhatjuk).</li>
+                <li><strong>Jelentkezés:</strong> Töltsd fel a videódat YouTube-ra (akár "Nem listázott" videóként), vagy egy felhőtárhelyre (Google Drive, Dropbox), és küldd el a linket a megadott kapcsolati e-mail címünkre <strong>"CFOP-1 Videópályázat"</strong> tárggyal.</li>
+                <li><strong>Felhasználási jogok:</strong> A nyertes videó díjazásának kifizetésével a videó teljes körű felhasználási joga (szerkesztés, megosztás, promóciós célú felhasználás) ránk száll.</li>
+            </ol>
+
+            <p style="text-align: center; margin-top: 40px; font-style: italic; font-size: 1.1rem; color: #ffffff;">Várjuk a kreatív és igényes videókat!</p>
+            
+        </div>
+    </div>
+
+    <!-- Diszkrét, sötét, minimalista lábléc az adatvédelmi említéssel -->
+    <footer class="site-footer">
+        <p>A weboldal nem használ sütiket. A látogatottságot a Cloudflare Web Analytics méri teljesen anonim, személyes adatok gyűjtése nélkül.</p>
+    </footer>
+
+</body>
+</html>
