@@ -320,19 +320,24 @@
             gap:25px;
         }
 
-        /* MODIFIED SECTION STARTS HERE */
+        /* --- A KÉPEK STÍLUSAI (MÓDOSÍTOTT RÉSZ) --- */
         .cfop-dual-images img{
-            max-width: 50%; /* Kb. felére */
-            width: auto; /* Megőrzés */
+            width: auto;
+            max-width: 100%; /* Eredeti méret, de ne lógjon ki */
             border-radius: 22px;
             box-shadow: 0 18px 45px rgba(0,0,0,0.4);
             background: #111;
-            /* Hogy középre kerüljenek a képek a tárolóban */
+            /* Középre igazítás */
             display: block;
             margin-left: auto;
             margin-right: auto;
+            height: auto;
         }
-        /* MODIFIED SECTION ENDS HERE */
+
+        /* Csak a panel-kép (alsó) felére csökkentése */
+        .panel-image {
+            max-width: 50% !important;
+        }
 
         .cfop-section{
             background: rgba(15, 15, 15, 0.85);
@@ -538,7 +543,7 @@
                 </div>
 
                 <div class="cfop-lead">
-                    A modul egyedi tervezésű elektronikára épül, kis darabszámban készült, and folyamatosan fejlesztés alatt áll a felhasználói visszajelzéseket figyelembe véve.
+                    A modul egyedi tervezésű elektronikára épül, kis darabszámban készült, és folyamatosan fejlesztés alatt áll a felhasználói visszajelzéseket figyelembe véve.
                 </div>
 
                 <div class="cfop-buttons">
@@ -550,7 +555,7 @@
 
             <div class="cfop-dual-images">
                 <img src="https://0f123c8804.cbaul-cdnwnd.com/4d4b1bc537a546a8b267aaa4db136d24/200000107-81cc481cc6/ChatGPT%20Image%202025.%20dec.%2018.%2000_00_58.webp?ph=0f123c8804" alt="CFOP-1 kaputelefon kiegészítő modul">
-                <img src="images/cfop-1.png" alt="CFOP-1 panel">
+                <img src="images/cfop-1.png" alt="CFOP-1 panel" class="panel-image">
             </div>
         </div>
 
