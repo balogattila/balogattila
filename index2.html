@@ -16,6 +16,9 @@
             height: 100%;
             overflow: hidden; /* Eltünteti a felesleges gördítősávokat */
             background-color: #000;
+            /* HOZZÁADVA: A függőleges görgetés engedélyezése a tartalomhoz */
+            overflow-y: auto; 
+            height: auto; 
         }
 
         #matrixCanvas {
@@ -28,7 +31,7 @@
         }
 
         /* 
-        JAVÍTVA: Az összes fő tartalom-konténer megkapja a z-index: 2-t, 
+        Az összes fő tartalom-konténer megkapja a z-index: 2-t, 
         hogy a mátrix eső mögéjük vetüljön! 
         */
         .banner-wrapper, .honeycomb-wrapper, header, footer {
@@ -147,7 +150,6 @@
             padding: 0 20px;
             box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            /* z-index-et fent a közös részben már megadtuk */
         }
 
         .promo-banner {
@@ -602,7 +604,7 @@
             ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // A halványulási effektus
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            // JAVÍTVA: Piros szín beállítása a zöld helyett
+            // Piros szín beállítása a zöld helyett
             ctx.fillStyle = '#F00'; // Mátrix piros szín
             ctx.font = fontSize + 'px monospace';
 
