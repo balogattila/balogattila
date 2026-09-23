@@ -179,6 +179,39 @@
             padding-bottom: 15px;
         }
 
+        /* --- REDDIT GOMB STÍLUSOK --- */
+        .reddit-section {
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .reddit-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #FF4500;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(255, 69, 0, 0.25);
+        }
+
+        .reddit-btn:hover {
+            background-color: #ff5722;
+            transform: translateY(-2px);
+        }
+
+        .reddit-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            fill: currentColor;
+        }
+
         /* --- LÁBLÉC --- */
         .site-footer {
             width: 100%;
@@ -224,6 +257,9 @@
             .forum-title {
                 font-size: 30px;
             }
+            .reddit-section {
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -260,6 +296,17 @@
             <p class="forum-intro">
                 Oszd meg a tapasztalataidat, tegyél fel kérdést az áramkörökkel, vezérlőkkel vagy egyéb projektekkel kapcsolatban! A hozzászóláshoz nem kötelező a regisztráció.
             </p>
+
+            <!-- REDDIT GOMB -->
+            <div class="reddit-section">
+                <a href="https://www.reddit.com/r/TE_SUBREDDITED_VAGY_POSZTOD" target="_blank" class="reddit-btn">
+                    <!-- Beépített Reddit SVG ikon -->
+                    <svg class="reddit-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M24 11.779c0-1.459-1.192-2.645-2.657-2.645-.715 0-1.363.286-1.84.746-1.81-1.191-4.259-1.949-6.971-2.046l1.483-4.669 4.016.941-.006.12c0 1.262 1.023 2.287 2.287 2.287 1.262 0 2.285-1.025 2.285-2.287 0-1.262-1.023-2.285-2.285-2.285-.884 0-1.644.502-2.029 1.23l-4.41-1.033c-.223-.051-.445.074-.51.294l-1.636 5.148c-2.766.059-5.263.83-7.11 2.05-.486-.474-1.144-.775-1.871-.775-1.463 0-2.657 1.187-2.657 2.646 0 .971.533 1.81 1.317 2.271-.052.282-.086.567-.086.857 0 3.911 4.808 7.093 10.719 7.093s10.72-3.182 10.72-7.093c0-.274-.029-.544-.075-.81.832-.447 1.405-1.312 1.405-2.318zm-17.224 1.816c0-.868.71-1.575 1.582-1.575.872 0 1.581.707 1.581 1.575s-.709 1.574-1.581 1.574-1.582-.706-1.582-1.574zm9.061 4.669c-.797.793-2.048 1.179-3.824 1.179l-.013-.003-.013.003c-1.777 0-3.028-.386-3.824-1.179-.145-.144-.145-.379 0-.523.145-.145.381-.145.526 0 .65.647 1.729.961 3.298.961l.013.003.013-.003c1.569 0 2.648-.315 3.298-.962.145-.145.381-.144.526 0 .145.145.145.379 0 .524zm-.189-3.095c-.872 0-1.581-.706-1.581-1.574 0-.868.709-1.575 1.581-1.575s1.581.707 1.581 1.575-.709 1.574-1.581 1.574z"/>
+                    </svg>
+                    Csatlakozz a Reddit beszélgetéshez!
+                </a>
+            </div>
 
             <!-- DISQUS DOBOZ -->
             <div id="disqus_thread"></div>
