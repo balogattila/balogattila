@@ -42,7 +42,6 @@
 
         /* --- ALAPVETŐ TÉMA ÉS EGYEDI HÁTTÉR --- */
         body {
-            /* A te eredeti háttérképed */
             background-image: linear-gradient(rgba(5, 5, 5, 0.75), rgba(5, 5, 5, 0.75)), url('images/bg.webp');
             background-color: #050505;
             background-size: cover;
@@ -589,7 +588,7 @@
         // Karakterek listája
         const katakana = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         const alphabet = katakana.split('');
-        const fontSize = 16;
+        const fontSize = 24;
         let columns = canvas.width / fontSize;
         let rainDrops = [];
 
@@ -603,7 +602,7 @@
         initRain();
 
         function draw() {
-            // ÚJ: Ezzel a módszerrel a vászon átlátszó marad, a betűk lassan eltűnnek, és látszik a háttérkép!
+            // a vászon átlátszó marad, a betűk lassan eltűnnek, és látszik a háttérkép!
             ctx.globalCompositeOperation = 'destination-out';
             ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'; // Radírozás mértéke. Kisebb érték = hosszabb, láthatóbb piros csóva
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -634,7 +633,7 @@
 
         // Optimalizált animáció requestAnimationFrame használatával (~30 FPS)
         let lastTime = 0;
-        const fpsInterval = 1000 / 30; // Animáció sebessége (itt tudod csökkenteni az FPS-t, ha lassabbat szeretnél)
+        const fpsInterval = 1000 / 20; // Animáció sebessége.
 
         function animate(currentTime) {
             requestAnimationFrame(animate);
