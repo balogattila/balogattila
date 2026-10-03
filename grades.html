@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <link rel="icon" type="image/png" href="images/BAlogo-blue.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sziklamászó nehézségi fokozatok - Balog Attila</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <style>
+        /* --- ALAPVETŐ TÉMA ÉS EGYEDI HÁTTÉR --- */
+        body {
+            background-image: linear-gradient(rgba(5, 5, 5, 0.75), rgba(5, 5, 5, 0.75)), url('images/bg.webp');
+            background-color: #050505;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #dcdcdc;
+        }
+
+        /* --- FEJLÉC ÉS LOGÓ BEÁLLÍTÁSOK --- */
+        .site-header {
+            position: relative;
+            width: 100%;
+            height: 130px;
+            background-color: #000000;
+            margin-top: 0;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            box-sizing: border-box;
+            overflow: hidden;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .header-bg-polygons {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 55%;
+            height: 100%;
+            background: 
+                linear-gradient(105deg, transparent 20%, rgba(150, 0, 0, 0.6) 21%, rgba(200, 20, 20, 0.9) 50%, transparent 51%),
+                linear-gradient(45deg, transparent 40%, rgba(100, 0, 0, 0.7) 41%, rgba(180, 10, 10, 0.95) 70%, transparent 71%),
+                linear-gradient(160deg, transparent 60%, rgba(80, 0, 0, 0.8) 61%, #d00000 90%);
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .custom-logo {
+            height: 75px;
+            width: auto;
+            max-width: 100px;
+            object-fit: contain;
+        }
+
+        .header-titles {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .title-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .site-header h1 {
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+            margin: 0;
+            color: #ffffff;
+            font-style: italic;
+            font-weight: 700;
+        }
+
+        .title-line {
+            width: 60px;
+            height: 1px;
+            background-color: #666666;
+            margin-top: 5px;
+        }
+
+        .site-header h2 {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #dddddd;
+            letter-spacing: 0.5px;
+            margin: 5px 0 0 0;
+        }
+
+        /* --- FŐ TARTALOM ÉS TÁBLÁZAT KONTÉNER --- */
+        .content-wrapper {
+            width: 100%;
+            max-width: 780px;
+            padding: 0 20px;
+            box-sizing: border-box;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .page-heading {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .page-heading h3 {
+            font-family: 'Indie Flower', cursive;
+            font-size: 2.3rem;
+            color: #ffffff;
+            margin: 0 0 8px 0;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+        }
+
+        .page-heading p {
+            color: #aaaaaa;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .back-nav {
+            align-self: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .back-link {
+            color: #d00000;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: #ff3333;
+            transform: translateX(-3px);
+        }
+
+        /* --- STÍLUSOS TÁBLÁZAT --- */
+        .table-card {
+            width: 100%;
+            background: linear-gradient(135deg, rgba(25, 25, 25, 0.85) 0%, rgba(10, 10, 10, 0.92) 100%);
+            border: 1px solid rgba(180, 20, 20, 0.35);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+        }
+
+        .grading-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        .grading-table thead th {
+            background-color: #0c0c0c;
+            color: #ffffff;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 14px 22px;
+            border-bottom: 2px solid #d00000;
+            font-size: 0.95rem;
+        }
+
+        .grading-table tbody tr {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background-color 0.25s ease;
+        }
+
+        /* Váltakozó sorok a képen látható csíkozás stílusában */
+        .grading-table tbody tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.035);
+        }
+
+        .grading-table tbody tr:hover {
+            background-color: rgba(208, 0, 0, 0.12);
+        }
+
+        .grading-table td {
+            padding: 11px 22px;
+            color: #e5e5e5;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .grading-table td.uiaa-cell {
+            font-weight: 700;
+            color: #ffffff;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .grading-table td.france-cell {
+            color: #f0c040;
+            font-weight: 600;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .grading-table td.us-cell {
+            color: #70b4ff;
+            font-weight: 600;
+        }
+
+        /* --- LÁBLÉC --- */
+        .site-footer {
+            width: 100%;
+            padding: 15px 20px;
+            background-color: rgba(0, 0, 0, 0.85);
+            border-top: 1px solid #1a1a1a;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .site-footer p {
+            margin: 0;
+            font-size: 0.75rem;
+            color: #666666;
+            letter-spacing: 0.3px;
+        }
+
+        /* RESZPONZÍV MOBIL NÉZET */
+        @media (max-width: 700px) {
+            .site-header {
+                height: auto;
+                padding: 20px;
+            }
+            .header-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 15px;
+            }
+            .title-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .title-line {
+                display: none;
+            }
+            .site-header h1 {
+                font-size: 1.8rem;
+            }
+            .page-heading h3 {
+                font-size: 1.8rem;
+            }
+            .grading-table thead th,
+            .grading-table td {
+                padding: 9px 14px;
+                font-size: 0.88rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-bg-polygons"></div>
+        <div class="header-content">
+            <div class="header-logo">
+                <img src="images/BAlogo-blue.png" alt="Balog Attila Logo" class="custom-logo">
+            </div>
+            <div class="header-titles">
+                <div class="title-row">
+                    <h1>Balog Attila</h1>
+                    <div class="title-line"></div>
+                </div>
+                <h2>Custom PCB &amp; Control Systems</h2>
+            </div>
+        </div>
+    </header>
+
+    <main class="content-wrapper">
+        <div class="back-nav">
+            <a href="index.html" class="back-link">&larr; Vissza a főoldalra</a>
+        </div>
+
+        <div class="page-heading">
+            <h3>Nehézségi fokozatok</h3>
+            <p>UIAA, Francia (FRANCE) és Amerikai (US) sziklamászó fokozatok összehasonlítása</p>
+        </div>
+
+        <div class="table-card">
+            <table class="grading-table">
+                <thead>
+                    <tr>
+                        <th>UIAA</th>
+                        <th>FRANCE</th>
+                        <th>US</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="uiaa-cell">I</td>
+                        <td class="france-cell">1</td>
+                        <td class="us-cell">5</td>
+                    </tr>
+                    <tr>
+                        <td class="uiaa-cell">II</td>
+                        <td class="france-cell">2</td>
+                        <td class="us-cell">5.1</td>
+                    </tr>
+                    <tr>
+                        <td class="uiaa-cell">III</td>
+                        <td class="france-cell">3</td>
+                        <td class="us-cell">5.3</td>
+                    </tr>
+                    <tr>
+                        <td class="uiaa-cell">IV</td>
+                        <td class="france-cell">4a</td>
+                        <td class="us-cell">5.5</td>
+                    </tr>
+                    <tr>
+                        <td class="uiaa-cell">IV+</td>
+                        <td class="france-cell">4b</td>
+                        <td class="us-cell">5.6</td>
+                    </tr>
+                    <tr>
+                        <td class="uiaa-cell">V</td>
+                        <td class="france-cell">4c</td>
+                        <td class="us-cell">5.7</td>
+                    </tr>
+                    <tr>
+                        <td class="uiaa-cell">V+</td>
+                        <td class="france-cell">5a</td>
+                        <td class="us-cell">5.8</td>
+                    </tr>
+                    <tr>
+                        <td class="uiaa-cell">VI</td>
+                        <td class="france-cell">5c</td>
+                        <td class="us-cell">5.10a</td>
+                    </tr>
+                    <tr>
+                        <td class="uiaa-cell">VI+</td>
+                        <td class="france-cell">6a</td>
+                        <td class="us-cell">5.10c</td>
+                    </tr>
+                    <tr>
+                        <td class="uiaa-cell">VII</td>
+                        <td class="france-cell">6b</td>
+                        <td class="us-cell">5.10d</td>
+                    </tr>
+                    <tr>
+                        <td class="uiaa-cell">VII+</td>
+                        <td class="france-cell">6b+</td>
+                        <td class="us-cell">5.11a</td>
+                    </tr>
+                    <tr>
+                        <td class="uiaa-cell">VIII</td>
+                        <td class="france-cell">6c+</td>
+                        <td class="us-cell">5.11c</td>
+                    </tr>
+                    <tr>
+                        <td class="uiaa-cell">VIII+</td>
+                        <td class="france-cell">7a</td>
+                        <td class="us-cell">5.11d</td>
+                    </tr>
+                    <tr>
+                        <td class="uiaa-cell">IX</td>
+                        <td class="france-cell">7b</td>
+                        <td class="us-cell">5.12c</td>
+                    </tr>
+                    <tr>
+                        <td class="uiaa-cell">IX+</td>
+                        <td class="france-cell">7c</td>
+                        <td class="us-cell">5.12d</td>
+                    </tr>
+                    <tr>
+                        <td class="uiaa-cell">X</td>
+                        <td class="france-cell">8b</td>
+                        <td class="us-cell">5.13b</td>
+                    </tr>
+                    <tr>
+                        <td class="uiaa-cell">X+</td>
+                        <td class="france-cell">8b+</td>
+                        <td class="us-cell">5.14a</td>
+                    </tr>
+                    <tr>
+                        <td class="uiaa-cell">XI</td>
+                        <td class="france-cell">9a</td>
+                        <td class="us-cell">5.14d</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>A weboldal nem használ sütiket. A látogatottságot a Cloudflare Web Analytics méri teljesen anonim, személyes adatok gyűjtése nélkül.</p>
+    </footer>
+
+</body>
+</html>
