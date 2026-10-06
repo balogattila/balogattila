@@ -107,8 +107,7 @@ body {
 /* --- VISSZA GOMB --- */
 .back-home {
     display: inline-block;
-    margin: 10px 0 20px 25px;
-    align-self: flex-start;
+    margin: 30px auto 20px auto; /* középen tartja */
     color: #aaaaaa;
     text-decoration: none;
     transition: color 0.3s;
