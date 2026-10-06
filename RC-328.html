@@ -7,7 +7,7 @@
     <meta name="description" content="RC-328 ATmega328P alapú intelligens redőnyvezérlő rendszer külső EEPROM naplózással, kettős kalibrációval és LCD menürendszerrel.">
     <link rel="icon" type="image/png" href="images/BAlogo-blue.png">
     
-    <!-- Közös stíluslap hivatkozás (Fejléc, háttér, lábléc, lightbox, body) -->
+    <!-- KÖZÖS STÍLUS BEHÍVÁSA -->
     <link rel="stylesheet" href="style.css">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,30 +15,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap" rel="stylesheet">
     
     <style>
-        /* --- KIZÁRÓLAG AZ RC-328 OLDAL EGYEDI STÍLUSAI --- */
-        
-        .rc-wrapper {
-            position: relative;
-            overflow: hidden;
-            padding: 50px 25px;
+        /* A közös style.css lecseréli az eredeti body fontját, ezért ide visszatesszük, 
+           hogy ezen az oldalon maradjon az Arial az eredeti terved szerint! */
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* --- TARTALMI DOBOZ ÉS STÍLUSOK (Érintetlen eredeti kód) --- */
+        .rc-wrapper{
+            position:relative;
+            overflow:hidden;
+            padding:50px 25px;
             max-width: 1200px;
             width: 100%;
             box-sizing: border-box;
         }
 
-        .rc-container {
-            max-width: 1200px;
-            margin: auto;
-            position: relative;
-            z-index: 2;
+        .rc-container{
+            max-width:1200px;
+            margin:auto;
+            position:relative;
+            z-index:2;
         }
 
-        .rc-hero {
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 60px;
-            align-items: center;
-            margin-bottom: 70px;
+        .rc-hero{
+            display:grid;
+            grid-template-columns:1.1fr 0.9fr;
+            gap:60px;
+            align-items:center;
+            margin-bottom:70px;
         }
 
         .rc-title {
@@ -60,61 +65,72 @@
             line-height: 1.25;
         }
 
-        .rc-subtitle {
-            font-size: 20px;
-            line-height: 1.6;
-            color: #d1d5db;
-            margin-bottom: 30px;
+        /* Reszponzív méret igazítás mobilon */
+        @media(max-width: 950px){
+            .rc-title {
+                font-size: 36px;
+            }
+            .rc-section h2, 
+            .rc-footer h2 {
+                font-size: 28px;
+            }
         }
 
-        .rc-lead {
-            font-size: 18px;
-            line-height: 1.8;
-            margin-bottom: 22px;
-            color: #cccccc;
+        .rc-subtitle{
+            font-size:20px;
+            line-height:1.6;
+            color:#d1d5db;
+            margin-bottom:30px;
         }
 
-        .rc-buttons {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            margin-top: 30px;
+        .rc-lead{
+            font-size:18px;
+            line-height:1.8;
+            margin-bottom:22px;
+            color:#cccccc;
         }
 
-        .rc-button {
-            display: inline-block;
-            padding: 18px 34px;
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
-            color: white !important;
-            text-decoration: none;
-            border-radius: 16px;
-            font-size: 18px;
-            font-weight: bold;
-            transition: 0.25s ease;
-            box-shadow: 0 12px 30px rgba(37,99,235,0.28);
+        .rc-buttons{
+            display:flex;
+            gap:16px;
+            flex-wrap:wrap;
+            margin-top:30px;
         }
 
-        .rc-button:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 18px 36px rgba(37,99,235,0.38);
+        .rc-button{
+            display:inline-block;
+            padding:18px 34px;
+            background:linear-gradient(135deg,#2563eb,#1d4ed8);
+            color:white !important;
+            text-decoration:none;
+            border-radius:16px;
+            font-size:18px;
+            font-weight:bold;
+            transition:0.25s ease;
+            box-shadow:0 12px 30px rgba(37,99,235,0.28);
         }
 
-        .rc-button-secondary {
-            background: linear-gradient(135deg, #1e293b, #334155);
-            box-shadow: 0 12px 30px rgba(15,23,42,0.25);
+        .rc-button:hover{
+            transform:translateY(-4px);
+            box-shadow:0 18px 36px rgba(37,99,235,0.38);
         }
 
-        .rc-dual-images {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
+        .rc-button-secondary{
+            background:linear-gradient(135deg,#1e293b,#334155);
+            box-shadow:0 12px 30px rgba(15,23,42,0.25);
         }
 
-        .rc-dual-images img {
-            width: 100%;
-            border-radius: 22px;
-            box-shadow: 0 18px 45px rgba(0,0,0,0.4);
-            background: #111;
+        .rc-dual-images{
+            display:grid;
+            grid-template-columns:1fr;
+            gap:25px;
+        }
+
+        .rc-dual-images img{
+            width:100%;
+            border-radius:22px;
+            box-shadow:0 18px 45px rgba(0,0,0,0.4);
+            background:#111;
             cursor: zoom-in;
             transition: transform 0.3s ease;
         }
@@ -123,145 +139,146 @@
             transform: scale(1.02);
         }
 
-        .rc-section {
+        .rc-section{
             background: rgba(15, 15, 15, 0.85);
             border: 1px solid #262626;
-            padding: 50px;
-            border-radius: 24px;
-            margin-top: 35px;
-            box-shadow: 0 10px 35px rgba(0,0,0,0.5);
+            padding:50px;
+            border-radius:24px;
+            margin-top:35px;
+            box-shadow:0 10px 35px rgba(0,0,0,0.5);
             backdrop-filter: blur(10px);
             color: #f5f5f7;
         }
 
-        .rc-section h3 {
-            font-size: 26px;
-            margin-top: 35px;
-            margin-bottom: 14px;
-            color: #ffffff;
+        .rc-section h3{
+            font-size:26px;
+            margin-top:35px;
+            margin-bottom:14px;
+            color:#ffffff;
         }
 
-        .rc-section p {
-            font-size: 18px;
-            line-height: 1.9;
-            margin-bottom: 18px;
-            color: #cccccc;
+        .rc-section p{
+            font-size:18px;
+            line-height:1.9;
+            margin-bottom:18px;
+            color:#cccccc;
         }
 
-        .rc-highlight {
-            background: linear-gradient(135deg, rgba(37,99,235,0.15), rgba(15,23,42,0.4));
-            border-left: 6px solid #2563eb;
-            padding: 28px;
-            border-radius: 18px;
-            margin: 30px 0;
-            font-size: 19px;
-            line-height: 1.8;
-            color: #e2e8f0;
+        .rc-highlight{
+            background:linear-gradient(135deg, rgba(37,99,235,0.15), rgba(15,23,42,0.4));
+            border-left:6px solid #2563eb;
+            padding:28px;
+            border-radius:18px;
+            margin:30px 0;
+            font-size:19px;
+            line-height:1.8;
+            color:#e2e8f0;
         }
 
-        .rc-list {
-            margin-top: 18px;
-            padding-left: 22px;
-            text-align: left;
+        .rc-list{
+            margin-top:18px;
+            padding-left:22px;
+            text-align:left;
         }
 
-        .rc-list li {
-            margin-bottom: 12px;
-            font-size: 18px;
-            line-height: 1.7;
-            text-align: left;
-            color: #cccccc;
+        .rc-list li{
+            margin-bottom:12px;
+            font-size:18px;
+            line-height:1.7;
+            text-align:left;
+            color:#cccccc;
         }
 
         .rc-list strong {
             color: #ffffff;
         }
 
-        .rc-note {
-            font-size: 15px;
-            color: #9ca3af;
-            margin-top: 20px;
-            font-style: italic;
-            text-align: left;
+        .rc-note{
+            font-size:15px;
+            color:#9ca3af;
+            margin-top:20px;
+            font-style:italic;
+            text-align:left;
         }
 
-        .rc-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 35px;
+        .rc-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:25px;
+            margin-top:35px;
         }
 
-        .rc-card {
+        .rc-card{
             background: rgba(25, 25, 25, 0.6);
-            border: 1px solid #333333;
-            border-radius: 20px;
-            padding: 28px;
-            transition: 0.2s ease;
+            border:1px solid #333333;
+            border-radius:20px;
+            padding:28px;
+            transition:0.2s ease;
         }
 
-        .rc-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 28px rgba(0,0,0,0.3);
+        .rc-card:hover{
+            transform:translateY(-4px);
+            box-shadow:0 12px 28px rgba(0,0,0,0.3);
             border-color: #2563eb;
         }
 
-        .rc-card h4 {
-            font-size: 20px;
-            margin-bottom: 14px;
-            color: #ffffff;
+        .rc-card h4{
+            font-size:20px;
+            margin-bottom:14px;
+            color:#ffffff;
         }
 
-        .rc-card p {
-            font-size: 16px;
-            margin: 0;
-            color: #aaaaaa;
+        .rc-card p{
+            font-size:16px;
+            margin:0;
+            color:#aaaaaa;
         }
 
-        .rc-footer {
-            margin-top: 50px;
-            padding: 70px 40px;
-            border-radius: 28px;
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            text-align: center;
-            color: white;
+        .rc-footer{
+            margin-top:50px;
+            padding:70px 40px;
+            border-radius:28px;
+            background:linear-gradient(135deg,#0f172a,#1e293b);
+            text-align:center;
+            color:white;
             border: 1px solid #334155;
         }
 
-        .rc-footer p {
-            color: #d1d5db;
-            font-size: 20px;
-            margin-bottom: 35px;
+        .rc-footer p{
+            color:#d1d5db;
+            font-size:20px;
+            margin-bottom:35px;
         }
 
-        .rc-footer-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            flex-wrap: wrap;
+        .rc-footer-buttons{
+            display:flex;
+            justify-content:center;
+            gap:16px;
+            flex-wrap:wrap;
         }
 
-        /* RC-328 Reszponzív mobil nézet */
-        @media(max-width: 950px){
-            .rc-hero {
-                grid-template-columns: 1fr;
+        @media(max-width:950px){
+            .rc-hero{
+                grid-template-columns:1fr;
             }
-            .rc-title {
-                font-size: 32px;
+            .rc-title{
+                font-size:32px;
             }
-            .rc-section h2, 
-            .rc-footer h2 {
-                font-size: 26px;
+            .rc-section{
+                padding:35px;
             }
-            .rc-section {
-                padding: 35px;
+            .rc-section h2{
+                font-size:26px;
+            }
+            .rc-footer h2{
+                font-size:26px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- FEJLÉC (A kinézetét a style.css szabályozza) -->
+    <!-- KÖZÖS FEJLÉC (Ezt most már a style.css formázza tökéletesen) -->
     <header class="site-header">
         <div class="header-bg-polygons"></div>
         <div class="header-content">
@@ -392,7 +409,7 @@
     </div>
     </div>
 
-    <!-- Lightbox Teljes Képernyős Nagyítás Réteg (A kinézetét a style.css szabályozza) -->
+    <!-- KÖZÖS LIGHTBOX (Ezt is a style.css formázza és rejti el alapból) -->
     <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
         <img id="lightbox-img" src="" alt="Nagyított kép">
     </div>
