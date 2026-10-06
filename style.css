@@ -30,6 +30,24 @@ body {
     border-bottom: 1px solid #1a1a1a;
 }
 
+/* --- DISKRÉT LÁBLÉC --- */
+.site-footer {
+    width: 100%;
+    padding: 15px 20px;
+    background-color: rgba(0, 0, 0, 0.85);
+    border-top: 1px solid #1a1a1a;
+    text-align: center;
+    box-sizing: border-box;
+    margin-top: auto; /* Ez nagyon fontos: ha rövid az oldal, akkor is letolja a képernyő aljára! */
+}
+
+.site-footer p {
+    margin: 0;
+    font-size: 0.75rem;
+    color: #666666;
+    letter-spacing: 0.3px;
+}
+
 .header-bg-polygons {
     position: absolute;
     top: 0;
