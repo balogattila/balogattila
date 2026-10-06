@@ -6,22 +6,117 @@
     <title>RC-328 Intelligens Redőny és lámpavezérlő rendszer</title>
     <meta name="description" content="RC-328 ATmega328P alapú intelligens redőnyvezérlő rendszer külső EEPROM naplózással, kettős kalibrációval és LCD menürendszerrel.">
     <link rel="icon" type="image/png" href="images/BAlogo-blue.png">
-    
-    <!-- KÖZÖS STÍLUS BEHÍVÁSA -->
-    <link rel="stylesheet" href="style.css">
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap" rel="stylesheet">
-    
     <style>
-        /* A közös style.css lecseréli az eredeti body fontját, ezért ide visszatesszük, 
-           hogy ezen az oldalon maradjon az Arial az eredeti terved szerint! */
+        /* --- ALAPVETŐ TÉMA ÉS A HÁTTÉR --- */
         body {
+            background-image: linear-gradient(rgba(5, 5, 5, 0.75), rgba(5, 5, 5, 0.75)), url('images/bg.webp');
+            background-color: #050505;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: #f5f5f7;
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        /* --- TARTALMI DOBOZ ÉS STÍLUSOK (Érintetlen eredeti kód) --- */
+        /* --- FEJLÉC --- */
+        .site-header {
+            position: relative;
+            width: 100%;
+            height: 130px;
+            background-color: #000000;
+            margin-top: 0;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            box-sizing: border-box;
+            overflow: hidden;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .header-bg-polygons {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 55%;
+            height: 100%;
+            background: 
+                linear-gradient(105deg, transparent 20%, rgba(150, 0, 0, 0.6) 21%, rgba(200, 20, 20, 0.9) 50%, transparent 51%),
+                linear-gradient(45deg, transparent 40%, rgba(100, 0, 0, 0.7) 41%, rgba(180, 10, 10, 0.95) 70%, transparent 71%),
+                linear-gradient(160deg, transparent 60%, rgba(80, 0, 0, 0.8) 61%, #d00000 90%);
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .custom-logo {
+            height: 75px;
+            width: auto;
+            max-width: 100px;
+            object-fit: contain;
+        }
+
+        .header-titles {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .title-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .site-header h1 {
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+            margin: 0;
+            color: #ffffff;
+            font-style: italic;
+            font-weight: 700;
+        }
+
+        .title-line {
+            width: 60px;
+            height: 1px;
+            background-color: #666666;
+            margin-top: 5px;
+        }
+
+        .site-header h2 {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #dddddd;
+            letter-spacing: 0.5px;
+            margin: 5px 0 0 0;
+        }
+
+        /* --- TARTALMI DOBOZ ÉS STÍLUSOK --- */
         .rc-wrapper{
             position:relative;
             overflow:hidden;
@@ -257,6 +352,55 @@
             flex-wrap:wrap;
         }
 
+        /* --- LIGHTBOX (TELJES KÉPERNYŐS NAGYÍTÁS) --- */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            cursor: zoom-out;
+        }
+
+        .lightbox-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox-overlay img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox-overlay.active img {
+            transform: scale(1);
+        }
+
+        .back-home {
+            display: inline-block;
+            margin: 30px 0 0 25px;
+            color: #aaaaaa;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .back-home:hover {
+            color: #ffffff;
+        }
+
         @media(max-width:950px){
             .rc-hero{
                 grid-template-columns:1fr;
@@ -273,12 +417,26 @@
             .rc-footer h2{
                 font-size:26px;
             }
+            .site-header {
+                height: auto;
+                padding: 20px;
+            }
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .title-row {
+                flex-direction: column;
+            }
+            .title-line {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- KÖZÖS FEJLÉC (Ezt most már a style.css formázza tökéletesen) -->
+    <!-- FEJLÉC -->
     <header class="site-header">
         <div class="header-bg-polygons"></div>
         <div class="header-content">
@@ -338,7 +496,7 @@
                 Az RC-328 egy intelligens, önálló beágyazott vezérlőrendszer, amelynek fő célja egy ingatlan árnyékolásának és világításának automatizálása, kiemelt fókusszal a betörésvédelemre és a jelenlét-szimulációra. Az RC-328 vezérlő mindent tud, amire egy modern, intelligens árnyékolástechnikai rendszernél szükség lehet:
             </p>
 
-            <ul class="rc-list">
+            <ul>
                 <li><strong>Felhőfüggetlen működés:</strong> A rendszer felhőkapcsolat nélkül, stabil belső állapotgéppel, ipari megbízhatósággal működik.</li>
                 <li><strong>Háromcsatornás redőnyvezérlés:</strong> A rendszer 3 független redőnyt kezel (R1, R2, R3). Az automatizált (napszakhoz és napfényhez kötött) mozgatások mellett a harmadik (R3) redőny jelenlét-szimulációs viselkedése külön is szabályozható. Ha az R3 egy belső területre (pl. belső udvarra vagy teraszra) néz, ahol nincs vizuális elrettentő szerepe az utcáról nézve, a véletlenszerű mozgása a menüből kikapcsolható, megkímélve a mechanikát a felesleges kopástól.</li>
                 <li><strong>Komplex világításvezérlés:</strong> A redőnyök mellett a rendszer egy integrált kiegészítő funkcióként teljes világítási szakaszok (R3 relé) okos vezérlését is ellátja. Képes időzített lekapcsolásra (gombnyomásra induló, testreszabható 5-10 perces késleltetéssel), valamint állandó világítás biztosítására is.</li>
@@ -355,7 +513,7 @@
             </p>
 
             <div>
-                <p class="rc-note">* A beszerelést és a hálózati bekötést minden esetben szakképzett villanyszerelő kell, hogy végezze!</p>
+                <p><em>* A beszerelést és a hálózati bekötést minden esetben szakképzett villanyszerelő kell, hogy végezze!</em></p>
             </div>
         </div>
         </div>
@@ -366,39 +524,57 @@
             <div class="rc-grid">
                 <div class="rc-card">
                     <h4>✔ ATmega328P alapú hardver</h4>
-                    <p>Megbízható, ipari sztenderd AVR architektúra dedikált C++ firmware futtatására optimalizálva.</p>
+                    <p>
+                        Megbízható, ipari sztenderd AVR architektúra dedikált C++ firmware futtatására optimalizálva.
+                    </p>
                 </div>
 
                 <div class="rc-card">
                     <h4>✔ Külső EEPROM naplózás</h4>
-                    <p>A fontos rendszeradatok, ciklusszámok és beállítások biztonságos tárolása külső I2C memóriában.</p>
+                    <p>
+                        A fontos rendszeradatok, ciklusszámok és beállítások biztonságos tárolása külső I2C memóriában.
+                    </p>
                 </div>
 
                 <div class="rc-card">
                     <h4>✔ Kettős kalibráció</h4>
-                    <p>Precíz idő- és útalapú kalibrációs eljárás a redőnyök tökéletes pozicionálásához.</p>
+                    <p>
+                        Precíz idő- és útalapú kalibrációs eljárás a redőnyök tökéletes pozicionálásához.
+                    </p>
                 </div>
 
                 <div class="rc-card">
                     <h4>✔ LCD menürendszer</h4>
-                    <p>Áttekinthető, helyi kijelző és kezelőfelület a paraméterek könnyű beállításához.</p>
+                    <p>
+                        Áttekinthető, helyi kijelző és kezelőfelület a paraméterek könnyű beállításához.
+                    </p>
                 </div>
 
                 <div class="rc-card">
                     <h4>✔ Biztonsági védelem</h4>
-                    <p>Beépített határérték-kezelés és akadályfelismerési logika a motorok és a szerkezet védelméért.</p>
+                    <p>
+                        Beépített határérték-kezelés és akadályfelismerési logika a motorok és a szerkezet védelméért.
+                    </p>
                 </div>
 
                 <div class="rc-card">
                     <h4>✔ Stabil működés</h4>
-                    <p>Hosszú távú, zavarvédett üzemre tervezett egyedi PCB kialakítás.</p>
+                    <p>
+                        Hosszú távú, zavarvédett üzemre tervezett egyedi PCB kialakítás.
+                    </p>
                 </div>
             </div>
         </div>
 
         <div class="rc-footer">
-            <h2>RC-328 — Intelligens árnyékolás precízen.</h2>
-            <p>Megbízható beágyazott vezérlés otthonod számára.</p>
+            <h2>
+                RC-328 — Intelligens árnyékolás precízen.
+            </h2>
+
+            <p>
+                Megbízható beágyazott vezérlés otthonod számára.
+            </p>
+
             <div class="rc-footer-buttons">
                 <a class="rc-button" href="https://docs.google.com/document/d/1OYH1T5NmyjVJbeQ836cc6iNL5hvpMvhHwE8Xio6AuPw/edit?usp=sharing" target="_blank" rel="noopener noreferrer">
                     Részletes szakmai dokumentáció
@@ -409,7 +585,7 @@
     </div>
     </div>
 
-    <!-- KÖZÖS LIGHTBOX (Ezt is a style.css formázza és rejti el alapból) -->
+    <!-- Lightbox Teljes Képernyős Nagyítás Réteg -->
     <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
         <img id="lightbox-img" src="" alt="Nagyított kép">
     </div>
