@@ -7,122 +7,28 @@
     <meta name="description" content="CFOP-1 kaputelefon okosító panel digitális Codefon rendszerekhez, egyszerű beszereléssel és Home Assistant támogatással.">
     <title>CFOP-1 kaputelefon kiegészítő modul - Balog Attila</title>
     <link rel="icon" type="image/png" href="images/BAlogo-blue.png">
+    
+    <!-- KÖZÖS STÍLUS BEHÍVÁSA -->
+    <link rel="stylesheet" href="style.css">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap" rel="stylesheet">
+    
     <style>
-        /* --- ALAPVETŐ TÉMA ÉS A HÁTTÉR --- */
+        /* A közös style.css lecseréli az eredeti body fontját, ezért ide visszatesszük az eredeti Arial beállítást! */
         body {
-            background-image: linear-gradient(rgba(5, 5, 5, 0.75), rgba(5, 5, 5, 0.75)), url('images/bg.webp');
-            background-color: #050505;
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            color: #f5f5f7;
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        /* --- FEJLÉC --- */
-        .site-header {
-            position: relative;
-            width: 100%;
-            height: 130px;
-            background-color: #000000;
-            margin-top: 0;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            padding: 0 5%;
-            box-sizing: border-box;
-            overflow: hidden;
-            border-bottom: 1px solid #1a1a1a;
-        }
-
-        .header-bg-polygons {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 55%;
-            height: 100%;
-            background: 
-                linear-gradient(105deg, transparent 20%, rgba(150, 0, 0, 0.6) 21%, rgba(200, 20, 20, 0.9) 50%, transparent 51%),
-                linear-gradient(45deg, transparent 40%, rgba(100, 0, 0, 0.7) 41%, rgba(180, 10, 10, 0.95) 70%, transparent 71%),
-                linear-gradient(160deg, transparent 60%, rgba(80, 0, 0, 0.8) 61%, #d00000 90%);
-            z-index: 1;
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            gap: 25px;
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .header-logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-        }
-
-        .custom-logo {
-            height: 75px;
-            width: auto;
-            max-width: 100px;
-            object-fit: contain;
-        }
-
-        .header-titles {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .title-row {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .site-header h1 {
-            font-size: 2.2rem;
-            letter-spacing: 1px;
-            margin: 0;
-            color: #ffffff;
-            font-style: italic;
-            font-weight: 700;
-        }
-
-        .title-line {
-            width: 60px;
-            height: 1px;
-            background-color: #666666;
-            margin-top: 5px;
-        }
-
-        .site-header h2 {
-            font-size: 1.1rem;
-            font-weight: 400;
-            color: #dddddd;
-            letter-spacing: 0.5px;
-            margin: 5px 0 0 0;
-        }
-
+        /* --- KIZÁRÓLAG AZ OLDALHOZ TARTOZÓ EGYEDI STÍLUSOK --- */
+        
         /* --- PROMO BANNER CSS --- */
         .banner-wrapper {
             width: 100%;
-            max-width: 1200px; /* Szélesebb méret, hogy egy vonalban legyen a termékoldal tartalmával */
+            max-width: 1200px;
             margin: 0 auto 10px auto; 
-            padding: 0 25px; /* Igazodik a cfop-wrapper 25px-es oldalsó paddingjéhez */
+            padding: 0 25px; 
             box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             z-index: 10;
@@ -211,7 +117,7 @@
         .cfop-wrapper{
             position:relative;
             overflow:hidden;
-            padding:30px 25px 50px 25px; /* Felső padding kicsit csökkentve a banner miatt */
+            padding:30px 25px 50px 25px;
             max-width: 1200px;
             width: 100%;
             box-sizing: border-box;
@@ -251,25 +157,13 @@
             line-height: 1.25;
         }
 
-        .back-home {
-            display: inline-block;
-            margin: 30px 0 0 25px;
-            color: #aaaaaa;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-size: 0.95rem;
+        @media(max-width: 950px){
+            .cfop-title { font-size: 40px; }
+            .cfop-section h2, .cfop-footer h2 { font-size: 30px; }
+            .cfop-hero{ grid-template-columns:1fr; }
+            .cfop-section{ padding:35px; }
         }
 
-        /* Reszponzív méret igazítás mobilon */
-        @media(max-width: 950px){
-            .cfop-title {
-                font-size: 40px;
-            }
-            .cfop-section h2, 
-            .cfop-footer h2 {
-                font-size: 30px;
-            }
-        }
         .cfop-subtitle{
             font-size:20px;
             line-height:1.6;
@@ -320,21 +214,18 @@
             gap:25px;
         }
 
-        /* --- A KÉPEK STÍLUSAI (MÓDOSÍTOTT RÉSZ) --- */
         .cfop-dual-images img{
             width: auto;
-            max-width: 100%; /* Eredeti méret, de ne lógjon ki */
+            max-width: 100%;
             border-radius: 22px;
             box-shadow: 0 18px 45px rgba(0,0,0,0.4);
             background: #111;
-            /* Középre igazítás */
             display: block;
             margin-left: auto;
             margin-right: auto;
             height: auto;
         }
 
-        /* Csak a panel-kép (alsó) felére csökkentése */
         .panel-image {
             max-width: 50% !important;
         }
@@ -375,31 +266,10 @@
             color:#e2e8f0;
         }
 
-        .cfop-list{
-            margin-top:18px;
-            padding-left:22px;
-            text-align:left;
-        }
-
-        .cfop-list li{
-            margin-bottom:12px;
-            font-size:18px;
-            line-height:1.7;
-            text-align:left;
-            color:#cccccc;
-        }
-
-        .cfop-list strong {
-            color: #ffffff;
-        }
-
-        .cfop-note{
-            font-size:15px;
-            color:#9ca3af;
-            margin-top:20px;
-            font-style:italic;
-            text-align:left;
-        }
+        .cfop-list{ margin-top:18px; padding-left:22px; text-align:left; }
+        .cfop-list li{ margin-bottom:12px; font-size:18px; line-height:1.7; text-align:left; color:#cccccc; }
+        .cfop-list strong { color: #ffffff; }
+        .cfop-note{ font-size:15px; color:#9ca3af; margin-top:20px; font-style:italic; text-align:left; }
 
         .cfop-grid{
             display:grid;
@@ -422,17 +292,8 @@
             border-color: #2563eb;
         }
 
-        .cfop-card h4{
-            font-size:20px;
-            margin-bottom:14px;
-            color:#ffffff;
-        }
-
-        .cfop-card p{
-            font-size:16px;
-            margin:0;
-            color:#aaaaaa;
-        }
+        .cfop-card h4{ font-size:20px; margin-bottom:14px; color:#ffffff; }
+        .cfop-card p{ font-size:16px; margin:0; color:#aaaaaa; }
 
         .cfop-footer{
             margin-top:50px;
@@ -444,59 +305,13 @@
             border: 1px solid #334155;
         }
 
-        .cfop-footer p{
-            color:#d1d5db;
-            font-size:20px;
-            margin-bottom:35px;
-        }
-
-        .cfop-footer-buttons{
-            display:flex;
-            justify-content:center;
-            gap:16px;
-            flex-wrap:wrap;
-        }
-
-        .back-home:hover {
-            color: #ffffff;
-        }
-
-        @media(max-width:950px){
-            .cfop-hero{
-                grid-template-columns:1fr;
-            }
-            .cfop-title{
-                font-size:38px;
-            }
-            .cfop-section{
-                padding:35px;
-            }
-            .cfop-section h2{
-                font-size:32px;
-            }
-            .cfop-footer h2{
-                font-size:30px;
-            }
-            .site-header {
-                height: auto;
-                padding: 20px;
-            }
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            .title-row {
-                flex-direction: column;
-            }
-            .title-line {
-                display: none;
-            }
-        }
+        .cfop-footer p{ color:#d1d5db; font-size:20px; margin-bottom:35px; }
+        .cfop-footer-buttons{ display:flex; justify-content:center; gap:16px; flex-wrap:wrap; }
     </style>
 </head>
 <body>
 
-    <!-- FEJLÉC -->
+    <!-- KÖZÖS FEJLÉC (Már a style.css formázza) -->
     <header class="site-header">
         <div class="header-bg-polygons"></div>
         <div class="header-content">
@@ -512,6 +327,8 @@
             </div>
         </div>
     </header>
+
+    <a href="index.html" class="back-home">← Vissza a főoldalra</a>
 
     <!-- VIDEÓPÁLYÁZAT BANNER -->
     <div class="banner-wrapper">
@@ -646,68 +463,4 @@
                 <li><strong>Relé kimenet:</strong> Használható pl. külső klasszikus csengő meghajtására, hang-fényjelző működtetésére (hallássérültek, gyengénlátók számára) vagy bármilyen egyéb vezérlés indítására.</li>
                 <li><strong>Ne zavarjanak üzemmód:</strong> A megfelelő bemenetet gnd-re téve a lakáskészülék nem ad hangot felcsengetéskor. (Pl. kisgyermekes családok esetében hasznos.)</li>
                 <li><strong>Zárnyitás bemenet:</strong> Adott bemenetet csengetés közben gnd-re téve, kinyitja a kültéri egység által vezérelt zárat. Célszerűen a Shelly egyik kimenetét ide kötve, távolról nyitás parancs adható. Vagy távirányító vevőt ide kötve, távirányítóval nyitható a zár.</li>
-                <li><strong>“Fogorvosi” funkció:</strong> Felcsengetésre automatikusan kinyitja a zárat. (Nem kell felemelni a kagylót és megnyomni a gombot.) Ezt egy rövid csengetés jelzi. Jumperrel vagy külső kapcsolóval is használható.</li>
-                <li><strong>128-as lakásszám fölé is címezhető</strong> 256-ig!</li>
-                <li><strong>Csökkenthető</strong> a csengetési hangerő.</li>
-                <li><strong>Némítható</strong> a csengetés, a többi funkció megtartása mellett is.</li>
-                <li><strong>Nem igényel</strong> külső áramforrást.</li>
-                <li><strong>Esztétikus, stabil</strong> és azonnal üzemkész.</li>
-            </ul>
-
-            <div class="cfop-note">
-                * A kapunyitás csak a felcsengetés ideje alatt lehetséges. Felcsengetés hiányában a zár nem nyitható!
-            </div>
-        </div>
-
-        <div class="cfop-section">
-            <h2>Professzionális kialakítás</h2>
-
-            <p style="text-align: left;">
-                A CFOP-1 fejlesztésénél fontos szempont volt:
-            </p>
-
-            <ul class="cfop-list">
-                <li>Kompakt méret</li>
-                <li>Egyszerű szerelhetőség</li>
-                <li>Saját tápellátás</li>
-                <li>Megbízható elektronikai kialakítás</li>
-                <li>Kulturált kábelezés</li>
-                <li>Üzembiztos működés</li>
-            </ul>
-
-            <div class="cfop-highlight">
-                A felhasználó nem egy prototípust kap,
-                hanem egy professzionális, kulturált és kész rendszert.
-            </div>
-        </div>
-
-        <div class="cfop-footer">
-            <h2>
-                CFOP-1 — Egyszerűen beszereli, és működik.
-            </h2>
-
-            <p>
-                Professzionális Codefon okosítás kompromisszumok nélkül.
-            </p>
-
-            <div class="cfop-footer-buttons">
-                
-                <a class="cfop-button cfop-button-secondary" href="https://docs.google.com/document/d/1NSw38J_vEP_PtCITSJjcPn0LqcIJoF7J0rKkf16r0hk/edit?tab=t.0" target="_blank">
-                    Teljes dokumentáció
-                </a>
-                <a class="cfop-button cfop-button-secondary" href="kapcsolat.html" target="_blank">
-                    Kapcsolat
-                </a>
-                <a class="cfop-button" href="https://script.google.com/macros/s/AKfycbwcuth4S1RLHCpbgboK8vl0EIZS_umX8s72f-4Iy9fK0NBonVG-LAby0ywrKXqlfxLZKQ/exec" target="_blank">
-                    Szeretnék egy ilyen modult!
-                </a>
-                
-            </div>
-        </div>
-
-    </div>
-    <a href="index.html" class="back-home">← Vissza a főoldalra</a>
-    </div>
-    
-</body>
-</html>
+                <li><strong>“Fogorvosi” funkció:</strong>
