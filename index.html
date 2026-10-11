@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <link rel="icon" type="image/png" href="images/BAlogo-blue.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Balog Attila - Custom PCB & Control Systems</title>
+    <link rel="icon" type="image/png" href="images/BAlogo-blue.png">
+    
+    <!-- KÖZÖS STÍLUS BEHÍVÁSA -->
+    <link rel="stylesheet" href="style.css">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    
     <style>
+        /* --- KIZÁRÓLAG A FŐOLDAL (MÁTRIX ÉS MÉHSEJT) EGYEDI STÍLUSAI --- */
+
         body, html {
             margin: 0;
             padding: 0;
@@ -28,7 +35,6 @@
             width: 100%;
             height: 100%;
             z-index: 0; /* A háttér legalulra kerül */
-            /* Ide nem kell háttérszín, alapból átlátszó a canvas */
         }
 
         /* 
@@ -38,109 +44,6 @@
         .banner-wrapper, .honeycomb-wrapper, header, footer {
             position: relative;
             z-index: 2;
-        }
-
-        /* --- ALAPVETŐ TÉMA ÉS EGYEDI HÁTTÉR --- */
-        body {
-            background-image: linear-gradient(rgba(5, 5, 5, 0.75), rgba(5, 5, 5, 0.75)), url('images/bg.webp');
-            background-color: #050505;
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        /* --- FEJLÉC ÉS LOGÓ BEÁLLÍTÁSOK --- */
-        .site-header {
-            width: 100%;
-            height: 130px;
-            background-color: #000000;
-            margin-top: 0;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            padding: 0 5%;
-            box-sizing: border-box;
-            overflow: hidden;
-            border-bottom: 1px solid #1a1a1a;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        .header-bg-polygons {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 55%;
-            height: 100%;
-            background: 
-                linear-gradient(105deg, transparent 20%, rgba(150, 0, 0, 0.6) 21%, rgba(200, 20, 20, 0.9) 50%, transparent 51%),
-                linear-gradient(45deg, transparent 40%, rgba(100, 0, 0, 0.7) 41%, rgba(180, 10, 10, 0.95) 70%, transparent 71%),
-                linear-gradient(160deg, transparent 60%, rgba(80, 0, 0, 0.8) 61%, #d00000 90%);
-            z-index: 1;
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            gap: 25px;
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .header-logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .custom-logo {
-            height: 75px;
-            width: auto;
-            max-width: 100px;
-            object-fit: contain;
-        }
-
-        .header-titles {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .title-row {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .site-header h1 {
-            font-size: 2.2rem;
-            letter-spacing: 1px;
-            margin: 0;
-            color: #ffffff;
-            font-style: italic;
-            font-weight: 700;
-        }
-
-        .title-line {
-            width: 60px;
-            height: 1px;
-            background-color: #666666;
-            margin-top: 5px;
-        }
-
-        .site-header h2 {
-            font-size: 1.1rem;
-            font-weight: 400;
-            color: #dddddd;
-            letter-spacing: 0.5px;
-            margin: 5px 0 0 0;
         }
 
         /* --- PROMO BANNER CSS --- */
@@ -212,6 +115,25 @@
 
         .promo-banner:hover .banner-btn {
             background-color: #f00000;
+        }
+
+        @media (max-width: 700px) {
+            /* Banner mobilos nézete */
+            .promo-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+            .banner-icon {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            .banner-btn {
+                margin-left: 0;
+                margin-top: 15px;
+                width: 100%;
+                box-sizing: border-box;
+            }
         }
 
         /* --- ASZTALI MÉHSEJTRÁCS --- */
@@ -324,65 +246,7 @@
             transform: scale(1.02);
         }
 
-        /* --- LÁBLÉC --- */
-        .site-footer {
-            width: 100%;
-            padding: 15px 20px;
-            background-color: rgba(0, 0, 0, 0.85);
-            border-top: 1px solid #1a1a1a;
-            text-align: center;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        .site-footer p {
-            margin: 0;
-            font-size: 0.75rem;
-            color: #666666;
-            letter-spacing: 0.3px;
-        }
-
-        /* RESZPONZÍV MOBIL NÉZET */
-        @media (max-width: 700px) {
-            .site-header {
-                height: auto;
-                padding: 20px;
-            }
-            .header-content {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                gap: 15px;
-            }
-            .title-row {
-                flex-direction: column;
-                gap: 10px;
-            }
-            .title-line {
-                display: none;
-            }
-            .site-header h1 {
-                font-size: 1.8rem;
-            }
-            
-            /* Banner mobilos nézete */
-            .promo-banner {
-                flex-direction: column;
-                text-align: center;
-                padding: 20px;
-            }
-            .banner-icon {
-                margin-right: 0;
-                margin-bottom: 10px;
-            }
-            .banner-btn {
-                margin-left: 0;
-                margin-top: 15px;
-                width: 100%;
-                box-sizing: border-box;
-            }
-        }
-
+        /* MÉHSEJT MOBIL NÉZET */
         @media (max-width: 550px) {
             .honeycomb-grid {
                 width: 100%;
@@ -439,7 +303,11 @@
     </style>
 </head>
 <body>
+    
+    <!-- MÁTRIX HÁTTÉR ANIMÁCIÓ CANVAS -->
     <canvas id="matrixCanvas"></canvas>
+
+    <!-- KÖZÖS FEJLÉC (A style.css formázza) -->
     <header class="site-header">
         <div class="header-bg-polygons"></div>
         <div class="header-content">
@@ -471,6 +339,7 @@
         </a>
     </div>
 
+    <!-- MÉHSEJT MENÜ -->
     <div class="honeycomb-wrapper">
         <div class="honeycomb-grid">
             
@@ -539,43 +408,44 @@
                 </a>
 
                 <!-- 9. elem: Balra -->
-                    <a href="kapcsolat.html" class="hex-button m-left" style="background-image: url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?q=80&w=400&auto=format&fit=crop');">
+                <a href="kapcsolat.html" class="hex-button m-left" style="background-image: url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?q=80&w=400&auto=format&fit=crop');">
                     <div class="hex-overlay">
                         <span class="hex-title">Kapcsolat</span>
                     </div>
                 </a>
-                </div>
-            
-                <!-- 4. SOR -->
-                <div class="hex-row offset-row">
-                    <!-- 10. elem: Jobbra -->
-                    <a href="forum.html" class="hex-button m-right" style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=400&auto=format&fit=crop');">
-                        <div class="hex-overlay">
-                            <span class="hex-title">Közösségi Fórum</span>
-                        </div>
-                    </a>
-                
-                    <!-- 11. elem: Balra -->
-                    <a href="discord.html" class="hex-button m-left" style="background-image: url('images/discord-logo.png'); background-size: auto 100%; background-repeat: no-repeat; background-position: center; background-color: #1e1f22;">
-                        <div class="hex-overlay">
-                            <span class="hex-title">Discord</span>
-                        </div>
-                    </a>
-
-                    <!-- Láthatatlan helykitöltő asztali nézethez, ami balra tolja a gombokat -->
-                    <div style="width: 252px; height: 0;"></div>
-                </div>
-                
             </div>
+            
+            <!-- 4. SOR -->
+            <div class="hex-row offset-row">
+                <!-- 10. elem: Jobbra -->
+                <a href="forum.html" class="hex-button m-right" style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=400&auto=format&fit=crop');">
+                    <div class="hex-overlay">
+                        <span class="hex-title">Közösségi Fórum</span>
+                    </div>
+                </a>
+            
+                <!-- 11. elem: Balra -->
+                <a href="discord.html" class="hex-button m-left" style="background-image: url('images/discord-logo.png'); background-size: auto 100%; background-repeat: no-repeat; background-position: center; background-color: #1e1f22;">
+                    <div class="hex-overlay">
+                        <span class="hex-title">Discord</span>
+                    </div>
+                </a>
 
+                <!-- Láthatatlan helykitöltő asztali nézethez, ami balra tolja a gombokat -->
+                <div style="width: 252px; height: 0;"></div>
+            </div>
+            
         </div>
+
     </div>
 
+    <!-- KÖZÖS LÁBLÉC -->
     <footer class="site-footer">
         <p>A weboldal nem használ sütiket. A látogatottságot a Cloudflare Web Analytics méri teljesen anonim, személyes adatok gyűjtése nélkül.</p>
     </footer>
 
-  <script>
+    <!-- MÁTRIX EFFEKT JAVASCRIPT -->
+    <script>
         const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
 
